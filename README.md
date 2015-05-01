@@ -183,7 +183,8 @@ console.log("[" + Style.title(title) + "]")
 
 # License
 
-[MIT](http://opensource.org/licenses/MIT)
+[MIT](http://opensource.org/licenses/MIT) © [Jorge Bucaran][Author]
 
+[Author]: http://about.bucaran.me
 [TravisLogo]: http://img.shields.io/travis/bucaran/clor.svg?style=flat-square
 [Travis]: https://travis-ci.org/bucaran/clor
