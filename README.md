@@ -50,7 +50,7 @@ console.log(
 )
 ```
 
-In _Clor_ you concatenate or use each style property as a function:
+In _Clor_ you can concatenate and use any style property as a function
 
 ```js
 console.log(String(
@@ -58,7 +58,7 @@ console.log(String(
 ))
 ```
 
-You can get the composed string using `string`
+You can get the string and styles using `string`
 
 ```js
 console.log(
@@ -66,17 +66,23 @@ console.log(
 )
 ```
 
-Or provide your own logger function:
+or use the `log()` wrapper to `console.log()`
+
+```js
+clor.red.bold("fee").line.inverse("fi").line.underline("fo").log(/* args */)
+```
+
+You can also provide your own logger function
 
 ```js
 clor.red.bold("hi").log(function (args) {
-  process.stdout.write("[" + this + "]")
+  process.stdout.write("[" + timestamp() + "] " + this)
 }/*, ... */)
 ```
 
-Where `args` is optional and `this` is bound to the string.
+in which `this` is bound to the string.
 
-In just a few lines of code _Clor_ packs a lot of interesting functionality.
+In just a few [lines of code](https://github.com/bucaran/clor/blob/master/index.js) _Clor_ packs a lot of interesting functionality.
 
 # Install
 
