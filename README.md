@@ -80,7 +80,7 @@ clor.red.bold("hi").log(function (args) {
 }/*, ... */)
 ```
 
-in which `this` is bound to the string.
+> Inside the logger wrapper `this` is bound to the _string_.
 
 In just a few [lines of code](https://github.com/bucaran/clor/blob/master/index.js) _Clor_ packs a lot of interesting functionality.
 
