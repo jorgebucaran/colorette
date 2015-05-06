@@ -171,13 +171,14 @@ console.log(
 Create custom styles easily:
 
 ```js
-let Style {
-  title: $.bold.underline,
-  quote: $.inverse,
-  notes: $.bold.green.italic
+const Style = {
+  head: $.bold.underline.green,
+  file: $.blue.bold("\"%s\""),
+  date: $.yellow("{{").gray(datefmt(new Date(), "HH:MM:ss")).yellow("}}")
 }
 
-console.log("[" + Style.title(title) + "]")
+console.log(Style.head("Starting app..."))
+console.log("Loading file " + Style.file + " on " + Style.date, file)
 
 ```
 
