@@ -1,6 +1,5 @@
-[![Build Status][TravisLogo]][Travis]
 ![](https://img.shields.io/badge/License-MIT-303030.svg?style=flat-square) ![](https://img.shields.io/badge/Color-Ful-0080ff.svg?style=flat-square)
-![](https://img.shields.io/badge/Clor-JS-f00033.svg?style=flat-square)
+![](https://img.shields.io/badge/Clor-JS-f050b3.svg?style=flat-square)
 [![NPM Downloads](http://img.shields.io/npm/dm/clor.svg?style=flat-square)](https://www.npmjs.org/package/clor)
 
 
@@ -29,7 +28,7 @@
 </p>
 
 
-# Synopsis
+# Synopsis [![Build Status][TravisLogo]][Travis]
 
 _Clor_ is a __30__ some LOC _original_ alternative to [colors.js](https://github.com/Marak/colors.js) and [Chalk](https://github.com/sindresorhus/chalk).
 
