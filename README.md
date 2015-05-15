@@ -1,5 +1,5 @@
-![](https://img.shields.io/badge/License-MIT-303030.svg?style=flat-square) 
-![](https://img.shields.io/badge/Clor-JS-f050b3.svg?style=flat-square)
+![](https://img.shields.io/badge/License-MIT-00CCFF.svg?style=flat-square) 
+![](https://img.shields.io/badge/Clor-JS-FF0066.svg?style=flat-square)
 [![NPM Downloads](http://img.shields.io/npm/dm/clor.svg?style=flat-square)](https://www.npmjs.org/package/clor)
 
 
@@ -23,7 +23,7 @@
 
 <p align="center">
 <a href="https://github.com/bucaran/clor/blob/master/clor">
-<img width=44% src="https://cloud.githubusercontent.com/assets/8317250/7343629/9bfe2a46-ecfe-11e4-8878-fcb9bac8b9f9.png">
+<img width=50% src="https://cloud.githubusercontent.com/assets/8317250/7646736/dbc8c8ae-fb02-11e4-8209-1d4a421ddbd9.png">
 </a>
 </p>
 
