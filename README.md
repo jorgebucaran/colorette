@@ -52,6 +52,10 @@ console.log(
 In _Clor_ you can concatenate and use any style property as a function
 
 ```js
+console.log(`${clor.red.bold("fee").line.inverse("fi").line.underline("fo")}`)
+```
+
+```js
 console.log(String(
   clor.red.bold("fee").line.inverse("fi").line.underline("fo")
 ))
