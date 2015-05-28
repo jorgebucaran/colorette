@@ -192,3 +192,7 @@ console.log("Loading file " + Style.file + " on " + Style.date, file)
 [Author]: http://about.bucaran.me
 [TravisLogo]: http://img.shields.io/travis/bucaran/clor.svg?style=flat-square
 [Travis]: https://travis-ci.org/bucaran/clor
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/bucaran/clor/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
