@@ -1,5 +1,6 @@
 /*ಠ_ಠ*/"use strict"
 var ansi = require("ansi-styles")
+var commands = require("./commands")
 ansi.line = { open: "\n", close: "" }
 ansi.tab = { open: "\t", close: "" }
 
@@ -28,6 +29,16 @@ module.exports = (function clor (s) {
     Object.defineProperty($, style, {
       get: function () {
         return clor(s + ansi[style].open)
+      }
+    })
+  })
+
+  Object.keys(commands).forEach(function (command) {
+    Object.defineProperty($, command, {
+      get: function () {
+        return typeof commands[command] === 'function' ?
+          function() { return clor(s + commands[command].apply(null, arguments)) } :
+          clor(s + commands[command])
       }
     })
   })
