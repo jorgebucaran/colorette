@@ -1,7 +1,7 @@
-![](https://img.shields.io/badge/License-MIT-00CCFF.svg?style=flat-square)
-![](https://img.shields.io/badge/Clor-JS-FF0066.svg?style=flat-square)
-
-
+![](https://img.shields.io/badge/license-MIT-00CCFF.svg?style=flat-square)
+![](https://img.shields.io/badge/clor-JS-FF0066.svg?style=flat-square)
+[![npm package][npm-ver-link]][clor]
+[![Build Status][TravisLogo]][Travis]
 
 <a name="clor"></a>
 
@@ -28,7 +28,7 @@
 </p>
 
 
-# Synopsis [![Build Status][TravisLogo]][Travis]
+# Synopsis
 
 _Clor_ is a __30__ some LOC _original_ alternative to [colors.js](https://github.com/Marak/colors.js) and [Chalk](https://github.com/sindresorhus/chalk).
 
@@ -195,3 +195,8 @@ console.log("Loading file " + Style.file + " on " + Style.date, file)
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/bucaran/clor/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
+
+[npm-ver-link]: https://img.shields.io/npm/v/clor.svg?style=flat-square
+
+[clor]: https://github.com/bucaran/clor
