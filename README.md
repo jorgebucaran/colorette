@@ -23,7 +23,7 @@
 
 <p align="center">
 <a href="https://github.com/bucaran/clor/blob/master/README.md">
-<img width=60% src="https://cloud.githubusercontent.com/assets/8317250/7664488/a71ba910-fbc4-11e4-9214-7ed9ea83e93b.png">
+<img width=300px src="https://cloud.githubusercontent.com/assets/8317250/8764977/89eeeaa0-2e32-11e5-9e20-fe41d5450b52.png">
 </a>
 </p>
 
