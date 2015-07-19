@@ -1,7 +1,10 @@
-![](https://img.shields.io/badge/license-MIT-00CCFF.svg?style=flat-square)
-![](https://img.shields.io/badge/clor-JS-FF0066.svg?style=flat-square)
+> Civilized terminal styles.
+
+[![][clor-badge]][clor]
 [![npm package][npm-ver-link]][clor]
-[![Build Status][TravisLogo]][Travis]
+[![][dl-badge]][npm-pkg-link]
+[![][travis-logo]][travis]
+![][mit-badge]
 
 <a name="clor"></a>
 
@@ -187,16 +190,18 @@ console.log("Loading file " + Style.file + " on " + Style.date, file)
 
 # License
 
-[MIT](http://opensource.org/licenses/MIT) © [Jorge Bucaran][Author]
-
-[Author]: http://about.bucaran.me
-[TravisLogo]: http://img.shields.io/travis/bucaran/clor.svg?style=flat-square
-[Travis]: https://travis-ci.org/bucaran/clor
+[MIT][license] © [Jorge Bucaran][author] et [al][contributors]
+:heart:
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/bucaran/clor/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
-
+[license]: http://opensource.org/licenses/MIT
+[author]: http://about.bucaran.me
+[clor]: https://www.github.com/bucaran/clor
+[clor-badge]: https://img.shields.io/badge/clor-JS-33CCFF.svg?style=flat-square
+[mit-badge]: https://img.shields.io/badge/license-MIT-444444.svg?style=flat-square
+[npm-pkg-link]: https://www.npmjs.org/package/clor
 [npm-ver-link]: https://img.shields.io/npm/v/clor.svg?style=flat-square
-
-[clor]: https://github.com/bucaran/clor
+[dl-badge]: http://img.shields.io/npm/dm/clor.svg?style=flat-square
+[travis-logo]: http://img.shields.io/travis/bucaran/clor.svg?style=flat-square
+[travis]: https://travis-ci.org/bucaran/clor
+[contributors]: https://github.com/bucaran/clor/graphs/contributors
