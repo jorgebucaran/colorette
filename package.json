@@ -1,6 +1,6 @@
 {
   "name": "clor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Better terminal styles.",
   "main": "index.js",
   "scripts": {
