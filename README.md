@@ -1,4 +1,4 @@
-> Civilized terminal styles.
+> Terminal styles
 
 [![][clor-badge]][clor]
 [![npm package][npm-ver-link]][clor]
@@ -18,6 +18,8 @@
 |
 <b><a href="#usage">Usage</a></b>
 |
+<b><a href="#wordwrap">Wordwrap</a></b>
+|
 <b><a href="#styles">Styles</a></b>
 |
 <b><a href="#license">License</a></b>
@@ -33,7 +35,7 @@
 
 # Synopsis
 
-_Clor_ is a __30__ some LOC _original_ alternative to [colors.js](https://github.com/Marak/colors.js) and [Chalk](https://github.com/sindresorhus/chalk).
+_Clor_ is a __40__ some LOC _original_ alternative to [Chalk](https://github.com/sindresorhus/chalk).
 
 
 <p align="center">
@@ -99,7 +101,7 @@ npm install clor
 # Usage
 
 ```js
-var $ = require("clor")
+const $ = require("clor")
 
 $.red("hey")
 //→ \u001b[31mhey\u001b[0m
@@ -110,20 +112,25 @@ $.underline.bold.bgBlue.yellow("howdy!")
 // You can add new lines with `line` or \n
 $("1st line").line("2nd line").red.line("3rd line")
 //→ 1st line\u001b[0m\n2nd line\u001b[0m\u001b[31m\n3rd line\u001b[0m
+
+// Break lines up by number of columns.
+$("The quick brown ")
+  .red("fox jumped over ")
+  .magenta("the lazy dog")
+  .break(40)
 ```
 
 ## Examples
 
 ```js
-console.log("npm install %s", $.blue("clor"))
+console.log("npm i %s", $.blue("clor"))
 
-// No need to cast to String explicitly when concatenating
 console.log(
   $.red("a red line") + $.line.blue("and a blue one")
 )
 
 // Using Clor
-var $ = require("clor")
+const $ = require("clor")
 console.log($
   .blue("A blue line\n")
   .green("I am a green line ")
@@ -132,7 +139,7 @@ console.log($
 )
 
 // Using Chalk
-var $ = require("chalk")
+const $ = require("chalk")
 console.log(
   $.blue("A blue line.\n") +
   $.green(
@@ -141,19 +148,22 @@ console.log(
       " that becomes green again!"
   ) + "Hasta la vista!"
 )
-
-// Using Colors.js
-console.log(
-  "A blue line.\n".blue +
-  "I am a green line ".green +
-  "with a blue substring".blue.underline.bold +
-  " that becomes green again!".green +
-  " Saraba!"
-)
 ```
 
-> Notes: To be fair, [_colors_](https://github.com/marak/colors.js/) is probably the most readable, but it extends the [String Prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype) which is generally a [bad practice](http://perfectionkills.com/whats-wrong-with-extending-the-dom/).
+# Wordwrap
 
+```js
+const clor = require("clor")
+
+clor("The quick brown ")
+  .red("fox jumped over ")("the lazy ")
+  .green("dog and then ran away with the unicorn.")
+  .break(40)
+```
+
+<p align="center">
+<img src="https://cloud.githubusercontent.com/assets/8317250/9351491/cf116ac0-4694-11e5-9a97-96724c3a09f7.png">
+</p>
 
 
 # Styles

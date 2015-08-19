@@ -1,20 +1,38 @@
 {
   "name": "clor",
   "version": "1.0.2",
-  "description": "Better terminal styles.",
+  "description": "Terminal styles.",
   "main": "index.js",
   "scripts": {
     "test": "npm run tap",
-    "tap": "NODE_ENV=development tap test.js"
+    "tap": "tap test.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/bucaran/clor"
   },
   "keywords": [
-    "color",
+    "ansi",
     "terminal",
-    "cli"
+    "color",
+    "colors",
+    "colour",
+    "str",
+    "style",
+    "rgb",
+    "styles",
+    "tty",
+    "formatting",
+    "console",
+    "cli",
+    "string",
+    "text",
+    "256",
+    "logging",
+    "log",
+    "shell",
+    "xterm",
+    "command-line"
   ],
   "author": "Jorge Bucaran",
   "license": "MIT",
