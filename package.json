@@ -1,0 +1,31 @@
+{
+  "name": "clor",
+  "version": "1.6.0",
+  "description": "Better terminal styles.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run tap",
+    "tap": "NODE_ENV=development tap test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bucaran/clor"
+  },
+  "keywords": [
+    "color",
+    "terminal",
+    "cli"
+  ],
+  "author": "Jorge Bucaran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bucaran/clor/issues"
+  },
+  "homepage": "https://github.com/bucaran/clor",
+  "dependencies": {
+    "ansi-styles": "^2.0.1"
+  },
+  "devDependencies": {
+    "tap": "^0.7.1"
+  }
+}
