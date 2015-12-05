@@ -3,13 +3,16 @@ var ansi = require("ansi-styles")
 ansi.line = { open: "\n", close: "" }
 ansi.tab = { open: "\t", close: "" }
 
-module.exports = (function clor (s) {
+module.exports = (function clor (s, open) {
   function $ (str) {
     return (str === undefined) ?
       $.toString() : clor(s + str + ansi.reset.close)
   }
 
-  $.toString = function () { return s + ansi.reset.close }
+  $.toString = function () {
+    return (open === true) ?
+      s + ansi.reset.close : s
+  }
 
   $.log = function (logger) {
     var args = [].slice.call(arguments, 0)
@@ -27,7 +30,7 @@ module.exports = (function clor (s) {
   Object.keys(ansi).forEach(function (style) {
     Object.defineProperty($, style, {
       get: function () {
-        return clor(s + ansi[style].open)
+        return clor(s + ansi[style].open, true)
       }
     })
   })
