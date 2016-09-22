@@ -1,7 +1,7 @@
 {
   "name": "clor",
-  "version": "1.0.0",
-  "description": "Better terminal styles.",
+  "version": "2.0.2",
+  "description": "Sexy terminal styles.",
   "main": "index.js",
   "scripts": {
     "test": "npm run tap",
