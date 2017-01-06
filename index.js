@@ -29,14 +29,14 @@ const ansi = {
 	reset: ["\x1b[0m"]
 }
 
-module.exports = (function clor(prev, close) {
+module.exports = (function clor(carry, close) {
 	const wrap = s => clor(wrap.toString(s))
 
-	wrap.toString = s => prev + (s || "") + (close || ansi.reset[0])
+	wrap.toString = s => carry + (s || "") + (close || ansi.reset[0])
 
 	Object.keys(ansi).forEach(style =>
 		Object.defineProperty(wrap, style, {
-			get: _ => clor(prev + ansi[style][0], ansi[style][1])
+			get: _ => clor(carry + ansi[style][0], ansi[style][1])
 		})
 	)
 
