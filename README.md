@@ -4,6 +4,10 @@
 ![[](https://travis-ci.org/jbucaran/clor)](http://img.shields.io/travis/jbucaran/clor.svg)
 ![[](https://www.npmjs.org/package/clor)](http://img.shields.io/npm/dm/clor.svg)
 
+
+
+[![](http://img.shields.io/npm/dm/clor.svg)](https://www.npmjs.org/package/clor)
+
 Functional terminal styles.
 
 ## Install
@@ -74,7 +78,9 @@ Available styles:
 * bgCyan
 * bgWhite
 
+* dim
 * bold
+* hidden
 * italic
 * underline
 * inverse
