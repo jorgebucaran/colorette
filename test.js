@@ -1,33 +1,44 @@
-#!/usr/bin/env node
+const clor = require("./")
 
-// var test = require("tap").test
-var $ = require("./")
-
-console.log("npm install %s", $.blue("clor"))
-
-console.log(String($
-  ("Roses are ").red("red")(", violets are ")
-  .blue("blue")(", I'm ")
-  .dim("schizophrenic")(", and so am I")
-))
-
-console.log($
-  .red("red").blue("blue").green("green")()
+console.log("" +
+    clor(1)(2)(3)
 )
 
-console.log(String($
-  .red("some red").tab("interlude")
-  .line.bgRed.yellow("a new line, yellow on red")
-  .line.bgYellow.red("and red on a yellow line!")
-))
+console.log(`${clor
+    .green(1)
+    .italic.red(2)
+    .underline.blue(3)
+    .bold.red(4)
+    .gray(5)
+    .reset(6)
+    .newLine
+    .underline.bold.magenta("7")
+    .blue(clor.italic(
+            clor.underline(
+                clor.bold(clor(8)))))
+}`)
 
-// No need to cast to String explicitly when concatenating
+console.log("" +
+    clor.underline.bold.bgBlue.yellow("howdy!")
+)
+
+console.log("" +
+    clor("1st line").newLine("2nd line").red.newLine("3rd line")
+)
+
+console.log("" +
+    clor.red.bold("fee").newLine.inverse("fi").newLine.underline("fo")
+)
+
 console.log(
-  $.red("a red line") +
-  $.line.blue("and a blue one")
+    `${clor.red.bold("fee").newLine.inverse("fi").newLine.underline("fo")}`
 )
 
-// test("test", function (t) {
-//   // Do some more meaningful tests here!!
-//   t.end()
-// })
+console.log("" +
+    clor.underline.red(1).tab.magenta(2).tab.blue(3).tab.green(4).tab.red(5)
+)
+
+console.log("" +
+    clor.underline(clor.red(1).tab.magenta(2).tab.blue(3).tab.green(4)).tab.red(5)
+)
+
