@@ -42,8 +42,3 @@ module.exports = (function clor(prev, close) {
 
     return wrap
 } (""))
-
-
-
-
-
