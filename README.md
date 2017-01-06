@@ -54,34 +54,14 @@ Returns an instance of `clor` so you can concatenate multiple style calls.
 
 Available styles:
 
-* black
-* red
-* green
-* yellow
-* blue
-* magenta
-* cyan
-* white
-* gray
-
-* bgBlack
-* bgRed
-* bgGreen
-* bgYellow
-* bgBlue
-* bgMagenta
-* bgCyan
-* bgWhite
-
-* dim
-* bold
-* hidden
-* italic
-* underline
-* inverse
-* strikethrough
-
-* newLine
-* tab
-* reset
-
+| Colors  | Background Colors | Modifiers     | Other   |
+|---------|-------------------|---------------|---------|
+| black   | bgBlack           | dim           | newLine |
+| red     | bgRed             | bold          | tab     |
+| green   | bgGreen           | hidden        | reset   |
+| yellow  | bgYellow          | italic        |         |
+| blue    | bgBlue            | underline     |         |
+| magenta | bgMagenta         | inverse       |         |
+| cyan    | bgCyan            | strikethrough |         |
+| white   | bgWhite           |               |         |
+| gray    |                   |               |         |
