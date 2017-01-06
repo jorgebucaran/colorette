@@ -1,12 +1,7 @@
 # Clor
 
-![[](https://www.npmjs.org/package/clor)](https://img.shields.io/npm/v/clor.svg)
-![[](https://travis-ci.org/jbucaran/clor)](http://img.shields.io/travis/jbucaran/clor.svg)
-![[](https://www.npmjs.org/package/clor)](http://img.shields.io/npm/dm/clor.svg)
-
-
-
-[![](http://img.shields.io/npm/dm/clor.svg)](https://www.npmjs.org/package/clor)
+[![](https://img.shields.io/npm/v/clor.svg)](https://www.npmjs.org/package/clor)
+[![](http://img.shields.io/travis/jbucaran/clor.svg)](https://travis-ci.org/jbucaran/clor)
 
 Functional terminal styles.
 
