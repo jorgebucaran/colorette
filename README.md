@@ -1,4 +1,4 @@
-# Clor
+# clor
 
 [![](https://img.shields.io/npm/v/clor.svg)](https://www.npmjs.org/package/clor)
 [![](http://img.shields.io/travis/jbucaran/clor.svg)](https://travis-ci.org/jbucaran/clor)
@@ -13,7 +13,7 @@ npm i clor
 
 ## Usage
 
-### Concatenation
+### Concatenate
 
 ```js
 console.log(
@@ -21,7 +21,7 @@ console.log(
 )
 ```
 
-### Composition
+### Compose
 
 ```js
 console.log("" +
@@ -37,7 +37,7 @@ console.log(
 )
 ```
 
-### Nested Styles
+### Nest
 
 ```js
 console.log("" +
@@ -48,9 +48,9 @@ console.log("" +
 
 ## API
 
-### clor._style_(string)
+### `clor._style_(string)`
 
-Returns an instance of `clor` so you can concatenate multiple style calls.
+Returns an instance of `clor`.
 
 Available styles:
 
