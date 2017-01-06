@@ -24,21 +24,21 @@ const ansi = {
 	inverse: ["\x1b[7m", "\x1b[27m"],
 	strikethrough: ["\x1b[9m", "\x1b[29m"],
 
-    newLine: ["\n", ""],
-    tab: ["\t", ""],
-    reset: ["\x1b[0m"]
+	newLine: ["\n", ""],
+	tab: ["\t", ""],
+	reset: ["\x1b[0m"]
 }
 
 module.exports = (function clor(prev, close) {
-    const wrap = s => clor(wrap.toString(s))
+	const wrap = s => clor(wrap.toString(s))
 
-    wrap.toString = s => prev + (s || "") + (close || ansi.reset[0])
+	wrap.toString = s => prev + (s || "") + (close || ansi.reset[0])
 
-    Object.keys(ansi).forEach(style =>
-        Object.defineProperty(wrap, style, {
-            get: _ => clor(prev + ansi[style][0], ansi[style][1])
-        })
-    )
+	Object.keys(ansi).forEach(style =>
+		Object.defineProperty(wrap, style, {
+			get: _ => clor(prev + ansi[style][0], ansi[style][1])
+		})
+	)
 
-    return wrap
+	return wrap
 } (""))
