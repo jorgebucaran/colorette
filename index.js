@@ -18,7 +18,9 @@ const ansi = {
 	bgCyan: ["\x1b[46m", "\x1b[49m"],
 	bgWhite: ["\x1b[47m", "\x1b[49m"],
 
+	dim: ["\x1b[2m", "\x1b[22m"],
 	bold: ["\x1b[1m", "\x1b[22m"],
+	hidden: ["\x1b[8m", "\x1b[28m"],
 	italic: ["\x1b[3m", "\x1b[23m"],
 	underline: ["\x1b[4m", "\x1b[24m"],
 	inverse: ["\x1b[7m", "\x1b[27m"],
