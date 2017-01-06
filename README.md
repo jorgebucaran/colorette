@@ -48,7 +48,7 @@ console.log("" +
 
 ## API
 
-### `clor._style_(string)`
+### clor._style_(string)
 
 Returns an instance of `clor`.
 
