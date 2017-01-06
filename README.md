@@ -47,3 +47,40 @@ console.log("" +
 )
 ```
 
+## API
+
+### clor._style_(string)
+
+Returns an instance of `clor` so you can concatenate multiple style calls.
+
+Available styles:
+
+* black
+* red
+* green
+* yellow
+* blue
+* magenta
+* cyan
+* white
+* gray
+
+* bgBlack
+* bgRed
+* bgGreen
+* bgYellow
+* bgBlue
+* bgMagenta
+* bgCyan
+* bgWhite
+
+* bold
+* italic
+* underline
+* inverse
+* strikethrough
+
+* newLine
+* tab
+* reset
+
