@@ -1,15 +1,14 @@
 {
   "name": "clor",
-  "version": "2.0.2",
-  "description": "Sexy terminal styles.",
+  "version": "3.0.0",
+  "description": "Functional terminal styles",
   "main": "index.js",
   "scripts": {
-    "test": "npm run tap",
-    "tap": "NODE_ENV=development tap test.js"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bucaran/clor"
+    "url": "https://github.com/jbucaran/clor"
   },
   "keywords": [
     "color",
@@ -19,13 +18,8 @@
   "author": "Jorge Bucaran",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bucaran/clor/issues"
+    "url": "https://github.com/jbucaran/clor/issues"
   },
-  "homepage": "https://github.com/bucaran/clor",
-  "dependencies": {
-    "ansi-styles": "^2.0.1"
-  },
-  "devDependencies": {
-    "tap": "^0.7.1"
-  }
+  "homepage": "https://github.com/jbucaran/clor",
+  "dependencies": {}
 }
