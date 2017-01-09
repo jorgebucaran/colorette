@@ -1,13 +1,13 @@
 const ansi = require("./ansi")
 
-module.exports = function (strings, ...values) {
-    var v = "", t = "", prev = "", tags = [], vals = [], result = []
+module.exports = function (strings) {
+    let v = "", t = "", prev = "", tags = [], vals = [], result = []
 
-    for (var i = 0; i < strings.length; i++) {
-        var s = strings[i]
+    for (let i = 0; i < strings.length; i++) {
+        let s = strings[i]
 
-        for (var j = 0; j < s.length; j++) {
-            var c = s[j]
+        for (let j = 0; j < s.length; j++) {
+            let c = s[j]
 
             if (c === "<") {
                 if (v !== "") {
@@ -46,7 +46,7 @@ module.exports = function (strings, ...values) {
 
                     const obj = {
                         style: tag,
-                        value: Array.isArray(vals[vals.length-1])
+                        value: Array.isArray(vals[vals.length - 1])
                             ? vals.pop()
                             : vals//.slice()
                     }
@@ -54,13 +54,13 @@ module.exports = function (strings, ...values) {
                     if (tags.length === 0) {
                         result.push(obj)
 
-                        if (Array.isArray(vals[vals.length-1]))
-                            delete vals[vals.length-1]
+                        if (Array.isArray(vals[vals.length - 1]))
+                            delete vals[vals.length - 1]
                         else
                             vals = []
                     } else {
                         if (Array.isArray(vals[vals.length - 1])) {
-                            vals[vals.length-1].push(obj)
+                            vals[vals.length - 1].push(obj)
                         } else {
                             vals.push(obj)
                         }
@@ -96,7 +96,7 @@ module.exports = function (strings, ...values) {
 
         }//j
 
-        v += values[i] || ""
+        v += arguments[i + 1] || ""
 
     }//i
 
@@ -109,9 +109,3 @@ module.exports = function (strings, ...values) {
 
     return unwrap(result) + ansi.reset[0]
 }
-
-
-
-
-
-
