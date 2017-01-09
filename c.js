@@ -1,3 +1,5 @@
+"use strict"
+
 const ansi = require("./ansi")
 
 module.exports = function (strings) {
