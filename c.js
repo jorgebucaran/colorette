@@ -1,4 +1,4 @@
-const styles = require("./ansi")
+const ansi = require("./ansi")
 
 module.exports = function (strings, ...values) {
     var v = "", t = "", prev = "", tags = [], vals = [], result = []
@@ -104,11 +104,13 @@ module.exports = function (strings, ...values) {
         result.push(v)
     }
 
-    const unwrap = obj => Object.values(obj).reduce((s, i) =>
-        s + (i.style ? styles[i.style][0] + unwrap(i.value) + styles[i.style][1] : i), "")
+    const unwrap = obj => Object.keys(obj).map(k => obj[k]).reduce((s, i) =>
+        s + (i.style ? ansi[i.style][0] + unwrap(i.value) + ansi[i.style][1] : i), "")
 
-    return unwrap(result) + styles.reset[0]
+    return unwrap(result) + ansi.reset[0]
 }
+
+
 
 
 
