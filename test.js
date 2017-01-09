@@ -1,44 +1,42 @@
 const clor = require("./")
 
 console.log("" +
-    clor(1)(2)(3)
-)
-
-console.log(`${clor
-    .green(1)
-    .italic.red(2)
-    .underline.blue(3)
-    .bold.red(4)
-    .gray(5)
-    .reset(6)
-    .newLine
-    .underline.bold.magenta("7")
-    .blue(clor.italic(
-            clor.underline(
-                clor.bold(clor(8)))))
-}`)
-
-console.log("" +
-    clor.underline.bold.bgBlue.yellow("howdy!")
-)
-
-console.log("" +
-    clor("1st line").newLine("2nd line").red.newLine("3rd line")
-)
-
-console.log("" +
-    clor.red.bold("fee").newLine.inverse("fi").newLine.underline("fo")
+    clor("How").newLine("are").newLine("you?")
 )
 
 console.log(
-    `${clor.red.bold("fee").newLine.inverse("fi").newLine.underline("fo")}`
+    `${clor.red.bold("How").newLine.inverse("are").newLine.italic("you?")}`
+)
+
+console.log(
+    clor.red.bold("How") + "\n" + clor.red.inverse("are") + "\n" + clor.red.italic("you?")
 )
 
 console.log("" +
-    clor.underline.red(1).tab.magenta(2).tab.blue(3).tab.green(4).tab.red(5)
+    clor.bold(clor.red("Bold red")).blue(" and blue")
 )
+
+// Custom styles
+
+const Styles = {
+    em: s => clor.bold.inverse(s)
+}
 
 console.log("" +
-    clor.underline(clor.red(1).tab.magenta(2).tab.blue(3).tab.green(4)).tab.red(5)
+    clor(Styles.em("Known trope")).bold(" or meme")
 )
 
+// Tagged Literals
+
+const c = require("./c")
+const x = "Bold", y = "red", z = "blue"
+
+console.log(
+    c`<bold>${x}, <red>${y}</red></bold> and <blue>${z}.</blue>`
+)
+
+const name = ["", "Chewie", "Leia", "Luke"][Math.floor(Math.random() * 4)]
+
+console.log(
+    c`Hello ${name ? c`<italic>${name}</italic>` : "everyone"}.`
+)
