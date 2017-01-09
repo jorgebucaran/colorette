@@ -17,7 +17,7 @@ npm i clor
 const clor = require("clor")
 ```
 
-### Compose
+Compose
 
 ```js
 console.log("" +
@@ -25,7 +25,7 @@ console.log("" +
 )
 ```
 
-### Concatenate
+or concatenate.
 
 ```js
 console.log(
@@ -33,7 +33,7 @@ console.log(
 )
 ```
 
-### Nest
+Nesting works too.
 
 ```js
 console.log("" +
