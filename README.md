@@ -25,14 +25,6 @@ console.log("" +
 )
 ```
 
-or
-
-```js
-console.log(
-    `${clor.red.bold("How").newLine.inverse("are").newLine.italic("you?")}`
-)
-```
-
 ### Concatenate
 
 ```js
