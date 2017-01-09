@@ -13,19 +13,15 @@ npm i clor
 
 ## Usage
 
-### Concatenate
-
 ```js
-console.log(
-    clor.red.bold("fee") + "\n" + clor.inverse("fi") + "\n" + clor.underline("fo")
-)
+const clor = require("clor")
 ```
 
 ### Compose
 
 ```js
 console.log("" +
-    clor.red.bold("fee").newLine.inverse("fi").newLine.underline("fo")
+    clor.red.bold("How").newLine.inverse("are").newLine.underline("you?")
 )
 ```
 
@@ -33,7 +29,15 @@ or
 
 ```js
 console.log(
-    `${clor.red.bold("fee").newLine.inverse("fi").newLine.underline("fo")}`
+    `${clor.red.bold("How").newLine.inverse("are").newLine.italic("you?")}`
+)
+```
+
+### Concatenate
+
+```js
+console.log(
+    clor.red.bold("How") + "\n" + clor.red.inverse("are") + "\n" + clor.red.italic("you?")
 )
 ```
 
@@ -41,8 +45,53 @@ console.log(
 
 ```js
 console.log("" +
-    clor.bold(clor.red("Bold and red"))
-        .red("Just red")
+    clor.bold(clor.red("Bold red")).blue(" and blue")
+)
+```
+
+### Custom styles
+
+Define custom styles.
+
+```js
+const Styles = {
+    em: s => clor.bgblack.yellow(s)
+}
+```
+
+Wrap them in `clor()` or `clor.<style>()` to continue the chain.
+
+```js
+console.log("" +
+    clor(Styles.em("Known trope")).bold(" or meme")
+)
+```
+
+### [Tagged Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals)
+
+Require the `c` function.
+
+```js
+const c = require("clor/c")
+```
+
+Use pseudo HTML to style strings.
+
+```js
+console.log(c`<red>Red</red>`)
+```
+
+```js
+console.log(
+    c`<inverse>Hey Ho, <bold>Lets Go!</bold></inverse>`
+)
+```
+
+Embed complex expressions.
+
+```js
+console.log(
+    c`Hello ${name ? c`<italic>${name}</italic>` : "everyone"}.`
 )
 ```
 
@@ -65,3 +114,4 @@ Available styles:
 | cyan    | bgCyan            | strikethrough |         |
 | white   | bgWhite           |               |         |
 | gray    |                   |               |         |
+
