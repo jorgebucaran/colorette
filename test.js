@@ -35,8 +35,8 @@ console.log(
     c`<bold>${x}, <red>${y}</red></bold> and <blue>${z}.</blue>`
 )
 
-const name = ["", "Chewie", "Leia", "Luke"][Math.floor(Math.random() * 4)]
+const name = ["Leia", "Han", "Ben"]
+    [Math.floor(Math.random() * 4)]
 
 console.log(
-    c`Hello ${name ? c`<italic>${name}</italic>` : "everyone"}.`
-)
+    c`Hi ${name ? c`<bold>${name}</bold>` : "everyone"}.`)
