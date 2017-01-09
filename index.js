@@ -1,9 +1,9 @@
 const ansi = require("./ansi")
 
-module.exports = (function Clor(prev, wrap = ansi.reset[0]) {
+module.exports = (function Clor(prev, wrap) {
 	const clor = s => Clor(clor.toString(s))
 
-	clor.toString = (s = "") => prev + s + wrap
+	clor.toString = s => prev + (s || "") + (wrap || ansi.reset[0])
 
 	Object.keys(ansi).forEach(k => Object.defineProperty(clor, k, {
 		get: _ => Clor(prev + ansi[k][0], ansi[k][1])
@@ -11,4 +11,3 @@ module.exports = (function Clor(prev, wrap = ansi.reset[0]) {
 
 	return clor
 } (""))
-
