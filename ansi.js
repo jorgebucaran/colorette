@@ -1,4 +1,4 @@
-const styles = module.exports = {
+const ansi = module.exports = {
 	black: ["\x1b[30m", "\x1b[39m"],
 	red: ["\x1b[31m", "\x1b[39m"],
 	green: ["\x1b[32m", "\x1b[39m"],
@@ -31,7 +31,10 @@ const styles = module.exports = {
 	reset: ["\x1b[0m"]
 }
 
-Object.keys(styles)
-	.filter(k => k.substr(0, 2) === "bg")
-	.forEach(k => styles[k.toLowerCase()] = styles[k])
+const hasColor = _ =>
+	process.stdout.isTTY &&
+	process.env.TERM &&
+	process.env.TERM !== "dumb"
+
+Object.keys(ansi).forEach(k => ansi[k] = hasColor() ? ansi[k] : [""])
 
