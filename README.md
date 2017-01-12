@@ -17,14 +17,6 @@ npm i clor
 const clor = require("clor")
 ```
 
-### Compose
-
-```js
-console.log("" +
-    clor.red.bold("How").newLine.inverse("are").newLine.underline("you?")
-)
-```
-
 ### Concatenate
 
 ```js
@@ -33,12 +25,16 @@ console.log(
 )
 ```
 
+### Compose
+
+```js
+console.log(`${clor.red.bold("How").newLine.inverse("are").newLine.underline("you?")}`)
+```
+
 ### Nest
 
 ```js
-console.log("" +
-    clor.bold(clor.red("Bold red")).blue(" and blue")
-)
+console.log(`${clor.bold(clor.red("Bold red")).blue(" and blue")}`)
 ```
 
 ### Custom styles
@@ -47,16 +43,14 @@ Define custom styles.
 
 ```js
 const Styles = {
-    em: s => clor.bgblack.yellow(s)
+    em: s => clor.bgBlack.yellow(s)
 }
 ```
 
 Wrap them in `clor()` or `clor.<style>()` to continue the chain.
 
 ```js
-console.log("" +
-    clor(Styles.em("Known trope")).bold(" or meme")
-)
+console.log(`${clor(Styles.em("Known trope")).bold(" or meme")}`)
 ```
 
 ### [Tagged Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals)
@@ -74,17 +68,13 @@ console.log(c`<red>Red</red>`)
 ```
 
 ```js
-console.log(
-    c`<inverse>Hey Ho, <bold>Lets Go!</bold></inverse>`
-)
+console.log(c`<inverse>Hey Ho, <bold>Lets Go!</bold></inverse>`)
 ```
 
 Embed complex expressions.
 
 ```js
-console.log(
-    c`Hello ${name ? c`<italic>${name}</italic>` : "everyone"}.`
-)
+console.log(c`Hello ${name ? c`<italic>${name}</italic>` : "everyone"}.`)
 ```
 
 ## API
