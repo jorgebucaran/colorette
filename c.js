@@ -2,7 +2,7 @@
 
 const ansi = require("./ansi")
 
-module.exports = function (strings) {
+const cx = c => function (strings) {
     let v = "", t = "", prev = "", tags = [], vals = [], result = []
 
     for (let i = 0; i < strings.length; i++) {
@@ -85,8 +85,6 @@ module.exports = function (strings) {
                 if (prev === "<") {
                     prev = c
                     continue
-                } else {
-                    v += c
                 }
             }
 
@@ -106,8 +104,14 @@ module.exports = function (strings) {
         result.push(v)
     }
 
-    const unwrap = obj => Object.keys(obj).map(k => obj[k]).reduce((s, i) =>
-        s + (i.style ? ansi[i.style][0] + unwrap(i.value) + ansi[i.style][1] : i), "")
-
-    return unwrap(result) + ansi.reset[0]
+    return c(result) + ansi.reset[0]
 }
+
+const c = obj => Object
+    .keys(obj)
+    .map(k => obj[k])
+    .reduce((s, i) => s + (i.style
+        ? ansi[i.style][0] + c(i.value) + ansi[i.style][1]
+        : i), "")
+
+module.exports = cx(c)
