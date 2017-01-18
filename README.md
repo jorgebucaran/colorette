@@ -64,10 +64,6 @@ const c = require("clor/c")
 Use pseudo HTML to style strings.
 
 ```js
-console.log(c`<red>Red</red>`)
-```
-
-```js
 console.log(c`<inverse>Hey Ho, <bold>Lets Go!</bold></inverse>`)
 ```
 
