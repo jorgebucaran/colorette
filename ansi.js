@@ -32,9 +32,10 @@ const ansi = module.exports = {
 }
 
 const hasColor = _ =>
+	process.platform === "win32" ||
 	process.stdout.isTTY &&
 	process.env.TERM &&
 	process.env.TERM !== "dumb"
 
-Object.keys(ansi).forEach(k => ansi[k] = hasColor() ? ansi[k] : [""])
+Object.keys(ansi).forEach(k => ansi[k] = hasColor() ? ansi[k] : ["", ""])
 
