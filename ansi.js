@@ -32,6 +32,7 @@ const ansi = module.exports = {
 }
 
 const hasColor = _ =>
+	process.env.FORCE_COLOR ||
 	process.platform === "win32" ||
 	process.stdout.isTTY &&
 	process.env.TERM &&
