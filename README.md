@@ -54,6 +54,24 @@ And wrap them in a `clor()` or `clor.<style>()` call to continue the sequence.
 console.log(`${clor(Styles.em("Known trope")).bold(" or meme")}`)
 ```
 
+Optionally, require the [tagged literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals) `c`.
+
+```js
+const c = require("clor/c")
+```
+
+Colorize text using pseudo HTML.
+
+```jsx
+console.log(c`<inverse>Hey Ho, <bold>Lets Go!</bold></inverse>`)
+```
+
+Embed complex expressions.
+
+```jsx
+console.log(c`Hello ${name ? c`<italic>${name}</italic>` : "everyone"}.`)
+```
+
 ## Styles
 | Colors  | Background Colors | Modifiers     | Other   |
 |---------|-------------------|---------------|---------|

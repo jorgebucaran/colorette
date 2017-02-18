@@ -16,8 +16,6 @@ console.log("" +
     clor.bold(clor.red("Bold red")).blue(" and blue")
 )
 
-// Custom styles
-
 const Styles = {
     em: s => clor.bold.inverse(s)
 }
