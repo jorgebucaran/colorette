@@ -48,7 +48,7 @@ const Styles = {
 console.log(Styles.em("Alert!"))
 ```
 
-And wrap them in a `clor()` or `clor.<style>()` call to continue the sequence.
+And wrap them in a `clor()` or `clor.<style>()` function call to continue the sequence.
 
 ```jsx
 console.log(`${clor(Styles.em("Known trope")).bold(" or meme")}`)
