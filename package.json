@@ -13,7 +13,10 @@
   "keywords": [
     "color",
     "terminal",
-    "cli"
+    "cli",
+    "chalk",
+    "ansi",
+    "ansi"
   ],
   "author": "Jorge Bucaran",
   "license": "MIT",
