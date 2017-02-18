@@ -1,86 +1,60 @@
 # clor
-
-[![](https://img.shields.io/npm/v/clor.svg)](https://www.npmjs.org/package/clor)
+[![circleci](https://circleci.com/gh/jbucaran/clor/tree/master.svg?style=shield)](https://circleci.com/gh/jbucaran/clor/tree/master)
 [![](http://img.shields.io/travis/jbucaran/clor.svg)](https://travis-ci.org/jbucaran/clor)
+[![](https://img.shields.io/npm/v/clor.svg)](https://www.npmjs.org/package/clor)
 
-Functional terminal styles.
+Clor is a Node.js library for colorizing text using ANSI escape sequences.
 
-## Install
+* **Safe**: Clor does not extend the [String.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype).
+* **Simple**: Clor has no dependencies nor is it broken into a dozen tiny modules that only work well together.
+* **It Just Works™**: Out of the box, Clor detects if your terminal supports colors and knows how to fail gracefully.
 
-```sh
-npm i clor
-```
+## Installation
+<pre>
+npm i -S <a href="https://www.npmjs.com/package/clor">clor</a>
+</pre>
 
 ## Usage
-
-```js
+```jsx
 const clor = require("clor")
 ```
 
-### Concatenate
-
-```js
+## Examples
+Compose a color expression.
+```jsx
 console.log(
-    clor.red.bold("How") + "\n" + clor.red.inverse("are") + "\n" + clor.red.italic("you?")
+    `${clor.red.bold("What's").newLine.inverse("up?")}`
 )
 ```
 
-### Compose
-
-```js
-console.log(`${clor.red.bold("How").newLine.inverse("are").newLine.underline("you?")}`)
+Concatenate expressions.
+```jsx
+console.log(
+    clor.red.bold("What's") + "\n" + clor.red.inverse("up?")
+)
 ```
 
-### Nest
-
-```js
-console.log(`${clor.bold(clor.red("Bold red")).blue(" and blue")}`)
+Nest expressions to reuse styles.
+```jsx
+console.log(`${clor.bold(clor.red("Bold & Red"))}`)
 ```
 
-### Custom styles
-
-Define custom styles.
-
-```js
+Create your own styles.
+```jsx
 const Styles = {
     em: s => clor.bgBlack.yellow(s)
 }
+
+console.log(Styles.em("Alert!"))
 ```
 
-Wrap them in `clor()` or `clor.<style>()` to continue the chain.
+And wrap them in a `clor()` or `clor.<style>()` call to continue the sequence.
 
-```js
+```jsx
 console.log(`${clor(Styles.em("Known trope")).bold(" or meme")}`)
 ```
 
-### [Tagged Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals)
-
-Require the `c` function.
-
-```js
-const c = require("clor/c")
-```
-
-Use pseudo HTML to style strings.
-
-```js
-console.log(c`<inverse>Hey Ho, <bold>Lets Go!</bold></inverse>`)
-```
-
-Embed complex expressions.
-
-```js
-console.log(c`Hello ${name ? c`<italic>${name}</italic>` : "everyone"}.`)
-```
-
-## API
-
-### clor._style_(string)
-
-Returns an instance of `clor`.
-
-Available styles:
-
+## Styles
 | Colors  | Background Colors | Modifiers     | Other   |
 |---------|-------------------|---------------|---------|
 | black   | bgBlack           | dim           | newLine |
