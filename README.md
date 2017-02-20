@@ -1,5 +1,4 @@
 # clor
-[![circleci](https://circleci.com/gh/jbucaran/clor/tree/master.svg?style=shield)](https://circleci.com/gh/jbucaran/clor/tree/master)
 [![](http://img.shields.io/travis/jbucaran/clor.svg)](https://travis-ci.org/jbucaran/clor)
 [![](https://img.shields.io/npm/v/clor.svg)](https://www.npmjs.org/package/clor)
 
