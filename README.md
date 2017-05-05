@@ -19,7 +19,6 @@ npm i -S <a href="https://www.npmjs.com/package/clor">clor</a>
 const clor = require("clor")
 ```
 
-## Examples
 Compose a color expression.
 ```jsx
 console.log(
