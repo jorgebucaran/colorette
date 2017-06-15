@@ -1,6 +1,5 @@
 # clor
 [![](http://img.shields.io/travis/jbucaran/clor.svg)](https://travis-ci.org/jbucaran/clor)
-[![](https://img.shields.io/npm/dm/clor.svg)](https://npmjs.org/package/clor)
 [![](https://img.shields.io/npm/v/clor.svg)](https://www.npmjs.org/package/clor)
 
 Clor is a Node.js library for colorizing text using ANSI escape sequences.
