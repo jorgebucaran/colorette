@@ -1,7 +1,7 @@
 {
   "name": "clor",
-  "version": "5.2.0",
-  "description": "Functional terminal styles",
+  "version": "6.0.0",
+  "description": "Node.js library for colorizing text using ANSI escape sequences.",
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
@@ -11,19 +11,12 @@
     "type": "git",
     "url": "https://github.com/jbucaran/clor"
   },
-  "keywords": [
-    "color",
-    "terminal",
-    "cli",
-    "chalk",
-    "ansi",
-    "ansi"
-  ],
+  "files": ["index.js", "ansi.js"],
+  "keywords": ["color", "terminal", "cli", "ansi"],
   "author": "Jorge Bucaran",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jbucaran/clor/issues"
   },
-  "homepage": "https://github.com/jbucaran/clor",
-  "dependencies": {}
+  "homepage": "https://github.com/jbucaran/clor"
 }
