@@ -11,4 +11,4 @@ const Styles = {
   }
 }
 
-console.log(`${x(Styles.em("Known trope")).bold(" or meme")}`)
+console.log(`${x(Styles.em("A funny")).bold(" joke.")}`)

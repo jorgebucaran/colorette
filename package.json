@@ -4,7 +4,7 @@
   "description": "Node.js library for colorizing text using ANSI escape sequences.",
   "main": "index.js",
   "scripts": {
-    "test": "nyc node test.js && nyc report --reporter=text-lcov > coverage/coverage.lcov && codecov coverage",
+    "test": "nyc node test.js && nyc report --reporter=text-lcov > coverage/coverage.lcov",
     "release": "npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": {
@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/JorgeBucaran/clorox",
   "devDependencies": {
-    "codecov": "^2.3.0",
     "nyc": "^11.2.1"
   }
 }
