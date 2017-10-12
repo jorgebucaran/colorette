@@ -1,6 +1,6 @@
 # Clorox
 [![](http://img.shields.io/travis/JorgeBucaran/clorox.svg)](https://travis-ci.org/JorgeBucaran/clorox)
-[![Codecov](https://img.shields.io/codecov/c/github/clorox/clorox/master.svg)](https://codecov.io/gh/clorox/clorox)
+[![Codecov](https://img.shields.io/codecov/c/github/JorgeBucaran/clorox/master.svg)](https://codecov.io/gh/JorgeBucaran/clorox)
 [![](https://img.shields.io/npm/v/clorox.svg)](https://www.npmjs.org/package/clorox)
 
 Clorox is a Node.js library for colorizing text using ANSI escape sequences.
