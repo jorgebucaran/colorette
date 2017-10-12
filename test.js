@@ -1,14 +1,15 @@
-const clor = require("./")
+const x = require("./")
+const test = require("tape")
 
-console.log(`${clor.red("Beans")}`)
-console.log(`${clor.red.bold("What's").newLine.inverse("up?")}`)
-console.log(clor.red.bold("What's") + "\n" + clor.red.inverse("up?"))
-console.log(`${clor.bold(clor.red("Bold & Red"))}`)
+console.log(`${x.red("Beans")}`)
+console.log(`${x.red.bold("What's").newLine.inverse("up?")}`)
+console.log(x.red.bold("What's") + "\n" + x.red.inverse("up?"))
+console.log(`${x.bold(x.red("Bold & Red"))}`)
 
 const Styles = {
   em(s) {
-    return clor.bgBlack.yellow(s)
+    return x.bgBlack.yellow(s)
   }
 }
 
-console.log(`${clor(Styles.em("Known trope")).bold(" or meme")}`)
+console.log(`${x(Styles.em("Known trope")).bold(" or meme")}`)
