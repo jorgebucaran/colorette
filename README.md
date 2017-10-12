@@ -5,9 +5,9 @@
 
 Clorox is a Node.js library for colorizing text using ANSI escape sequences.
 
-* **Nontoxic**: Clorox does not extend the [String.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype).
+* **Eco-friendly**: Clorox does not extend the [String.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype).
 * **Concentrated**: Clorox has no dependencies, nor is it broken into a dozen modules that only work together.
-* **It Just Works™**: Clorox auto-detects color support. 99% percent of the time, it works every time.
+* **Non-toxic**: Clorox auto-detects terminal color support and doesn't pollute your terminal with unrecognized escape codes.
 
 ## Installation
 
@@ -18,7 +18,7 @@ npm i <a href="https://www.npmjs.com/package/clorox">clorox</a>
 ## Usage
 
 ```jsx
-const x = require("clorox")
+const c = require("clorox")
 ```
 
 ## Examples
@@ -26,19 +26,19 @@ const x = require("clorox")
 Compose a color expression.
 
 ```jsx
-console.log(`${x.red.bold("What's").newLine.inverse("up?")}`)
+console.log(`${c.red.bold("What's").newLine.inverse("up?")}`)
 ```
 
 Concatenate expressions.
 
 ```jsx
-console.log(x.red.bold("What's") + "\n" + x.red.inverse("up?"))
+console.log(c.red.bold("What's") + "\n" + c.red.inverse("up?"))
 ```
 
 Nest expressions to reuse styles.
 
 ```jsx
-console.log(`${x.bold(x.red("Bold & Red"))}`)
+console.log(`${c.bold(c.red("Bold & Red"))}`)
 ```
 
 Create your own styles.
@@ -46,11 +46,11 @@ Create your own styles.
 ```jsx
 const Styles = {
   em(s) {
-    return x.bgBlack.yellow(s)
+    return c.bgBlack.yellow(s)
   }
 }
 
-console.log(`${x(Styles.em("Known trope")).bold(" or meme")}`)
+console.log(`${c(Styles.em("Known trope")).bold(" or meme")}`)
 ```
 
 ## Styles

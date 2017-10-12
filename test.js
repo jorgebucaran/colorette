@@ -1,14 +1,14 @@
-const x = require("./")
+const c = require("./")
 
-console.log(`${x.red("Beans")}`)
-console.log(`${x.red.bold("What's").newLine.inverse("up?")}`)
-console.log(x.red.bold("What's") + "\n" + x.red.inverse("up?"))
-console.log(`${x.bold(x.red("Bold & Red"))}`)
+console.log(`${c.red("Beans")}`)
+console.log(`${c.red.bold("What's").newLine.inverse("up?")}`)
+console.log(c.red.bold("What's") + "\n" + c.red.inverse("up?"))
+console.log(`${c.bold(c.red("Bold & Red"))}`)
 
 const Styles = {
   em(s) {
-    return x.bgBlack.yellow(s)
+    return c.bgBlack.yellow(s)
   }
 }
 
-console.log(`${x(Styles.em("A funny")).bold(" joke.")}`)
+console.log(`${c(Styles.em("A funny")).bold(" joke.")}`)
