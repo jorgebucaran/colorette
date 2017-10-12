@@ -1,9 +1,24 @@
 const c = require("./")
 
-console.log(`${c.red("Beans")}`)
-console.log(`${c.red.bold("What's").newLine.inverse("up?")}`)
-console.log(c.red.bold("What's") + "\n" + c.red.inverse("up?"))
-console.log(`${c.bold(c.red("Bold & Red"))}`)
+// Compose a color expression.
+
+console.log(`${
+  c.red.bold("What's").newLine.inverse("up?")
+}`)
+
+// Concatenate expressions.
+
+console.log(
+  c.red.bold("What's") + "\n" + c.red.inverse("up?")
+)
+
+// Nest expressions to reuse styles.
+
+console.log(`${
+  c.bold(c.red("Bold & Red"))
+}`)
+
+// Create your own styles.
 
 const Styles = {
   em(s) {
@@ -11,4 +26,7 @@ const Styles = {
   }
 }
 
-console.log(`${c(Styles.em("A funny")).bold(" joke.")}`)
+console.log(`${
+  c(Styles.em("A funny")).bold(" joke.")
+}`)
+

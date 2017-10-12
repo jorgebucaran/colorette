@@ -1,11 +1,11 @@
 {
   "name": "clorox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node.js library for colorizing text using ANSI escape sequences.",
   "main": "index.js",
   "scripts": {
     "test": "nyc node test.js && nyc report --reporter=text-lcov > coverage/coverage.lcov",
-    "release": "npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
+    "release": "npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push origin master && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
