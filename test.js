@@ -1,5 +1,4 @@
 const x = require("./")
-const test = require("tape")
 
 console.log(`${x.red("Beans")}`)
 console.log(`${x.red.bold("What's").newLine.inverse("up?")}`)
