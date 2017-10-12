@@ -1,22 +1,24 @@
-# Clor
-[![](http://img.shields.io/travis/jbucaran/clor.svg)](https://travis-ci.org/jbucaran/clor)
-[![](https://img.shields.io/npm/v/clor.svg)](https://www.npmjs.org/package/clor)
+# Clorox
+[![](http://img.shields.io/travis/JorgeBucaran/clorox.svg)](https://travis-ci.org/JorgeBucaran/clorox)
+[![Codecov](https://img.shields.io/codecov/c/github/JorgeBucaran/clorox/master.svg)](https://codecov.io/gh/JorgeBucaran/clorox)
+[![](https://img.shields.io/npm/v/clorox.svg)](https://www.npmjs.org/package/clorox)
 
-Clor is a Node.js library for colorizing text using ANSI escape sequences.
+Clorox is a Node.js library for colorizing text using ANSI escape sequences.
 
-* **Safe**: Clor does not extend the [String.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype).
-* **Simple**: Clor has no dependencies nor is it broken into a dozen tiny modules that only work well together.
-* **It Just Works™**: Out of the box, Clor detects if your terminal supports colors and knows how to fail with grace.
+* **Eco-friendly**: Clorox does not extend the [String.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype).
+* **Concentrated**: Clorox has no dependencies, nor is it broken into a dozen modules that only work together.
+* **Non-toxic**: Clorox auto-detects terminal color support and doesn't pollute your terminal with unrecognized escape codes.
 
 ## Installation
+
 <pre>
-npm i <a href="https://www.npmjs.com/package/clor">clor</a>
+npm i <a href="https://www.npmjs.com/package/clorox">clorox</a>
 </pre>
 
 ## Usage
 
 ```jsx
-const clor = require("clor")
+const c = require("clorox")
 ```
 
 ## Examples
@@ -24,23 +26,19 @@ const clor = require("clor")
 Compose a color expression.
 
 ```jsx
-console.log(
-  `${clor.red.bold("What's").newLine.inverse("up?")}`
-)
+console.log(`${c.red.bold("What's").newLine.inverse("up?")}`)
 ```
 
 Concatenate expressions.
 
 ```jsx
-console.log(
-  clor.red.bold("What's") + "\n" + clor.red.inverse("up?")
-)
+console.log(c.red.bold("What's") + "\n" + c.red.inverse("up?"))
 ```
 
 Nest expressions to reuse styles.
 
 ```jsx
-console.log(`${clor.bold(clor.red("Bold & Red"))}`)
+console.log(`${c.bold(c.red("Bold & Red"))}`)
 ```
 
 Create your own styles.
@@ -48,18 +46,15 @@ Create your own styles.
 ```jsx
 const Styles = {
   em(s) {
-    return clor.bgBlack.yellow(s)
+    return c.bgBlack.yellow(s)
   }
 }
-```
 
-And wrap them in a `clor()` or <code>clor.<em>\<style\></em>()</code> function call to continue the sequence.
-
-```jsx
-console.log(`${clor(Styles.em("Known trope")).bold(" or meme")}`)
+console.log(`${c(Styles.em("Known trope")).bold(" or meme")}`)
 ```
 
 ## Styles
+
 | Colors  | Background Colors | Modifiers     | Other   |
 |---------|-------------------|---------------|---------|
 | black   | bgBlack           | dim           | newLine |
@@ -74,4 +69,4 @@ console.log(`${clor(Styles.em("Known trope")).bold(" or meme")}`)
 
 ## License
 
-Clor is MIT licensed. See [LICENSE](LICENSE.md).
+Clorox is MIT licensed. See [LICENSE](LICENSE.md).

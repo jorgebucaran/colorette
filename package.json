@@ -1,22 +1,33 @@
 {
-  "name": "clor",
-  "version": "6.0.0",
+  "name": "clorox",
+  "version": "0.0.0",
   "description": "Node.js library for colorizing text using ANSI escape sequences.",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js",
+    "test": "nyc node test.js && nyc report --reporter=text-lcov > coverage/coverage.lcov",
     "release": "npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jbucaran/clor"
+    "url": "JorgeBucaran/clorox"
   },
-  "files": ["index.js", "ansi.js"],
-  "keywords": ["color", "terminal", "cli", "ansi"],
+  "files": [
+    "index.js",
+    "ansi.js"
+  ],
+  "keywords": [
+    "color",
+    "terminal",
+    "cli",
+    "ansi"
+  ],
   "author": "Jorge Bucaran",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jbucaran/clor/issues"
+    "url": "https://github.com/JorgeBucaran/clorox/issues"
   },
-  "homepage": "https://github.com/jbucaran/clor"
+  "homepage": "https://github.com/JorgeBucaran/clorox",
+  "devDependencies": {
+    "nyc": "^11.2.1"
+  }
 }
