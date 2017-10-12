@@ -1,6 +1,6 @@
 {
   "name": "clorox",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Node.js library for colorizing text using ANSI escape sequences.",
   "main": "index.js",
   "scripts": {
