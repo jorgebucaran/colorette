@@ -28,6 +28,6 @@
   },
   "homepage": "https://github.com/JorgeBucaran/clorox",
   "devDependencies": {
-    "nyc": "^11.2.1"
+    "nyc": "^11.4.1"
   }
 }
