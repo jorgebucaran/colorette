@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "JorgeBucaran/clorox"
+    "url": "jorgebucaran/clorox"
   },
   "files": [
     "index.js",
@@ -24,9 +24,9 @@
   "author": "Jorge Bucaran",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JorgeBucaran/clorox/issues"
+    "url": "https://github.com/jorgebucaran/clorox/issues"
   },
-  "homepage": "https://github.com/JorgeBucaran/clorox",
+  "homepage": "https://github.com/jorgebucaran/clorox",
   "devDependencies": {
     "nyc": "^11.4.1"
   }
