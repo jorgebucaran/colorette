@@ -7,7 +7,7 @@ module.exports = (function Clorox(old, close) {
 
   Object.keys(ansi).map(name => {
     Object.defineProperty(clorox, name, {
-      get: () => Clorox(old + ansi[name][0], ansi[name][1])
+      get: () => Clorox(old + ansi[name][0], (close || "") + ansi[name][1])
     })
   })
 
