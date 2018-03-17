@@ -5,8 +5,8 @@
 
 Clorox is a Node.js library for colorizing text using ANSI escape sequences.
 
-* **Eco-friendly** — We don't extend the [String.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype).
-* **Concentrated** — Zero dependencies. Clorox is not broken into a dozen modules that only work together.
+* **All-in-one** — Clorox is not broken into a dozen modules that only work together.
+* **Eco-friendly** — No modifications were made to the [String.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype) in the making of this package.
 * **Non-toxic** — Auto-detect color support without polluting your terminal with unrecognized escape codes.
 
 ## Installation
