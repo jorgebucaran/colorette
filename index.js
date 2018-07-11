@@ -1,77 +1,77 @@
 const isColorSupported =
-	process.env.FORCE_COLOR ||
-	process.platform === "win32" ||
-	(process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
+  process.env.FORCE_COLOR ||
+  process.platform === "win32" ||
+  (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
 
-const EMPTY_CODE = { left: "", right: "", rgx: "" }
+const EMPTY_REGEX = /(?:)/
+const NO_STYLE = { left: "", right: "", strip: EMPTY_REGEX }
 
-const Color = function(left, right) {
-	return isColorSupported
-		? {
-				left: `\x1b[${left}m`,
-				right: `\x1b[${right}m`,
-				rgx: new RegExp(`\\x1b\\[${right}m`, "g")
-		  }
-		: EMPTY_CODE
+const Style = function(left, right) {
+  return isColorSupported
+    ? {
+        left: `\x1b[${left}m`,
+        right: `\x1b[${right}m`,
+        strip: new RegExp(`\\x1b\\[${right}m`, "g")
+      }
+    : NO_STYLE
 }
 
-const COLORS = {
-	black: Color(30, 39),
-	red: Color(31, 39),
-	green: Color(32, 39),
-	yellow: Color(33, 39),
-	blue: Color(34, 39),
-	magenta: Color(35, 39),
-	cyan: Color(36, 39),
-	white: Color(37, 39),
-	gray: Color(90, 39),
-
-	bgBlack: Color(40, 49),
-	bgRed: Color(41, 49),
-	bgGreen: Color(42, 49),
-	bgYellow: Color(43, 49),
-	bgBlue: Color(44, 49),
-	bgMagenta: Color(45, 49),
-	bgCyan: Color(46, 49),
-	bgWhite: Color(47, 49),
-
-	reset: Color(0, 0),
-	bold: Color(1, 22),
-	dim: Color(2, 22),
-	italic: Color(3, 23),
-	underline: Color(4, 24),
-	inverse: Color(7, 27),
-	hidden: Color(8, 28),
-	strikethrough: Color(9, 29)
+const STYLES = {
+  black: Style(30, 39),
+  red: Style(31, 39),
+  green: Style(32, 39),
+  yellow: Style(33, 39),
+  blue: Style(34, 39),
+  magenta: Style(35, 39),
+  cyan: Style(36, 39),
+  white: Style(37, 39),
+  gray: Style(90, 39),
+  bgBlack: Style(40, 49),
+  bgRed: Style(41, 49),
+  bgGreen: Style(42, 49),
+  bgYellow: Style(43, 49),
+  bgBlue: Style(44, 49),
+  bgMagenta: Style(45, 49),
+  bgCyan: Style(46, 49),
+  bgWhite: Style(47, 49),
+  reset: Style(0, 0),
+  bold: Style(1, 22),
+  dim: Style(2, 22),
+  italic: Style(3, 23),
+  underline: Style(4, 24),
+  inverse: Style(7, 27),
+  hidden: Style(8, 28),
+  strikethrough: Style(9, 29)
 }
 
-const Clorox = colors => {
-	const self = Object.setPrototypeOf(s => {
-		const colors = self.colors
+const Clorox = styles => {
+  const self = Object.setPrototypeOf(s => {
+    const styles = self.styles
 
-		for (var i = 0, n = colors.length; i < n; i++) {
-			let color = COLORS[colors[i]]
-			s = color.left + s.replace(color.rgx, color.left) + color.right
-		}
+    for (var i = 0, n = styles.length; i < n; i++) {
+      let style = STYLES[styles[i]]
+      s = style.left + s.replace(style.strip, style.left) + style.right
+    }
 
-		return s
-	}, Clorox)
+    return s
+  }, Clorox)
 
-	self.colors = colors
+  self.styles = styles
 
-	return self
+  return self
 }
 
-for (const color in COLORS) {
-	Object.defineProperty(Clorox, color, {
-		get() {
-			if (this.colors === undefined) return Clorox([color])
+for (const style in STYLES) {
+  Object.defineProperty(Clorox, style, {
+    get() {
+      if (this.styles === undefined) return Clorox([style])
 
-			this.colors.push(color)
+      this.styles.push(style)
 
-			return this
-		}
-	})
+      return this
+    }
+  })
 }
 
-module.exports = Clorox
+exports.Clorox = Clorox
+exports.STYLES = STYLES
