@@ -3,3 +3,4 @@ node_modules
 yarn.lock
 .nyc_*
 coverage
+package-lock.json
