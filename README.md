@@ -19,7 +19,7 @@ npm i <a href="https://www.npmjs.com/package/clorox">clorox</a>
 ## Usage
 
 ```jsx
-const x = require("clorox")
+const { Clorox: x } = require("clorox")
 ```
 
 Write with color.
@@ -49,6 +49,14 @@ console.log(`${x.bold(x.blue("Bold/Blue") + "Bold")}`)
 ```
 
 ## Styles
+
+```jsx
+const { STYLES } = require("clorox")
+
+console.log(`${STYLES.red.left}Red${STYLES.red.right}`)
+```
+
+### Available Styles
 
 | Colors  | Background Colors | Modifiers     |
 | ------- | ----------------- | ------------- |
