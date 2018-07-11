@@ -4,3 +4,4 @@ yarn.lock
 .nyc_*
 coverage
 package-lock.json
+.vscode
