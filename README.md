@@ -4,11 +4,11 @@
 [![Codecov](https://img.shields.io/codecov/c/github/jorgebucaran/clorox/master.svg)](https://codecov.io/gh/jorgebucaran/clorox)
 [![](https://img.shields.io/npm/v/clorox.svg)](https://www.npmjs.org/package/clorox)
 
-Clorox is a Node.js library for colorizing text using ANSI escape sequences.
+Clorox is a Node.js library for colorizing text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
 - **All-in-one** — Not broken into a dozen modules that only work together.
 - **Eco-friendly** — No modifications were made to the [String.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype) in the making of this package.
-- **Non-toxic** — Auto-detects color support without polluting your terminal with broken escape codes.
+- **It Just Works™** — Auto-detects color support and [degrades gracefully](https://en.wikipedia.org/wiki/Fault_tolerance) without contaminating your terminal with broken escape codes.
 
 ## Installation
 
@@ -25,13 +25,13 @@ const { Clorox: x } = require("clorox")
 Write with color.
 
 ```jsx
-console.log(x.red("Hello World!"))
+console.log(x.red("Bonjour!"))
 ```
 
 Chain expressions.
 
 ```jsx
-console.log(x.red.underline("Hola") + x.blue.bold("Mundo!"))
+console.log(x.red.underline("Hello") + x.blue.bold("World"))
 ```
 
 Compose a color expression using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
@@ -45,30 +45,34 @@ console.log(
 Nest expressions to reuse styles.
 
 ```jsx
-console.log(`${x.bold(x.blue("Bold/Blue") + "Bold")}`)
+console.log(`Normal ${x.bold(`Bold ${x.blue("Bold/Blue")} Bold`)} Normal`)
 ```
 
 ## Styles
 
+Clorox exports ANSI escape codes which you can use for manually styling console output. They can be useful for testing your actual output matches the expected output.
+
+Each [style](#available-styles) has an `open`, `close` and `strip` property. The `strip` property is useful for removing the previously closed escape code within a nested expression.
+
 ```jsx
 const { STYLES } = require("clorox")
 
-console.log(`${STYLES.red.left}Red${STYLES.red.right}`)
+console.log(`${STYLES.red.open}Red${STYLES.red.close}`)
 ```
 
 ### Available Styles
 
-| Colors  | Background Colors | Modifiers     |
-| ------- | ----------------- | ------------- |
-| black   | bgBlack           | dim           |
-| red     | bgRed             | bold          |
-| green   | bgGreen           | hidden        |
-| yellow  | bgYellow          | italic        |
-| blue    | bgBlue            | underline     |
-| magenta | bgMagenta         | inverse       |
-| cyan    | bgCyan            | strikethrough |
-| white   | bgWhite           | reset         |
-| gray    |                   |               |
+| Colors  | Background Colors | Modifiers         |
+| ------- | ----------------- | ----------------- |
+| black   | bgBlack           | dim               |
+| red     | bgRed             | **bold**          |
+| green   | bgGreen           | hidden            |
+| yellow  | bgYellow          | _italic_          |
+| blue    | bgBlue            | underline         |
+| magenta | bgMagenta         | inverse           |
+| cyan    | bgCyan            | ~~strikethrough~~ |
+| white   | bgWhite           | reset             |
+| gray    |                   |                   |
 
 ## License
 
