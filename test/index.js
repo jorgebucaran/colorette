@@ -11,6 +11,15 @@ test("styles", t => {
   t.end()
 })
 
+test("numbers", t => {
+  const actual = x.red(1985)
+  const expected = `${STYLES.red.open}1985${STYLES.red.close}`
+
+  t.is(actual, expected, actual)
+
+  t.end()
+})
+
 test("chains", t => {
   const { red, bold, underline, italic } = STYLES
   const fixture = "Red, bold, underline and italic."
