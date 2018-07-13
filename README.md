@@ -39,7 +39,7 @@ Compose a color expression using [template literals](https://developer.mozilla.o
 ```jsx
 console.log(`
   Oil: ${x.bgBlack.white(42)}
-  Gold: ${x.yellow(132)}
+  Gold: ${x.yellow(150)}
   Lumber: ${x.green(10000)}
 `)
 ```
@@ -48,6 +48,12 @@ Nest expressions to reuse styles.
 
 ```jsx
 console.log(`Normal ${x.bold(`Bold ${x.blue("Bold/Blue")} Bold`)} Normal`)
+```
+
+Use [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args) for easier formatting.
+
+```jsx
+console.log(x.green("Total: $%f"), 1.99)
 ```
 
 ## Styles
