@@ -48,7 +48,7 @@ const Clorox = function(s) {
   const styles = this.styles
   const length = styles.length
 
-  for (i = 0; i < length; i++) {
+  for (i = 0, s = s + ""; i < length; i++) {
     style = STYLES[styles[i]]
     s = `${style.open}${s.replace(style.strip, style.open)}${style.close}`
   }
