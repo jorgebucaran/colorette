@@ -1,10 +1,10 @@
+const EMPTY_REGEX = /(?:)/
+const NO_STYLE = { open: "", close: "", strip: EMPTY_REGEX }
+
 const isColorSupported =
   process.env.FORCE_COLOR ||
   process.platform === "win32" ||
   (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
-
-const EMPTY_REGEX = /(?:)/
-const NO_STYLE = { open: "", close: "", strip: EMPTY_REGEX }
 
 const Style = (open, close) =>
   isColorSupported
@@ -43,33 +43,38 @@ const STYLES = {
   strikethrough: Style(9, 29)
 }
 
-const Clorox = styles => {
-  const self = Object.setPrototypeOf(s => {
-    const styles = self.styles
-    const length = styles.length
+const Clorox = function(s) {
+  let i, style
+  const styles = this.styles
+  const length = styles.length
 
-    for (let i = 0; i < length; i++) {
-      let style = STYLES[styles[i]]
-      s = `${style.open}${s.replace(style.strip, style.open)}${style.close}`
-    }
+  for (i = 0; i < length; i++) {
+    style = STYLES[styles[i]]
+    s = `${style.open}${s.replace(style.strip, style.open)}${style.close}`
+  }
 
-    return s
-  }, Clorox)
-
-  self.styles = styles
-
-  return self
+  return s
 }
 
+const defineProperty = Object.defineProperty
+
 for (const style in STYLES) {
-  Object.defineProperty(Clorox, style, {
+  defineProperty(Clorox, style, {
     get() {
-      return this.styles === undefined
-        ? Clorox([style])
-        : (this.styles.push(style), this)
+      if (this.styles === undefined) {
+        const o = {}
+        const f = Clorox.bind(o)
+
+        f.__proto__ = Clorox
+        f.styles = o.styles = [style]
+
+        return f
+      }
+
+      this.styles.push(style)
+      return this
     }
   })
 }
 
-exports.Clorox = Clorox
-exports.STYLES = STYLES
+module.exports = { Clorox, STYLES }
