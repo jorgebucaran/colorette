@@ -31,15 +31,17 @@ console.log(x.red("Bonjour!"))
 Chain expressions.
 
 ```jsx
-console.log(x.red.underline("Hello") + x.blue.bold("World"))
+console.log(x.red.underline("Hello") + x.blue.bold("World") + "!")
 ```
 
 Compose a color expression using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
 ```jsx
-console.log(
-  `${x.red("Hey!")}\n${x.blue.bold("Ho!")}\n${x.green.italic("Let's go!")}`
-)
+console.log(`
+  Oil: ${x.bgBlack.white(42)}
+  Gold: ${x.yellow(132)}
+  Lumber: ${x.green(10000)}
+`)
 ```
 
 Nest expressions to reuse styles.
