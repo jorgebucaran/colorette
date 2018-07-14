@@ -16,23 +16,6 @@ const Style = (open, close) =>
     : NO_STYLE
 
 const STYLES = {
-  black: Style(30, 39),
-  red: Style(31, 39),
-  green: Style(32, 39),
-  yellow: Style(33, 39),
-  blue: Style(34, 39),
-  magenta: Style(35, 39),
-  cyan: Style(36, 39),
-  white: Style(37, 39),
-  gray: Style(90, 39),
-  bgBlack: Style(40, 49),
-  bgRed: Style(41, 49),
-  bgGreen: Style(42, 49),
-  bgYellow: Style(43, 49),
-  bgBlue: Style(44, 49),
-  bgMagenta: Style(45, 49),
-  bgCyan: Style(46, 49),
-  bgWhite: Style(47, 49),
   reset: Style(0, 0),
   bold: Style(1, 22),
   dim: Style(2, 22),
@@ -40,10 +23,29 @@ const STYLES = {
   underline: Style(4, 24),
   inverse: Style(7, 27),
   hidden: Style(8, 28),
-  strikethrough: Style(9, 29)
+  strikethrough: Style(9, 29),
+
+  black: Style(30, 39), // Dark
+  red: Style(91, 39),
+  green: Style(92, 39),
+  yellow: Style(93, 39),
+  blue: Style(94, 39),
+  magenta: Style(95, 39),
+  cyan: Style(96, 39),
+  white: Style(97, 39),
+  gray: Style(90, 39),
+
+  bgBlack: Style(40, 49), // Dark
+  bgRed: Style(101, 49),
+  bgGreen: Style(102, 49),
+  bgYellow: Style(103, 49),
+  bgBlue: Style(104, 49),
+  bgMagenta: Style(105, 49),
+  bgCyan: Style(106, 49),
+  bgWhite: Style(107, 49)
 }
 
-const Clorox = function(s) {
+const color = function(s) {
   let i, style
   const styles = this.styles
   const length = styles.length
@@ -59,13 +61,13 @@ const Clorox = function(s) {
 const defineProperty = Object.defineProperty
 
 for (const style in STYLES) {
-  defineProperty(Clorox, style, {
+  defineProperty(color, style, {
     get() {
       if (this.styles === undefined) {
         const o = {}
-        const f = Clorox.bind(o)
+        const f = color.bind(o)
 
-        f.__proto__ = Clorox
+        f.__proto__ = color
         f.styles = o.styles = [style]
 
         return f
@@ -77,4 +79,4 @@ for (const style in STYLES) {
   })
 }
 
-module.exports = { Clorox, STYLES }
+module.exports = { color, STYLES }
