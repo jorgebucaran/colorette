@@ -1,3 +1,5 @@
+"use strict"
+
 const EMPTY_REGEX = /(?:)/
 const NO_STYLE = { open: "", close: "", strip: EMPTY_REGEX }
 
