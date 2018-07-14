@@ -1,0 +1,10 @@
+{
+  "name": "benchmarks",
+  "private": true,
+  "devDependencies": {
+    "benchmark": "^2.1.4",
+    "ansi-colors": "^2.0.2",
+    "chalk": "^2.4.1",
+    "kleur": "^1.0.1"
+  }
+}
