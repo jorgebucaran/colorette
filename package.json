@@ -1,5 +1,5 @@
 {
-  "name": "clorox",
+  "name": "turbocolor",
   "version": "2.2.0",
   "description": "Node.js library for colorizing text using ANSI escape sequences.",
   "main": "index.js",
@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "jorgebucaran/clorox"
+    "url": "jorgebucaran/turbocolor"
   },
   "files": [
     "index.js"
   ],
   "keywords": [
-    "clorox",
+    "turbocolor",
     "color",
     "terminal",
     "cli",
@@ -24,9 +24,9 @@
   "author": "Jorge Bucaran",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jorgebucaran/clorox/issues"
+    "url": "https://github.com/jorgebucaran/turbocolor/issues"
   },
-  "homepage": "https://github.com/jorgebucaran/clorox",
+  "homepage": "https://github.com/jorgebucaran/turbocolor",
   "devDependencies": {
     "nyc": "^12.0.2",
     "tape": "^4.9.1"

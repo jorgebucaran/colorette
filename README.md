@@ -1,69 +1,71 @@
-# Clorox
+# Turbocolor
 
-[![](http://img.shields.io/travis/jorgebucaran/clorox.svg)](https://travis-ci.org/jorgebucaran/clorox)
-[![Codecov](https://img.shields.io/codecov/c/github/jorgebucaran/clorox/master.svg)](https://codecov.io/gh/jorgebucaran/clorox)
-[![](https://img.shields.io/npm/v/clorox.svg)](https://www.npmjs.org/package/clorox)
+[![](http://img.shields.io/travis/jorgebucaran/turbocolor.svg)](https://travis-ci.org/jorgebucaran/turbocolor)
+[![Codecov](https://img.shields.io/codecov/c/github/jorgebucaran/turbocolor/master.svg)](https://codecov.io/gh/jorgebucaran/turbocolor)
+[![](https://img.shields.io/npm/v/turbocolor.svg)](https://www.npmjs.org/package/turbocolor)
 
-Clorox is a Node.js library for colorizing text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
+Turbocolor is a Node.js library for colorizing text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
 - **All-in-one** — Not broken into a dozen modules that only work together.
 - **Eco-friendly** — No modifications were made to the [String.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype) in the making of this package.
 - **It Just Works™** — Auto-detects color support and [degrades gracefully](https://en.wikipedia.org/wiki/Fault_tolerance) without contaminating your terminal with broken escape codes.
 
+Need for speed? Turbocolor is the fastest terminal colorizer for Node.js. See the [benchmarks](/bench).
+
 ## Installation
 
 <pre>
-npm i <a href="https://www.npmjs.com/package/clorox">clorox</a>
+npm i <a href="https://www.npmjs.com/package/turbocolor">turbocolor</a>
 </pre>
 
 ## Usage
 
 ```jsx
-const { Clorox: x } = require("clorox")
+const { color } = require("turbocolor")
 ```
 
 Write with color.
 
 ```jsx
-console.log(x.red("Bonjour!"))
+console.log(color.red("Bonjour!"))
 ```
 
 Chain expressions.
 
 ```jsx
-console.log(x.red.underline("Hello") + x.blue.bold("World") + "!")
+console.log(color.red.bold("Turbo") + color.bgRed.white("Color"))
 ```
 
 Compose a color expression using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
 ```jsx
 console.log(`
-  Oil: ${x.bgBlack.white(42)}
-  Gold: ${x.yellow(150)}
-  Lumber: ${x.green(10000)}
+  ${color.bold("Score")}: ${100}
+  Lives: ${color.red.inverse(1)}
+  Level: ${color.bgCyan.black.inverse(2)}
 `)
 ```
 
 Nest expressions to reuse styles.
 
 ```jsx
-console.log(`Normal ${x.bold(`Bold ${x.blue("Bold/Blue")} Bold`)} Normal`)
+console.log(`Normal ${color.bold(`Bold ${color.red("Bold/Red")} Bold`)} Normal`)
 ```
 
 Use [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args) for easier formatting.
 
 ```jsx
-console.log(x.green("Total: $%f"), 1.99)
+console.log(color.green("Total: $%f"), 1.99)
 ```
 
 ## Styles
 
-Clorox exports ANSI escape codes which you can use for manually styling console output. They can be useful for testing your actual output matches the expected output.
+Turbocolor exports ANSI escape codes which you can use for manually styling console output. They can be useful for testing your actual output matches the expected output.
 
-Each [style](#available-styles) has an `open`, `close` and `strip` property. The `strip` property is useful for removing the previously closed escape code within a nested expression.
+Each [style](#available-styles) has an `open`, `close` and `strip` property. The `strip` property is a regular expression useful for removing the previously closed escape code within a nested expression.
 
 ```jsx
-const { STYLES } = require("clorox")
+const { STYLES } = require("turbocolor")
 
 console.log(`${STYLES.red.open}Red${STYLES.red.close}`)
 ```
@@ -84,4 +86,4 @@ console.log(`${STYLES.red.open}Red${STYLES.red.close}`)
 
 ## License
 
-Clorox is MIT licensed. See [LICENSE](LICENSE.md).
+Turbocolor is MIT licensed. See [LICENSE](LICENSE.md).
