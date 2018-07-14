@@ -1,6 +1,6 @@
 {
   "name": "turbocolor",
-  "version": "2.0.1",
+  "version": "2.2.0",
   "description": "Node.js library for colorizing text using ANSI escape sequences.",
   "main": "index.js",
   "scripts": {
