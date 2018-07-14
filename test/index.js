@@ -23,7 +23,10 @@ test("numbers", t => {
 })
 
 test("chains", t => {
-  const { red, bold, underline, italic } = color.Styles
+  const red = color.Styles.red
+  const bold = color.Styles.bold
+  const underline = color.Styles.underline
+  const italic = color.Styles.italic
   const fixture = "Red, bold, underline and italic."
   const actual = color.red.bold.underline.italic(fixture)
   const expected = `${italic.open}${underline.open}${bold.open}${
@@ -35,7 +38,11 @@ test("chains", t => {
 })
 
 test("nested", t => {
-  const { red, blue, black, bold, inverse } = color.Styles
+  const red = color.Styles.red
+  const blue = color.Styles.blue
+  const black = color.Styles.black
+  const bold = color.Styles.bold
+  const inverse = color.Styles.inverse
   const actual = color.red(
     `Red ${color.blue.bold("Bold Blue")} Red ${color.black.inverse(
       "Inverse Black"
