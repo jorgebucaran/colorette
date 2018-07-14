@@ -58,6 +58,11 @@ test("nested", t => {
   t.end()
 })
 
+test("supports color", t => {
+  t.is(typeof color.supportsColor, "boolean")
+  t.end()
+})
+
 test("toggle", t => {
   color.enabled = false
   t.is(color.red.bold.inverse.dim.underline("Ok"), "Ok")
