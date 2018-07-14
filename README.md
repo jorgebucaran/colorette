@@ -77,12 +77,12 @@ Every style function can be chained or nested with one another and will return a
 
 ## Color Support
 
-Turbocolor color support is enabled by default, but you can toggle it off as needed. For example, use [chalk/supports-color](https://github.com/chalk/supports-color#usage) to determine whether a terminal supports color.
+Turbocolor color support is enabled by default, but you can toggle it off as needed. For example, to disable color when the terminal does not support it use `supportsColor` like so.
 
 ```js
 const color = require("turbocolor")
 
-color.enabled = require("supports-color").stdout
+color.enabled = color.supportsColor
 ```
 
 ## Escape Codes

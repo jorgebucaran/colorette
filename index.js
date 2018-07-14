@@ -38,9 +38,16 @@ const Styles = {
   bgWhite: Style(107, 49)
 }
 
-const Turbocolor = { enabled: true, Styles }
+const Turbocolor = {
+  Styles,
+  enabled: true,
+  supportsColor:
+    process.env.FORCE_COLOR ||
+    process.platform === "win32" ||
+    (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
+}
 
-const color = function(out) {
+const color = function (out) {
   if (!Turbocolor.enabled) return out
 
   let i, style
