@@ -1,9 +1,9 @@
-const { Clorox: x, STYLES } = require("../")
+const { color, STYLES } = require("../")
 const test = require("tape")
 
 test("styles", t => {
   Object.keys(STYLES).map(style => {
-    const actual = x[style](style)
+    const actual = color[style](style)
     const expected = `${STYLES[style].open}${style}${STYLES[style].close}`
 
     t.is(actual, expected, actual)
@@ -12,8 +12,10 @@ test("styles", t => {
 })
 
 test("numbers", t => {
-  const actual = x.red(1985)
-  const expected = `${STYLES.red.open}1985${STYLES.red.close}`
+  const actual = color.inverse.bgRed(1985)
+  const expected = `${STYLES.bgRed.open}${STYLES.inverse.open}1985${
+    STYLES.inverse.close
+  }${STYLES.bgRed.close}`
 
   t.is(actual, expected, actual)
 
@@ -23,7 +25,7 @@ test("numbers", t => {
 test("chains", t => {
   const { red, bold, underline, italic } = STYLES
   const fixture = "Red, bold, underline and italic."
-  const actual = x.red.bold.underline.italic(fixture)
+  const actual = color.red.bold.underline.italic(fixture)
   const expected = `${italic.open}${underline.open}${bold.open}${
     red.open
   }${fixture}${red.close}${bold.close}${underline.close}${italic.close}`
@@ -33,14 +35,18 @@ test("chains", t => {
 })
 
 test("nested", t => {
-  const { red, blue, green, bold } = STYLES
+  const { red, blue, black, bold, inverse } = STYLES
 
-  const actual = x.red(
-    `Red ${x.blue.bold("Blue Bold")} Red ${x.green("Green")} Red`
+  const actual = color.red(
+    `Red ${color.blue.bold("Bold Blue")} Red ${color.black.inverse(
+      "Inverse Black"
+    )} Red`
   )
-  const expected = `${red.open}Red ${bold.open}${blue.open}Blue Bold${
+  const expected = `${red.open}Red ${bold.open}${blue.open}Bold Blue${
     red.open
-  }${bold.close} Red ${green.open}Green${red.open} Red${red.close}`
+  }${bold.close} Red ${inverse.open}${black.open}Inverse Black${red.open}${
+    inverse.close
+  } Red${red.close}`
 
   t.is(actual, expected, actual)
   t.end()
