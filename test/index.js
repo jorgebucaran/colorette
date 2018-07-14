@@ -1,4 +1,4 @@
-const { color, STYLES } = require("../")
+const { color, STYLES } = require("..")
 const test = require("tape")
 
 test("styles", t => {
