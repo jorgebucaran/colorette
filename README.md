@@ -6,11 +6,12 @@
 
 Turbocolor is a Node.js library for colorizing text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
-- **All-in-one** — Not broken into a dozen modules that only work together.
-- **Eco-friendly** — No modifications were made to the [String.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype) in the making of this package.
-- **It Just Works™** — Auto-detects color support and [degrades gracefully](https://en.wikipedia.org/wiki/Fault_tolerance) without contaminating your terminal with broken escape codes.
+## Features
 
-Need for speed? Turbocolor is the fastest terminal colorizer for Node.js. See the [benchmarks](/bench).
+- No dependencies
+- [Toggle color support](#color-support) off as needed
+- Use it as a drop-in replacement for [chalk](https://github.com/chalk/chalk), [ansi-colors](https://github.com/doowb/ansi-colors), [kleur](https://github.com/lukeed/kleur), etc
+- Need for speed? Turbocolor is the [fastest](/bench) terminal colorizer for Node.js
 
 ## Installation
 
@@ -21,22 +22,22 @@ npm i <a href="https://www.npmjs.com/package/turbocolor">turbocolor</a>
 ## Usage
 
 ```jsx
-const { color } = require("turbocolor")
+const color = require("turbocolor")
 ```
 
-Write with color.
+Using color.
 
 ```jsx
 console.log(color.red("Bonjour!"))
 ```
 
-Chain expressions.
+Chaining styles.
 
 ```jsx
 console.log(color.red.bold("Turbo") + color.bgRed.white("Color"))
 ```
 
-Compose a color expression using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+Using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
 ```jsx
 console.log(`
@@ -46,13 +47,13 @@ console.log(`
 `)
 ```
 
-Nest expressions to reuse styles.
+Nesting styles.
 
 ```jsx
 console.log(`Normal ${color.bold(`Bold ${color.red("Bold/Red")} Bold`)} Normal`)
 ```
 
-Use [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args) for easier formatting.
+Using [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args).
 
 ```jsx
 console.log(color.green("Total: $%f"), 1.99)
@@ -60,17 +61,7 @@ console.log(color.green("Total: $%f"), 1.99)
 
 ## Styles
 
-Turbocolor exports ANSI escape codes which you can use for manually styling console output. They can be useful for testing your actual output matches the expected output.
-
-Each [style](#available-styles) has an `open`, `close` and `strip` property. The `strip` property is a regular expression useful for removing the previously closed escape code within a nested expression.
-
-```jsx
-const { STYLES } = require("turbocolor")
-
-console.log(`${STYLES.red.open}Red${STYLES.red.close}`)
-```
-
-### Available Styles
+Every style function can be chained or nested with one another and will return a string when invoked.
 
 | Colors  | Background Colors | Modifiers         |
 | ------- | ----------------- | ----------------- |
@@ -83,6 +74,26 @@ console.log(`${STYLES.red.open}Red${STYLES.red.close}`)
 | cyan    | bgCyan            | ~~strikethrough~~ |
 | white   | bgWhite           | reset             |
 | gray    |                   |                   |
+
+## Color Support
+
+Turbocolor color support is enabled by default, but you can toggle it off as needed. For example, use [chalk/supports-color](https://github.com/chalk/supports-color#usage) to determine whether a terminal supports color.
+
+```js
+const color = require("turbocolor")
+
+color.enabled = require("supports-color").stdout
+```
+
+## Escape Codes
+
+Turbocolor exports ANSI escape codes which can be used for manually styling console output. Each style has an `open`, `close` and `strip` property. The `strip` property is a regular expression that matches all `close` substrings of that style and can be useful for creating nested expressions.
+
+```jsx
+const { Styles } = require("turbocolor")
+
+console.log(`${Styles.red.open}Red${Styles.red.close}`)
+```
 
 ## License
 
