@@ -1,5 +1,7 @@
 "use strict"
 
+const defineProperty = Object.defineProperty
+
 const Style = (open, close) => ({
   open: `\x1b[${open}m`,
   close: `\x1b[${close}m`,
@@ -52,8 +54,6 @@ const color = function(out) {
 
   return out
 }
-
-const defineProperty = Object.defineProperty
 
 for (const style in Styles) {
   defineProperty(Turbocolor, style, {
