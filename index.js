@@ -1,23 +1,12 @@
 "use strict"
 
-const EMPTY_REGEX = /(?:)/
-const NO_STYLE = { open: "", close: "", strip: EMPTY_REGEX }
+const Style = (open, close) => ({
+  open: `\x1b[${open}m`,
+  close: `\x1b[${close}m`,
+  strip: new RegExp(`\\x1b\\[${close}m`, "g")
+})
 
-const isColorSupported =
-  process.env.FORCE_COLOR ||
-  process.platform === "win32" ||
-  (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
-
-const Style = (open, close) =>
-  isColorSupported
-    ? {
-        open: `\x1b[${open}m`,
-        close: `\x1b[${close}m`,
-        strip: new RegExp(`\\x1b\\[${close}m`, "g")
-      }
-    : NO_STYLE
-
-const STYLES = {
+const Styles = {
   reset: Style(0, 0),
   bold: Style(1, 22),
   dim: Style(2, 22),
@@ -47,29 +36,33 @@ const STYLES = {
   bgWhite: Style(107, 49)
 }
 
-const color = function(s) {
+const Turbocolor = { enabled: true, Styles }
+
+const color = function(out) {
+  if (!Turbocolor.enabled) return out
+
   let i, style
   const styles = this.styles
   const length = styles.length
 
-  for (i = 0, s = s + ""; i < length; i++) {
-    style = STYLES[styles[i]]
-    s = `${style.open}${s.replace(style.strip, style.open)}${style.close}`
+  for (i = 0, out = out + ""; i < length; i++) {
+    style = Styles[styles[i]]
+    out = `${style.open}${out.replace(style.strip, style.open)}${style.close}`
   }
 
-  return s
+  return out
 }
 
 const defineProperty = Object.defineProperty
 
-for (const style in STYLES) {
-  defineProperty(color, style, {
+for (const style in Styles) {
+  defineProperty(Turbocolor, style, {
     get() {
       if (this.styles === undefined) {
         const o = {}
         const f = color.bind(o)
 
-        f.__proto__ = color
+        f.__proto__ = Turbocolor
         f.styles = o.styles = [style]
 
         return f
@@ -81,4 +74,4 @@ for (const style in STYLES) {
   })
 }
 
-module.exports = { color, STYLES }
+module.exports = Turbocolor

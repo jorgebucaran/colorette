@@ -1,10 +1,10 @@
-const { color, STYLES } = require("..")
+const color = require("..")
 const test = require("tape")
 
 test("styles", t => {
-  Object.keys(STYLES).map(style => {
-    const actual = color[style](style)
-    const expected = `${STYLES[style].open}${style}${STYLES[style].close}`
+  Object.keys(color.Styles).map(k => {
+    const actual = color[k](k)
+    const expected = `${color.Styles[k].open}${k}${color.Styles[k].close}`
 
     t.is(actual, expected, actual)
   })
@@ -13,9 +13,9 @@ test("styles", t => {
 
 test("numbers", t => {
   const actual = color.inverse.bgRed(1985)
-  const expected = `${STYLES.bgRed.open}${STYLES.inverse.open}1985${
-    STYLES.inverse.close
-  }${STYLES.bgRed.close}`
+  const expected = `${color.Styles.bgRed.open}${color.Styles.inverse.open}1985${
+    color.Styles.inverse.close
+  }${color.Styles.bgRed.close}`
 
   t.is(actual, expected, actual)
 
@@ -23,7 +23,7 @@ test("numbers", t => {
 })
 
 test("chains", t => {
-  const { red, bold, underline, italic } = STYLES
+  const { red, bold, underline, italic } = color.Styles
   const fixture = "Red, bold, underline and italic."
   const actual = color.red.bold.underline.italic(fixture)
   const expected = `${italic.open}${underline.open}${bold.open}${
@@ -35,8 +35,7 @@ test("chains", t => {
 })
 
 test("nested", t => {
-  const { red, blue, black, bold, inverse } = STYLES
-
+  const { red, blue, black, bold, inverse } = color.Styles
   const actual = color.red(
     `Red ${color.blue.bold("Bold Blue")} Red ${color.black.inverse(
       "Inverse Black"
@@ -49,5 +48,11 @@ test("nested", t => {
   } Red${red.close}`
 
   t.is(actual, expected, actual)
+  t.end()
+})
+
+test("toggle", t => {
+  color.enabled = false
+  t.is(color.red.bold.inverse.dim.underline("Ok"), "Ok")
   t.end()
 })
