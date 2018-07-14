@@ -15,7 +15,7 @@ const kleur = require("kleur")
 console.timeEnd("kleur")
 
 console.time("turbocolor")
-const { color } = require("..")
+const color = require("..")
 console.timeEnd("turbocolor")
 
 const bench = name => (
@@ -64,7 +64,7 @@ const fixture = lib =>
     )} message.`
   )
 
-const keys = Object.keys(require("..").STYLES)
+const keys = Object.keys(require("..").Styles)
 
 bench("All Colors")
   .add("chalk", () => keys.map(k => chalk[k]("foo")))

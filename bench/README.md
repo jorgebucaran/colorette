@@ -14,26 +14,26 @@ Results may slightly vary across Node.js runtimes. All tests run on a 2.4GHz Int
 
 <pre>
 # Load Time
-chalk: 15.190ms
-ansi-colors: 1.024ms
-kleur: 0.943ms
-<b>turbocolor: 0.777ms</b>
+chalk: 11.418ms
+ansi-colors: 1.048ms
+kleur: 0.920ms
+<b>turbocolor: 0.681ms</b>
 
 # All Colors
-chalk × 8,729 ops/sec
-ansi-colors × 94,710 ops/sec
-kleur × 124,678 ops/sec
-<b>turbocolor × 158,383 ops/sec</b>
+chalk × 8,544 ops/sec
+ansi-colors × 94,701 ops/sec
+kleur × 125,096 ops/sec
+<b>turbocolor × 163,410 ops/sec</b>
 
 # Chained Colors
-chalk × 1,838 ops/sec
-ansi-colors × 15,035 ops/sec
-kleur × 35,086 ops/sec
-<b>turbocolor × 39,830 ops/sec</b>
+chalk × 1,842 ops/sec
+ansi-colors × 15,214 ops/sec
+kleur × 37,478 ops/sec
+<b>turbocolor × 39,664 ops/sec</b>
 
 # Nested Colors
-chalk × 4,049 ops/sec
-ansi-colors × 38,878 ops/sec
-kleur × 48,976 ops/sec
-<b>turbocolor × 59,833 ops/sec</b>
+chalk × 4,144 ops/sec
+ansi-colors × 38,601 ops/sec
+kleur × 48,755 ops/sec
+<b>turbocolor × 60,527 ops/sec</b>
 </pre>
