@@ -38,7 +38,7 @@ const Styles = {
   bgWhite: Style(107, 49)
 }
 
-const Turbocolor = {
+const turbocolor = {
   Styles,
   enabled: true,
   supportsColor:
@@ -48,7 +48,7 @@ const Turbocolor = {
 }
 
 const color = function (out) {
-  if (!Turbocolor.enabled) return out
+  if (!turbocolor.enabled) return out
 
   let i, style
   const styles = this.styles
@@ -63,13 +63,13 @@ const color = function (out) {
 }
 
 for (const style in Styles) {
-  defineProperty(Turbocolor, style, {
+  defineProperty(turbocolor, style, {
     get() {
       if (this.styles === undefined) {
         const o = {}
         const f = color.bind(o)
 
-        f.__proto__ = Turbocolor
+        f.__proto__ = turbocolor
         f.styles = o.styles = [style]
 
         return f
@@ -81,4 +81,4 @@ for (const style in Styles) {
   })
 }
 
-module.exports = Turbocolor
+module.exports = turbocolor

@@ -22,41 +22,41 @@ npm i <a href="https://www.npmjs.com/package/turbocolor">turbocolor</a>
 ## Usage
 
 ```jsx
-const color = require("turbocolor")
+const tc = require("turbocolor")
 ```
 
 Using color.
 
 ```jsx
-console.log(color.red("Bonjour!"))
+console.log(tc.red("Bonjour!"))
 ```
 
 Chaining styles.
 
 ```jsx
-console.log(color.red.bold("Turbo") + color.bgRed.white("Color"))
+console.log(tc.red.bold("Turbo") + tc.bgRed.white("Color"))
 ```
 
 Using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
 ```jsx
 console.log(`
-  ${color.bold("Score")}: ${100}
-  Lives: ${color.red.inverse(1)}
-  Level: ${color.bgCyan.black.inverse(2)}
+  ${tc.bold("Score")}: ${100}
+  Lives: ${tc.red.inverse(1)}
+  Level: ${tc.bgCyan.black.inverse(2)}
 `)
 ```
 
 Nesting styles.
 
 ```jsx
-console.log(`Normal ${color.bold(`Bold ${color.red("Bold/Red")} Bold`)} Normal`)
+console.log(`Normal ${tc.bold(`Bold ${tc.red("Bold/Red")} Bold`)} Normal`)
 ```
 
 Using [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args).
 
 ```jsx
-console.log(color.green("Total: $%f"), 1.99)
+console.log(tc.green("Total: $%f"), 1.99)
 ```
 
 ## Styles
@@ -80,9 +80,9 @@ Every style function can be chained or nested with one another and will return a
 Turbocolor color support is enabled by default, but you can toggle it off as needed. For example, to disable color when the terminal does not support it use `supportsColor` like so.
 
 ```js
-const color = require("turbocolor")
+const tc = require("turbocolor")
 
-color.enabled = color.supportsColor
+tc.enabled = tc.supportsColor
 ```
 
 ## Escape Codes
