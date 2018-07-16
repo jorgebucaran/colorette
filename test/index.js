@@ -1,10 +1,10 @@
-const color = require("..")
+const tc = require("..")
 const test = require("tape")
 
 test("styles", t => {
-  Object.keys(color.Styles).map(k => {
-    const actual = color[k](k)
-    const expected = `${color.Styles[k].open}${k}${color.Styles[k].close}`
+  Object.keys(tc.Styles).map(k => {
+    const actual = tc[k](k)
+    const expected = `${tc.Styles[k].open}${k}${tc.Styles[k].close}`
 
     t.is(actual, expected, actual)
   })
@@ -12,10 +12,10 @@ test("styles", t => {
 })
 
 test("numbers", t => {
-  const actual = color.inverse.bgRed(1985)
-  const expected = `${color.Styles.bgRed.open}${color.Styles.inverse.open}1985${
-    color.Styles.inverse.close
-  }${color.Styles.bgRed.close}`
+  const actual = tc.inverse.bgRed(1985)
+  const expected = `${tc.Styles.bgRed.open}${tc.Styles.inverse.open}1985${
+    tc.Styles.inverse.close
+  }${tc.Styles.bgRed.close}`
 
   t.is(actual, expected, actual)
 
@@ -23,12 +23,12 @@ test("numbers", t => {
 })
 
 test("chains", t => {
-  const red = color.Styles.red
-  const bold = color.Styles.bold
-  const underline = color.Styles.underline
-  const italic = color.Styles.italic
+  const red = tc.Styles.red
+  const bold = tc.Styles.bold
+  const underline = tc.Styles.underline
+  const italic = tc.Styles.italic
   const fixture = "Red, bold, underline and italic."
-  const actual = color.red.bold.underline.italic(fixture)
+  const actual = tc.red.bold.underline.italic(fixture)
   const expected = `${italic.open}${underline.open}${bold.open}${
     red.open
   }${fixture}${red.close}${bold.close}${underline.close}${italic.close}`
@@ -38,13 +38,13 @@ test("chains", t => {
 })
 
 test("nested", t => {
-  const red = color.Styles.red
-  const blue = color.Styles.blue
-  const black = color.Styles.black
-  const bold = color.Styles.bold
-  const inverse = color.Styles.inverse
-  const actual = color.red(
-    `Red ${color.blue.bold("Bold Blue")} Red ${color.black.inverse(
+  const red = tc.Styles.red
+  const blue = tc.Styles.blue
+  const black = tc.Styles.black
+  const bold = tc.Styles.bold
+  const inverse = tc.Styles.inverse
+  const actual = tc.red(
+    `Red ${tc.blue.bold("Bold Blue")} Red ${tc.black.inverse(
       "Inverse Black"
     )} Red`
   )
@@ -58,13 +58,8 @@ test("nested", t => {
   t.end()
 })
 
-test("supports color", t => {
-  t.is(typeof color.supportsColor, "boolean")
-  t.end()
-})
-
 test("toggle", t => {
-  color.enabled = false
-  t.is(color.red.bold.inverse.dim.underline("Ok"), "Ok")
+  tc.enabled = false
+  t.is(tc.red.bold.inverse.dim.underline("Ok"), "Ok")
   t.end()
 })

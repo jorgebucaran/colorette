@@ -40,42 +40,41 @@ const Styles = {
 
 const turbocolor = {
   Styles,
-  enabled: true,
-  supportsColor:
+  enabled:
     process.env.FORCE_COLOR ||
     process.platform === "win32" ||
     (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
 }
 
-const color = function (out) {
+const color = function(out) {
   if (!turbocolor.enabled) return out
 
   let i, style
-  const styles = this.styles
-  const length = styles.length
+  const names = this.names
+  const length = names.length
 
   for (i = 0, out = out + ""; i < length; i++) {
-    style = Styles[styles[i]]
+    style = Styles[names[i]]
     out = `${style.open}${out.replace(style.strip, style.open)}${style.close}`
   }
 
   return out
 }
 
-for (const style in Styles) {
-  defineProperty(turbocolor, style, {
+for (const name in Styles) {
+  defineProperty(turbocolor, name, {
     get() {
-      if (this.styles === undefined) {
-        const o = {}
-        const f = color.bind(o)
+      if (this.names === undefined) {
+        const chain = {}
+        const style = color.bind(chain)
 
-        f.__proto__ = turbocolor
-        f.styles = o.styles = [style]
+        style.__proto__ = turbocolor
+        style.names = chain.names = [name]
 
-        return f
+        return style
       }
 
-      this.styles.push(style)
+      this.names.push(name)
       return this
     }
   })

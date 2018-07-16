@@ -8,10 +8,10 @@ Turbocolor is a Node.js library for colorizing text using [ANSI escape sequences
 
 ## Features
 
-- No dependencies
-- [Toggle color support](#color-support) off as needed
-- Use it as a drop-in replacement for [chalk](https://github.com/chalk/chalk), [ansi-colors](https://github.com/doowb/ansi-colors), [kleur](https://github.com/lukeed/kleur), etc
-- Need for speed? Turbocolor is the [fastest](/bench) terminal colorizer for Node.js
+- No dependencies!
+- [Toggle color support](#color-support) on/off as needed.
+- Use it as a drop-in replacement for [chalk](https://github.com/chalk/chalk), [ansi-colors](https://github.com/doowb/ansi-colors), [kleur](https://github.com/lukeed/kleur), etc.
+- Need for speed? Turbocolor is the [fastest](/bench) terminal colorizer for Node.js.
 
 ## Installation
 
@@ -25,7 +25,7 @@ npm i <a href="https://www.npmjs.com/package/turbocolor">turbocolor</a>
 const tc = require("turbocolor")
 ```
 
-Using color.
+Writing with color.
 
 ```jsx
 console.log(tc.red("Bonjour!"))
@@ -77,17 +77,19 @@ Every style function can be chained or nested with one another and will return a
 
 ## Color Support
 
-Turbocolor color support is enabled by default, but you can toggle it off as needed. For example, to disable color when the terminal does not support it use `supportsColor` like so.
+Color support is automatically enabled if your terminal supports it, but you can toggle it on/off as needed.
 
 ```js
 const tc = require("turbocolor")
 
-tc.enabled = tc.supportsColor
+tc.enabled = false
+
+console.log(tc.red("No color!"))
 ```
 
 ## Escape Codes
 
-Turbocolor exports ANSI escape codes which can be used for manually styling console output. Each style has an `open`, `close` and `strip` property. The `strip` property is a regular expression that matches all `close` substrings of that style and can be useful for creating nested expressions.
+Turbocolor exports ANSI escape codes for each [available style](#styles). Each has an `open` and `close` property which can be used for manually styling console output.
 
 ```jsx
 const { Styles } = require("turbocolor")
