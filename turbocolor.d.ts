@@ -1,38 +1,35 @@
-type Style = ((string: string) => string) &
-  ({
-    reset: Style
-    bold: Style
-    dim: Style
-    italic: Style
-    underline: Style
-    inverse: Style
-    hidden: Style
-    strikethrough: Style
-
-    black: Style
-    red: Style
-    green: Style
-    yellow: Style
-    blue: Style
-    magenta: Style
-    cyan: Style
-    white: Style
-    gray: Style
-
-    bgBlack: Style
-    bgRed: Style
-    bgGreen: Style
-    bgYellow: Style
-    bgBlue: Style
-    bgMagenta: Style
-    bgCyan: Style
-    bgWhite: Style
-  })
-
-type StyleCode = {
+type EscapeCode = {
   open: string
   close: string
 }
+
+type Style = {
+  reset: Style
+  bold: Style
+  dim: Style
+  italic: Style
+  underline: Style
+  inverse: Style
+  hidden: Style
+  strikethrough: Style
+  black: Style
+  red: Style
+  green: Style
+  yellow: Style
+  blue: Style
+  magenta: Style
+  cyan: Style
+  white: Style
+  gray: Style
+  bgBlack: Style
+  bgRed: Style
+  bgGreen: Style
+  bgYellow: Style
+  bgBlue: Style
+  bgMagenta: Style
+  bgCyan: Style
+  bgWhite: Style
+} & ((string: string) => string)
 
 export const reset: Style
 export const bold: Style
@@ -63,31 +60,29 @@ export const bgWhite: Style
 export let enabled: boolean
 
 export const Styles: {
-  reset: StyleCode
-  bold: StyleCode
-  dim: StyleCode
-  italic: StyleCode
-  underline: StyleCode
-  inverse: StyleCode
-  hidden: StyleCode
-  strikethrough: StyleCode
-
-  black: StyleCode
-  red: StyleCode
-  green: StyleCode
-  yellow: StyleCode
-  blue: StyleCode
-  magenta: StyleCode
-  cyan: StyleCode
-  white: StyleCode
-  gray: StyleCode
-
-  bgBlack: StyleCode
-  bgRed: StyleCode
-  bgGreen: StyleCode
-  bgYellow: StyleCode
-  bgBlue: StyleCode
-  bgMagenta: StyleCode
-  bgCyan: StyleCode
-  bgWhite: StyleCode
+  reset: EscapeCode
+  bold: EscapeCode
+  dim: EscapeCode
+  italic: EscapeCode
+  underline: EscapeCode
+  inverse: EscapeCode
+  hidden: EscapeCode
+  strikethrough: EscapeCode
+  black: EscapeCode
+  red: EscapeCode
+  green: EscapeCode
+  yellow: EscapeCode
+  blue: EscapeCode
+  magenta: EscapeCode
+  cyan: EscapeCode
+  white: EscapeCode
+  gray: EscapeCode
+  bgBlack: EscapeCode
+  bgRed: EscapeCode
+  bgGreen: EscapeCode
+  bgYellow: EscapeCode
+  bgBlue: EscapeCode
+  bgMagenta: EscapeCode
+  bgCyan: EscapeCode
+  bgWhite: EscapeCode
 }
