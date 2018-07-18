@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "../..",
+    "paths": {
+      "turbocolor": ["turbocolor.js", "turbocolor.d.ts"]
+    }
+  }
+}
