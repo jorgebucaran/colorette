@@ -13,7 +13,8 @@
     "url": "jorgebucaran/turbocolor"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "turbocolor.d.ts"
   ],
   "keywords": [
     "turbocolor",
