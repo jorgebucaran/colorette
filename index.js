@@ -18,17 +18,17 @@ const Styles = {
   hidden: Style(8, 28),
   strikethrough: Style(9, 29),
 
-  black: Style(30, 39), // Dark
-  red: Style(91, 39),
-  green: Style(92, 39),
-  yellow: Style(93, 39),
-  blue: Style(94, 39),
-  magenta: Style(95, 39),
-  cyan: Style(96, 39),
-  white: Style(97, 39),
+  black: Style(30, 39),
+  red: Style(31, 39),
+  green: Style(32, 39),
+  yellow: Style(33, 39),
+  blue: Style(34, 39),
+  magenta: Style(35, 39),
+  cyan: Style(36, 39),
+  white: Style(37, 39),
   gray: Style(90, 39),
 
-  bgBlack: Style(40, 49), // Dark
+  bgBlack: Style(40, 49),
   bgRed: Style(101, 49),
   bgGreen: Style(102, 49),
   bgYellow: Style(103, 49),
