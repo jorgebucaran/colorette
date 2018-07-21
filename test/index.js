@@ -12,10 +12,13 @@ test("styles", t => {
 })
 
 test("numbers", t => {
-  const actual = tc.inverse.bgRed(1985)
-  const expected = `${tc.Styles.bgRed.open}${tc.Styles.inverse.open}1985${
+  const actual = tc.inverse.bgYellow(Math.PI)
+  const expected =
+    tc.Styles.inverse.open +
+    tc.Styles.bgYellow.open +
+    Math.PI +
+    tc.Styles.bgYellow.close +
     tc.Styles.inverse.close
-  }${tc.Styles.bgRed.close}`
 
   t.is(actual, expected, actual)
 
@@ -25,13 +28,24 @@ test("numbers", t => {
 test("chains", t => {
   const red = tc.Styles.red
   const bold = tc.Styles.bold
-  const underline = tc.Styles.underline
   const italic = tc.Styles.italic
-  const fixture = "Red, bold, underline and italic."
-  const actual = tc.red.bold.underline.italic(fixture)
-  const expected = `${italic.open}${underline.open}${bold.open}${
-    red.open
-  }${fixture}${red.close}${bold.close}${underline.close}${italic.close}`
+  const inverse = tc.Styles.inverse
+  const underline = tc.Styles.underline
+
+  const fixture = "Red, bold, italic, inverse & underline."
+  const actual = tc.red.bold.italic.inverse.underline(fixture)
+  const expected =
+    red.open +
+    bold.open +
+    italic.open +
+    inverse.open +
+    underline.open +
+    fixture +
+    underline.close +
+    inverse.close +
+    italic.close +
+    bold.close +
+    red.close
 
   t.is(actual, expected, actual)
   t.end()
@@ -40,19 +54,29 @@ test("chains", t => {
 test("nested", t => {
   const red = tc.Styles.red
   const blue = tc.Styles.blue
-  const black = tc.Styles.black
+  const cyan = tc.Styles.cyan
   const bold = tc.Styles.bold
+  const italic = tc.Styles.italic
   const inverse = tc.Styles.inverse
+  const underline = tc.Styles.underline
+
   const actual = tc.red(
-    `Red ${tc.blue.bold("Bold Blue")} Red ${tc.black.inverse(
-      "Inverse Black"
-    )} Red`
+    `Red ${tc.inverse("Inverse Red")} ${tc.blue.bold(
+      `Blue ${tc.italic("Italic")} Bold`
+    )} Red ${tc.cyan.inverse(
+      `Inverse ${tc.underline("Underline")} Cyan`
+    )} ${tc.italic("Italic")} Red`
   )
-  const expected = `${red.open}Red ${bold.open}${blue.open}Bold Blue${
+
+  const expected = `${red.open}Red ${inverse.open}Inverse Red${inverse.close} ${
+    blue.open
+  }${bold.open}Blue ${italic.open}Italic${italic.close} Bold${bold.close}${
     red.open
-  }${bold.close} Red ${inverse.open}${black.open}Inverse Black${red.open}${
-    inverse.close
-  } Red${red.close}`
+  } Red ${cyan.open}${inverse.open}Inverse ${underline.open}Underline${
+    underline.close
+  } Cyan${inverse.close}${red.open} ${italic.open}Italic${italic.close} Red${
+    red.close
+  }`
 
   t.is(actual, expected, actual)
   t.end()
