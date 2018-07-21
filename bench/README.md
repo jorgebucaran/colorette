@@ -8,26 +8,26 @@ npm i --prefix bench && node bench
 
 <pre>
 # Load Time
-chalk: 14.661ms
-ansi-colors: 1.050ms
+chalk: 15.211ms
+ansi-colors: 1.010ms
 kleur: 1.226ms
-<b>turbocolor: 0.740ms</b>
+<b>turbocolor: 0.764ms</b>
 
 # All Colors
-chalk × 9,064 ops/sec
-ansi-colors × 97,435 ops/sec
-kleur × 291,646 ops/sec
-<b>turbocolor × 430,379 ops/sec</b>
+chalk × 8,922 ops/sec
+ansi-colors × 93,614 ops/sec
+kleur × 299,561 ops/sec
+<b>turbocolor × 390,123 ops/sec</b>
 
 # Chained Colors
-chalk × 1,898 ops/sec
-ansi-colors × 15,102 ops/sec
-kleur × 42,026 ops/sec
-<b>turbocolor × 49,959 ops/sec</b>
+chalk × 1,897 ops/sec
+ansi-colors × 14,944 ops/sec
+kleur × 41,776 ops/sec
+<b>turbocolor × 49,343 ops/sec</b>
 
 # Nested Colors
-chalk × 4,001 ops/sec
-ansi-colors × 39,206 ops/sec
-kleur × 84,731 ops/sec
-<b>turbocolor × 96,996 ops/sec</b>
+chalk × 4,154 ops/sec
+ansi-colors × 38,756 ops/sec
+kleur × 83,751 ops/sec
+<b>turbocolor × 92,831 ops/sec</b>
 </pre>

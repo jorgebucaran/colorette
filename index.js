@@ -2,10 +2,10 @@
 
 const tc = {}
 const Styles = (tc.Styles = {})
-const enabled = (tc.enabled =
+tc.enabled =
   process.env.FORCE_COLOR ||
   process.platform === "win32" ||
-  (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb"))
+  (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
 const defineProp = Object.defineProperty
 
 const style = (prop, open, close) => {
@@ -23,7 +23,7 @@ const style = (prop, open, close) => {
   })
 
   const fn = out => {
-    if (enabled) {
+    if (tc.enabled) {
       let i
       for (out += ""; (i = stack.pop()) !== void 0; ) {
         out = (open = i.open) + out.replace(i.old, open) + i.close
