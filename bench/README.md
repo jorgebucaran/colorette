@@ -3,7 +3,7 @@
 Results may vary across Node.js runtimes. All tests run on a 2.4GHz Intel Core i7 CPU with 16 GB memory.
 
 ```
-npm i --prefix bench && node bench
+npm i && node .
 ```
 
 <pre>
