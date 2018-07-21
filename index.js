@@ -1,83 +1,71 @@
 "use strict"
 
-const defineProperty = Object.defineProperty
+const tc = {}
+const Styles = (tc.Styles = {})
+const enabled = (tc.enabled =
+  process.env.FORCE_COLOR ||
+  process.platform === "win32" ||
+  (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb"))
+const defineProp = Object.defineProperty
 
-const Style = (open, close) => ({
-  open: `\x1b[${open}m`,
-  close: `\x1b[${close}m`,
-  strip: new RegExp(`\\x1b\\[${close}m`, "g")
-})
+const style = (prop, open, close) => {
+  defineProp(tc, prop, {
+    get: () => {
+      for (let p in Styles) {
+        defineProp(fn, p, {
+          get: () => (stack.push(Styles[p]), fn)
+        })
+      }
+      delete tc[prop]
+      return (tc[prop] = fn)
+    },
+    configurable: true
+  })
 
-const Styles = {
-  reset: Style(0, 0),
-  bold: Style(1, 22),
-  dim: Style(2, 22),
-  italic: Style(3, 23),
-  underline: Style(4, 24),
-  inverse: Style(7, 27),
-  hidden: Style(8, 28),
-  strikethrough: Style(9, 29),
-
-  black: Style(30, 39),
-  red: Style(31, 39),
-  green: Style(32, 39),
-  yellow: Style(33, 39),
-  blue: Style(34, 39),
-  magenta: Style(35, 39),
-  cyan: Style(36, 39),
-  white: Style(37, 39),
-  gray: Style(90, 39),
-
-  bgBlack: Style(40, 49),
-  bgRed: Style(101, 49),
-  bgGreen: Style(102, 49),
-  bgYellow: Style(103, 49),
-  bgBlue: Style(104, 49),
-  bgMagenta: Style(105, 49),
-  bgCyan: Style(106, 49),
-  bgWhite: Style(107, 49)
-}
-
-const turbocolor = {
-  Styles,
-  enabled:
-    process.env.FORCE_COLOR ||
-    process.platform === "win32" ||
-    (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
-}
-
-const color = function(out) {
-  if (!turbocolor.enabled) return out
-
-  let i, style
-  const names = this.names
-  const length = names.length
-
-  for (i = 0, out = out + ""; i < length; i++) {
-    style = Styles[names[i]]
-    out = `${style.open}${out.replace(style.strip, style.open)}${style.close}`
+  const fn = out => {
+    if (enabled) {
+      let i
+      for (out += ""; (i = stack.pop()) !== void 0; ) {
+        out = (open = i.open) + out.replace(i.old, open) + i.close
+      }
+      stack[0] = style
+    }
+    return out
   }
 
-  return out
-}
-
-for (const name in Styles) {
-  defineProperty(turbocolor, name, {
-    get() {
-      if (this.names === undefined) {
-        const chain = {}
-        const style = color.bind(chain)
-
-        style.__proto__ = turbocolor
-        style.names = chain.names = [name]
-
-        return style
-      }
-
-      this.names.push(name)
-      return this
-    }
+  const style = (Styles[prop] = {
+    open: "\x1b[" + open,
+    close: "\x1b[" + close,
+    old: new RegExp("\\x1b\\[" + close, "g")
   })
+
+  const stack = (fn.stack = [style])
 }
 
-module.exports = turbocolor
+style("reset", "0m", "0m")
+style("bold", "1m", "22m")
+style("dim", "2m", "22m")
+style("italic", "3m", "23m")
+style("underline", "4m", "24m")
+style("inverse", "7m", "27m")
+style("hidden", "8m", "28m")
+style("strikethrough", "9m", "29m")
+style("black", "30m", "39m")
+style("red", "31m", "39m")
+style("green", "32m", "39m")
+style("yellow", "33m", "39m")
+style("blue", "34m", "39m")
+style("magenta", "35m", "39m")
+style("cyan", "36m", "39m")
+style("white", "37m", "39m")
+style("gray", "90m", "39m")
+style("bgBlack", "40m", "49m")
+style("bgRed", "101m", "49m")
+style("bgGreen", "102m", "49m")
+style("bgYellow", "103m", "49m")
+style("bgBlue", "104m", "49m")
+style("bgMagenta", "105m", "49m")
+style("bgCyan", "106m", "49m")
+style("bgWhite", "107m", "49m")
+
+module.exports = tc
