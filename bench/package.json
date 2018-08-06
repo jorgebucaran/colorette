@@ -2,8 +2,8 @@
   "private": true,
   "dependencies": {
     "benchmark": "^2.1.4",
-    "ansi-colors": "^2.0.5",
     "chalk": "^2.4.1",
-    "kleur": "^2.0.1"
+    "kleur": "^2.0.1",
+    "ansi-colors": "^2.0.5"
   }
 }

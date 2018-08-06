@@ -1,88 +1,75 @@
 const { Suite } = require("benchmark")
 
-console.log(`# Load Time`)
+console.log("# Load Time")
 
 console.time("chalk")
 const chalk = require("chalk")
 console.timeEnd("chalk")
 
-console.time("ansi-colors")
-const ansi = require("ansi-colors")
-console.timeEnd("ansi-colors")
-
 console.time("kleur")
 const kleur = require("kleur")
 console.timeEnd("kleur")
 
+console.time("ansi-colors")
+const ansi = require("ansi-colors")
+console.timeEnd("ansi-colors")
+
 console.time("turbocolor")
-const color = require("..")
+const turbocolor = require("..")
 console.timeEnd("turbocolor")
 
-const bench = name => (
-  console.log(`\n# ${name}`),
-  new Suite().on("cycle", ({ target: { name, hz } }) =>
-    console.log(`${name} × ${Math.floor(hz).toLocaleString()} ops/sec`)
-  )
-)
+const styles = Object.keys(turbocolor.Styles)
 
-const fixture = lib =>
-  lib.red(
-    `A red ${lib.white("red")} red ${lib.red("red")} red ${lib.gray(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")} red ${lib.blue(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")}red ${lib.red("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")}red ${lib.green(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")} red ${lib.magenta("red")} red ${lib.red(
-      "red"
-    )}red ${lib.red("red")} red ${lib.cyan("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")} red ${lib.yellow("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")} red ${lib.red(
-      "red"
-    )} red ${lib.red("red")} red ${lib.red("red")} red ${lib.red(
-      "red"
-    )} message.`
-  )
+const bench = ({ testables, tests }) =>
+  Object.keys(tests)
+    .map(name => ({
+      name,
+      test: Object.keys(testables).reduce(
+        (bench, id) => bench.add(id, tests[name].bind({}, testables[id])),
+        new Suite().on("cycle", ({ target: { name, hz } }) =>
+          console.log(`${name} × ${Math.floor(hz).toLocaleString()} ops/sec`)
+        )
+      )
+    }))
+    .map(({ name, test }) => (console.log(`\n# ${name}`), test.run()))
 
-const keys = Object.keys(require("..").Styles)
-
-bench("All Colors")
-  .add("chalk", () => keys.map(k => chalk[k]("foo")))
-  .add("ansi-colors", () => keys.map(k => ansi[k]("foo")))
-  .add("kleur", () => keys.map(k => kleur[k]("foo")))
-  .add("turbocolor", () => keys.map(k => color[k]("foo")))
-  .run()
-
-bench("Chained Colors")
-  .add("chalk", () => keys.map(k => chalk[k].bold.dim.italic("foo")))
-  .add("ansi-colors", () => keys.map(k => ansi[k].bold.dim.italic("foo")))
-  .add("kleur", () => keys.map(k => kleur[k].bold.dim.italic("foo")))
-  .add("turbocolor", () => keys.map(k => color[k].bold.dim.italic("foo")))
-  .run()
-
-bench("Nested Colors")
-  .add("chalk", () => fixture(chalk))
-  .add("ansi-colors", () => fixture(ansi))
-  .add("kleur", () => fixture(kleur))
-  .add("turbocolor", () => fixture(color))
-  .run()
+bench({
+  testables: {
+    chalk,
+    kleur,
+    "ansi-colors": ansi,
+    turbocolor
+  },
+  tests: {
+    "Using Styles": c => styles.map(k => c[k]("foo")),
+    "Chaining Styles": c => styles.map(k => c[k].italic.underline.bold("bar")),
+    "Nesting Styles": ({
+      red,
+      cyan,
+      green,
+      blue,
+      bold,
+      magenta,
+      white,
+      bgBlue,
+      yellow
+    }) =>
+      green(
+        `GREEN, ${blue(
+          `BLUE, ${bold(
+            `BOLD AND ${green("GREEN")}. BACK TO BLUE, ${red.italic.underline(
+              `RED ITALIC UNDERLINE,`
+            )}`
+          )} MORE BLUE, ${magenta(
+            `MAGENTA, ${white.inverse("INVERSE WHITE,")}${cyan(
+              ` CYAN, ${bgBlue.black(
+                `BLACK ON BLUE, ${yellow.bold.inverse(
+                  "BLUE ON BOLD YELLOW"
+                )}, BLACK ON BLUE`
+              )}, CYAN,`
+            )} MAGENTA,`
+          )} BLUE`
+        )} AND BACK TO GREEN.`
+      )
+  }
+})
