@@ -8,26 +8,26 @@ npm i && node .
 
 <pre>
 # Load Time
-chalk: 15.211ms
-ansi-colors: 1.010ms
-kleur: 1.226ms
-<b>turbocolor: 0.764ms</b>
+chalk: 15.653ms
+kleur: 1.195ms
+ansi-colors: 1.227ms
+<em>turbocolor: 0.740ms</em>
 
-# All Colors
-chalk × 8,922 ops/sec
-ansi-colors × 93,614 ops/sec
-kleur × 299,561 ops/sec
-<b>turbocolor × 390,123 ops/sec</b>
+# Using Styles
+chalk × 8,634 ops/sec
+kleur × 290,343 ops/sec
+ansi-colors × 93,980 ops/sec
+<em>turbocolor × 374,825 ops/sec</em>
 
-# Chained Colors
-chalk × 1,897 ops/sec
-ansi-colors × 14,944 ops/sec
-kleur × 41,776 ops/sec
-<b>turbocolor × 49,343 ops/sec</b>
+# Chaining Styles
+chalk × 1,802 ops/sec
+kleur × 44,709 ops/sec
+ansi-colors × 14,495 ops/sec
+<em>turbocolor × 52,300 ops/sec</em>
 
-# Nested Colors
-chalk × 4,154 ops/sec
-ansi-colors × 38,756 ops/sec
-kleur × 83,751 ops/sec
-<b>turbocolor × 92,831 ops/sec</b>
+# Nesting Styles
+chalk × 12,088 ops/sec
+kleur × 176,561 ops/sec
+ansi-colors × 82,132 ops/sec
+<em>turbocolor × 190,595 ops/sec</em>
 </pre>
