@@ -26,7 +26,7 @@ npm i <a href="https://www.npmjs.com/package/turbocolor">turbocolor</a>
 const tc = require("turbocolor")
 ```
 
-Writing with color.
+Using styles.
 
 ```jsx
 console.log(tc.red("Bonjour!"))
@@ -84,8 +84,6 @@ Color support is automatically enabled if your terminal supports it, but you can
 const tc = require("turbocolor")
 
 tc.enabled = false
-
-console.log(tc.red("No color!"))
 ```
 
 ## Escape Codes
