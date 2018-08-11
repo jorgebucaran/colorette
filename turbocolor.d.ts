@@ -1,4 +1,4 @@
-type EscapeCode = {
+type StyleCode = {
   open: string
   close: string
 }
@@ -60,29 +60,29 @@ export const bgWhite: Style
 export let enabled: boolean
 
 export const Styles: {
-  reset: EscapeCode
-  bold: EscapeCode
-  dim: EscapeCode
-  italic: EscapeCode
-  underline: EscapeCode
-  inverse: EscapeCode
-  hidden: EscapeCode
-  strikethrough: EscapeCode
-  black: EscapeCode
-  red: EscapeCode
-  green: EscapeCode
-  yellow: EscapeCode
-  blue: EscapeCode
-  magenta: EscapeCode
-  cyan: EscapeCode
-  white: EscapeCode
-  gray: EscapeCode
-  bgBlack: EscapeCode
-  bgRed: EscapeCode
-  bgGreen: EscapeCode
-  bgYellow: EscapeCode
-  bgBlue: EscapeCode
-  bgMagenta: EscapeCode
-  bgCyan: EscapeCode
-  bgWhite: EscapeCode
+  reset: StyleCode
+  bold: StyleCode
+  dim: StyleCode
+  italic: StyleCode
+  underline: StyleCode
+  inverse: StyleCode
+  hidden: StyleCode
+  strikethrough: StyleCode
+  black: StyleCode
+  red: StyleCode
+  green: StyleCode
+  yellow: StyleCode
+  blue: StyleCode
+  magenta: StyleCode
+  cyan: StyleCode
+  white: StyleCode
+  gray: StyleCode
+  bgBlack: StyleCode
+  bgRed: StyleCode
+  bgGreen: StyleCode
+  bgYellow: StyleCode
+  bgBlue: StyleCode
+  bgMagenta: StyleCode
+  bgCyan: StyleCode
+  bgWhite: StyleCode
 }
