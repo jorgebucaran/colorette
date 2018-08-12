@@ -1,9 +1,4 @@
-type EscapeCode = {
-  open: string
-  close: string
-}
-
-type Style = {
+interface Turbocolor {
   reset: Style
   bold: Style
   dim: Style
@@ -29,7 +24,11 @@ type Style = {
   bgMagenta: Style
   bgCyan: Style
   bgWhite: Style
-} & ((string: string) => string)
+}
+
+interface Style extends Turbocolor {
+  (string: string): string
+}
 
 export const reset: Style
 export const bold: Style
@@ -57,32 +56,37 @@ export const bgMagenta: Style
 export const bgCyan: Style
 export const bgWhite: Style
 
-export let enabled: boolean
+interface StyleCode {
+  open: string
+  close: string
+}
 
 export const Styles: {
-  reset: EscapeCode
-  bold: EscapeCode
-  dim: EscapeCode
-  italic: EscapeCode
-  underline: EscapeCode
-  inverse: EscapeCode
-  hidden: EscapeCode
-  strikethrough: EscapeCode
-  black: EscapeCode
-  red: EscapeCode
-  green: EscapeCode
-  yellow: EscapeCode
-  blue: EscapeCode
-  magenta: EscapeCode
-  cyan: EscapeCode
-  white: EscapeCode
-  gray: EscapeCode
-  bgBlack: EscapeCode
-  bgRed: EscapeCode
-  bgGreen: EscapeCode
-  bgYellow: EscapeCode
-  bgBlue: EscapeCode
-  bgMagenta: EscapeCode
-  bgCyan: EscapeCode
-  bgWhite: EscapeCode
+  reset: StyleCode
+  bold: StyleCode
+  dim: StyleCode
+  italic: StyleCode
+  underline: StyleCode
+  inverse: StyleCode
+  hidden: StyleCode
+  strikethrough: StyleCode
+  black: StyleCode
+  red: StyleCode
+  green: StyleCode
+  yellow: StyleCode
+  blue: StyleCode
+  magenta: StyleCode
+  cyan: StyleCode
+  white: StyleCode
+  gray: StyleCode
+  bgBlack: StyleCode
+  bgRed: StyleCode
+  bgGreen: StyleCode
+  bgYellow: StyleCode
+  bgBlue: StyleCode
+  bgMagenta: StyleCode
+  bgCyan: StyleCode
+  bgWhite: StyleCode
 }
+
+export let enabled: boolean
