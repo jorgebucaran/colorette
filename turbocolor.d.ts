@@ -1,9 +1,4 @@
-type StyleCode = {
-  open: string
-  close: string
-}
-
-type Style = {
+interface Turbocolor {
   reset: Style
   bold: Style
   dim: Style
@@ -29,7 +24,11 @@ type Style = {
   bgMagenta: Style
   bgCyan: Style
   bgWhite: Style
-} & ((string: string) => string)
+}
+
+interface Style extends Turbocolor {
+  (string: string): string
+}
 
 export const reset: Style
 export const bold: Style
@@ -57,7 +56,10 @@ export const bgMagenta: Style
 export const bgCyan: Style
 export const bgWhite: Style
 
-export let enabled: boolean
+interface StyleCode {
+  open: string
+  close: string
+}
 
 export const Styles: {
   reset: StyleCode
@@ -86,3 +88,5 @@ export const Styles: {
   bgCyan: StyleCode
   bgWhite: StyleCode
 }
+
+export let enabled: boolean
