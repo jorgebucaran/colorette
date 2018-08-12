@@ -1,24 +1,20 @@
 const tc = require("..")
 const equal = require("testmatrix").equal
 
-const Equal = (actual, expected) => ({
+const styleKeys = Object.keys(tc.Styles)
+
+const EqualTest = (actual, expected) => ({
   name: actual,
   assert: equal,
   actual,
   expected
 })
 
-const StyleTest = style =>
-  Equal(
-    tc[style](style),
-    tc.Styles[style].open + style + tc.Styles[style].close
-  )
-
 const ChainTest = rightChain => style => {
   const chain = [style].concat(rightChain)
   const name = chain.join(" ")
 
-  return Equal(
+  return EqualTest(
     chain.reduce((getter, i) => getter[i], tc)(name),
     chain.reduceRight(
       (name, i) =>
@@ -31,14 +27,18 @@ const ChainTest = rightChain => style => {
   )
 }
 
+const StyleTest = style =>
+  EqualTest(
+    tc[style](style),
+    tc.Styles[style].open + style + tc.Styles[style].close
+  )
+
 exports.default = {
-  "using styles": Object.keys(tc.Styles).map(StyleTest),
-  "chaining styles": Object.keys(tc.Styles).map(
-    ChainTest(["bold", "italic", "underline"])
-  ),
+  "using styles": styleKeys.map(StyleTest),
+  "chaining styles": styleKeys.map(ChainTest(["bold", "italic", "underline"])),
   "nesting styles": [tc.Styles].map(
     ({ red, blue, cyan, bold, italic, inverse, underline }) =>
-      Equal(
+      EqualTest(
         tc.red(
           `Red ${tc.inverse("Inverse Red")} ${tc.blue.bold(
             `Blue ${tc.italic("Italic")} Bold`
@@ -58,7 +58,7 @@ exports.default = {
       )
   ),
   "numbers & others": [new Date(), -1e10, -1, -0.1, 0, 0.1, 1, 1e10].map(n =>
-    Equal(
+    EqualTest(
       tc.inverse.bgYellow(n),
       tc.Styles.inverse.open +
         tc.Styles.bgYellow.open +
