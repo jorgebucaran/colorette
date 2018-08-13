@@ -36,27 +36,30 @@ const StyleTest = style =>
 exports.default = {
   "using styles": styleKeys.map(StyleTest),
   "chaining styles": styleKeys.map(ChainTest(["bold", "italic", "underline"])),
-  "nesting styles": [tc.Styles].map(
-    ({ red, blue, cyan, bold, italic, inverse, underline }) =>
-      EqualTest(
-        tc.red(
-          `Red ${tc.inverse("Inverse Red")} ${tc.blue.bold(
-            `Blue ${tc.italic("Italic")} Bold`
-          )} Red ${tc.cyan.inverse(
-            `Inverse ${tc.underline("Underline")} Cyan`
-          )} ${tc.italic("Italic")} Red`
-        ),
-        `${red.open}Red ${inverse.open}Inverse Red${inverse.close} ${
-          blue.open
-        }${bold.open}Blue ${italic.open}Italic${italic.close} Bold${
-          bold.close
-        }${red.open} Red ${cyan.open}${inverse.open}Inverse ${
-          underline.open
-        }Underline${underline.close} Cyan${inverse.close}${red.open} ${
-          italic.open
-        }Italic${italic.close} Red${red.close}`
-      )
-  ),
+  "nesting styles": [
+    EqualTest(
+      tc.red(
+        `Red ${tc.inverse("Inverse Red")} ${tc.blue.bold(
+          `Blue ${tc.italic("Italic")} Bold`
+        )} Red ${tc.cyan.inverse(
+          `Inverse ${tc.underline("Underline")} Cyan`
+        )} ${tc.italic("Italic")} Red`
+      ),
+      `${tc.Styles.red.open}Red ${tc.Styles.inverse.open}Inverse Red${
+        tc.Styles.inverse.close
+      } ${tc.Styles.blue.open}${tc.Styles.bold.open}Blue ${
+        tc.Styles.italic.open
+      }Italic${tc.Styles.italic.close} Bold${tc.Styles.bold.close}${
+        tc.Styles.red.open
+      } Red ${tc.Styles.cyan.open}${tc.Styles.inverse.open}Inverse ${
+        tc.Styles.underline.open
+      }Underline${tc.Styles.underline.close} Cyan${tc.Styles.inverse.close}${
+        tc.Styles.red.open
+      } ${tc.Styles.italic.open}Italic${tc.Styles.italic.close} Red${
+        tc.Styles.red.close
+      }`
+    )
+  ],
   "numbers & others": [new Date(), -1e10, -1, -0.1, 0, 0.1, 1, 1e10].map(n =>
     EqualTest(
       tc.inverse.bgYellow(n),
