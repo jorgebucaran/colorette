@@ -1,49 +1,17 @@
-const { Suite } = require("benchmark")
+const { runBenchmark } = require("./runBenchmark")
 
-console.log("# Load Time")
-
-console.time("chalk")
 const chalk = require("chalk")
-console.timeEnd("chalk")
-
-console.time("kleur")
 const kleur = require("kleur")
-console.timeEnd("kleur")
+const color = require("ansi-colors")
+const tc = require("..")
 
-console.time("ansi-colors")
-const ansi = require("ansi-colors")
-console.timeEnd("ansi-colors")
+const styleKeys = Object.keys(tc.Styles)
 
-console.time("turbocolor")
-const turbocolor = require("..")
-console.timeEnd("turbocolor")
-
-const styles = Object.keys(turbocolor.Styles)
-
-const bench = ({ testables, tests }) =>
-  Object.keys(tests)
-    .map(name => ({
-      name,
-      test: Object.keys(testables).reduce(
-        (bench, id) => bench.add(id, tests[name].bind({}, testables[id])),
-        new Suite().on("cycle", ({ target: { name, hz } }) =>
-          console.log(`${name} × ${Math.floor(hz).toLocaleString()} ops/sec`)
-        )
-      )
-    }))
-    .map(({ name, test }) => (console.log(`\n# ${name}`), test.run()))
-
-bench({
-  testables: {
-    chalk,
-    kleur,
-    "ansi-colors": ansi,
-    turbocolor
-  },
-  tests: {
-    "Using Styles": c => styles.map(k => c[k]("foo")),
-    "Chaining Styles": c => styles.map(k => c[k].italic.underline.bold("bar")),
-    "Nesting Styles": ({
+runBenchmark(
+  {
+    "# Using Styles": c => styleKeys.map(k => c[k](k)),
+    "# Chaining Styles": c => styleKeys.map(k => c[k].italic.underline.bold(k)),
+    "# Nesting Styles": ({
       red,
       cyan,
       green,
@@ -71,5 +39,11 @@ bench({
           )} BLUE`
         )} AND BACK TO GREEN.`
       )
+  },
+  {
+    chalk,
+    kleur,
+    "ansi-colors": color,
+    turbocolor: tc
   }
-})
+)

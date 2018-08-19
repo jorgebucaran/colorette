@@ -1,18 +1,18 @@
 # Turbocolor
 
-[![](http://img.shields.io/travis/jorgebucaran/turbocolor.svg)](https://travis-ci.org/jorgebucaran/turbocolor)
+[![CI](http://img.shields.io/travis/jorgebucaran/turbocolor.svg)](https://travis-ci.org/jorgebucaran/turbocolor)
 [![Codecov](https://img.shields.io/codecov/c/github/jorgebucaran/turbocolor/master.svg)](https://codecov.io/gh/jorgebucaran/turbocolor)
-[![Size](https://packagephobia.now.sh/badge?p=turbocolor)](https://packagephobia.now.sh/result?p=turbocolor)
 [![](https://img.shields.io/npm/v/turbocolor.svg)](https://www.npmjs.org/package/turbocolor)
 
 Turbocolor is a Node.js library for colorizing text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
 ## Features
 
-- No dependencies!
+- Tiny (669B)!
+- No dependencies
 - [Toggle color support](#color-support) on/off as needed.
 - Use it as a drop-in replacement for [chalk](https://github.com/chalk/chalk), [ansi-colors](https://github.com/doowb/ansi-colors), [kleur](https://github.com/lukeed/kleur), etc.
-- Need for speed? Turbocolor is the [_fastest_](/bench) terminal colorizer for Node.js.
+- Need for speed? Turbocolor is the [_fastest_](#benchmarks) terminal colorizer for Node.js.
 
 ## Installation
 
@@ -29,7 +29,7 @@ const tc = require("turbocolor")
 Using styles.
 
 ```jsx
-console.log(tc.red("Bonjour!"))
+console.log(tc.red("Hello!"))
 ```
 
 Chaining styles.
@@ -60,9 +60,35 @@ Using [string substitution](https://nodejs.org/api/console.html#console_console_
 console.log(tc.green("Total: $%f"), 1.99)
 ```
 
+## API
+
+### tc.<samp>style[.style...]</samp>(string)
+
+Every [style](#tc-styles) function can be chained or nested with one another and when invoked, will return the given string argument wrapped in the corresponding ANSI escape codes. Style precedence is determined by chaining order in a first-come, first-served basis. This means that `tc.red.green.blue` is reduced to `tc.red`.
+
+### tc.Styles
+
+Turbocolor exports ANSI escape codes for each available style. Use them if you want to stylize console output manually.
+
+```jsx
+const { Styles } = require("turbocolor")
+
+console.log(`${Styles.red.open}Red${Styles.red.close}`)
+```
+
+### tc.enabled
+
+Color support is automatically enabled if your terminal supports it, but you can toggle it on/off as needed.
+
+```js
+const tc = require("turbocolor")
+
+tc.enabled = false
+```
+
 ## Styles
 
-Every style function can be chained or nested with one another and will return a string when invoked.
+Turbocolor only supports the regular color set at the moment. If you want to use the high intensity variations or need 256 color/Truecolor support, please use [chalk](https://github.com/chalk/chalk) instead.
 
 | Colors  | Background Colors | Modifiers         |
 | ------- | ----------------- | ----------------- |
@@ -76,25 +102,33 @@ Every style function can be chained or nested with one another and will return a
 | white   | bgWhite           | reset             |
 | gray    |                   |                   |
 
-## Color Support
+## Benchmark Results
 
-Color support is automatically enabled if your terminal supports it, but you can toggle it on/off as needed.
+All tests run on a 2.4GHz Intel Core i7 CPU with 16 GB memory.
 
-```js
-const tc = require("turbocolor")
-
-tc.enabled = false
+```
+npm i -C bench && node bench
 ```
 
-## Escape Codes
+<pre>
+# Using Styles
+chalk × 8,510 ops/sec
+kleur × 298,812 ops/sec
+ansi-colors × 299,145 ops/sec
+<em>turbocolor × 606,180 ops/sec</em>
 
-Turbocolor exports ANSI escape codes for each [available style](#styles). Each has an `open` and `close` property which can be used for manually styling console output.
+# Chaining Styles
+chalk × 1,881 ops/sec
+kleur × 43,187 ops/sec
+ansi-colors × 22,549 ops/sec
+<em>turbocolor × 58,745 ops/sec</em>
 
-```jsx
-const { Styles } = require("turbocolor")
-
-console.log(`${Styles.red.open}Red${Styles.red.close}`)
-```
+# Nesting Styles
+chalk × 12,449 ops/sec
+kleur × 183,384 ops/sec
+ansi-colors × 123,488 ops/sec
+<em>turbocolor × 197,616 ops/sec</em>
+</pre>
 
 ## License
 
