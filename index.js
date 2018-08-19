@@ -1,71 +1,72 @@
 "use strict"
 
-const tc = {}
+const tc = {
+  enabled:
+    process.env.FORCE_COLOR ||
+    process.platform === "win32" ||
+    (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
+}
 const Styles = (tc.Styles = {})
-tc.enabled =
-  process.env.FORCE_COLOR ||
-  process.platform === "win32" ||
-  (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
 const defineProp = Object.defineProperty
 
-const style = (prop, open, close) => {
-  defineProp(tc, prop, {
+const init = (style, open, close, re) => {
+  let i,
+    len = 1,
+    seq = [(Styles[style] = { open, close, re })]
+
+  defineProp(tc, style, {
     get: () => {
-      for (let p in Styles) {
-        defineProp(fn, p, {
-          get: () => (stack.push(Styles[p]), fn)
+      for (let k in Styles)
+        defineProp(fn, k, {
+          get: () => ((seq[len++] = Styles[k]), fn)
         })
-      }
-      delete tc[prop]
-      return (tc[prop] = fn)
+      delete tc[style]
+      return (tc[style] = fn)
     },
     configurable: true
   })
 
   const fn = out => {
     if (tc.enabled) {
-      let i
-      for (out += ""; (i = stack.pop()) !== void 0; ) {
-        out = (open = i.open) + out.replace(i.old, open) + i.close
+      for (i = 0, out += ""; i < len; i++) {
+        style = seq[i]
+        out =
+          (open = style.open) +
+          (~out.indexOf((close = style.close), 4) // skip first \x1b[
+            ? out.replace(style.re, open)
+            : out) +
+          close
       }
-      stack[0] = style
+      len = 1
     }
     return out
   }
-
-  const style = (Styles[prop] = {
-    open: "\x1b[" + open,
-    close: "\x1b[" + close,
-    old: new RegExp("\\x1b\\[" + close, "g")
-  })
-
-  const stack = (fn.stack = [style])
 }
 
-style("reset", "0m", "0m")
-style("bold", "1m", "22m")
-style("dim", "2m", "22m")
-style("italic", "3m", "23m")
-style("underline", "4m", "24m")
-style("inverse", "7m", "27m")
-style("hidden", "8m", "28m")
-style("strikethrough", "9m", "29m")
-style("black", "30m", "39m")
-style("red", "31m", "39m")
-style("green", "32m", "39m")
-style("yellow", "33m", "39m")
-style("blue", "34m", "39m")
-style("magenta", "35m", "39m")
-style("cyan", "36m", "39m")
-style("white", "37m", "39m")
-style("gray", "90m", "39m")
-style("bgBlack", "40m", "49m")
-style("bgRed", "101m", "49m")
-style("bgGreen", "102m", "49m")
-style("bgYellow", "103m", "49m")
-style("bgBlue", "104m", "49m")
-style("bgMagenta", "105m", "49m")
-style("bgCyan", "106m", "49m")
-style("bgWhite", "107m", "49m")
+init("reset", "\x1b[0m", "\x1b[0m", /\x1b\[0m/g)
+init("bold", "\x1b[1m", "\x1b[22m", /\x1b\[22m/g)
+init("dim", "\x1b[2m", "\x1b[22m", /\x1b\[22m/g)
+init("italic", "\x1b[3m", "\x1b[23m", /\x1b\[23m/g)
+init("underline", "\x1b[4m", "\x1b[24m", /\x1b\[24m/g)
+init("inverse", "\x1b[7m", "\x1b[27m", /\x1b\[27m/g)
+init("hidden", "\x1b[8m", "\x1b[28m", /\x1b\[28m/g)
+init("strikethrough", "\x1b[9m", "\x1b[29m", /\x1b\[29m/g)
+init("black", "\x1b[30m", "\x1b[39m", /\x1b\[39m/g)
+init("red", "\x1b[31m", "\x1b[39m", /\x1b\[39m/g)
+init("green", "\x1b[32m", "\x1b[39m", /\x1b\[39m/g)
+init("yellow", "\x1b[33m", "\x1b[39m", /\x1b\[39m/g)
+init("blue", "\x1b[34m", "\x1b[39m", /\x1b\[39m/g)
+init("magenta", "\x1b[35m", "\x1b[39m", /\x1b\[39m/g)
+init("cyan", "\x1b[36m", "\x1b[39m", /\x1b\[39m/g)
+init("white", "\x1b[37m", "\x1b[39m", /\x1b\[39m/g)
+init("gray", "\x1b[90m", "\x1b[39m", /\x1b\[39m/g)
+init("bgBlack", "\x1b[40m", "\x1b[49m", /\x1b\[49m/g)
+init("bgRed", "\x1b[41m", "\x1b[49m", /\x1b\[49m/g)
+init("bgGreen", "\x1b[42m", "\x1b[49m", /\x1b\[49m/g)
+init("bgYellow", "\x1b[43m", "\x1b[49m", /\x1b\[49m/g)
+init("bgBlue", "\x1b[44m", "\x1b[49m", /\x1b\[49m/g)
+init("bgMagenta", "\x1b[45m", "\x1b[49m", /\x1b\[49m/g)
+init("bgCyan", "\x1b[46m", "\x1b[49m", /\x1b\[49m/g)
+init("bgWhite", "\x1b[47m", "\x1b[49m", /\x1b\[49m/g)
 
 module.exports = tc
