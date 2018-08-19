@@ -1,6 +1,6 @@
 {
   "name": "turbocolor",
-  "version": "2.4.5",
+  "version": "2.6.0",
   "description": "Node.js library for colorizing text using ANSI escape sequences.",
   "main": "index.js",
   "types": "turbocolor.d.ts",
@@ -18,9 +18,9 @@
   ],
   "keywords": [
     "turbocolor",
-    "color",
     "terminal",
-    "cli",
+    "styles",
+    "color",
     "ansi"
   ],
   "author": "Jorge Bucaran",
