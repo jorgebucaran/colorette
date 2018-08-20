@@ -8,10 +8,9 @@ Turbocolor is a Node.js library for colorizing text using [ANSI escape sequences
 
 ## Features
 
-- Tiny (686B)!
 - No dependencies
 - [Toggle color support](#color-support) on/off as needed
-- Use it as a drop-in replacement for [chalk](https://github.com/chalk/chalk), [ansi-colors](https://github.com/doowb/ansi-colors), [kleur](https://github.com/lukeed/kleur), etc.
+- Use it as a drop-in replacement for [chalk](https://github.com/chalk/chalk), [ansi-colors](https://github.com/doowb/ansi-colors), [kleur](https://github.com/lukeed/kleur)
 - Need for speed? Turbocolor is the [_fastest_](#benchmarks) terminal colorizer for Node.js
 
 ## Installation
