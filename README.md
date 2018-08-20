@@ -1,18 +1,18 @@
 # Turbocolor
 
 [![CI](http://img.shields.io/travis/jorgebucaran/turbocolor.svg)](https://travis-ci.org/jorgebucaran/turbocolor)
-[![Codecov](https://img.shields.io/codecov/c/github/jorgebucaran/turbocolor/master.svg)](https://codecov.io/gh/jorgebucaran/turbocolor)
+[![Coverage](https://img.shields.io/codecov/c/github/jorgebucaran/turbocolor/master.svg)](https://codecov.io/gh/jorgebucaran/turbocolor)
 [![](https://img.shields.io/npm/v/turbocolor.svg)](https://www.npmjs.org/package/turbocolor)
 
 Turbocolor is a Node.js library for colorizing text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
 ## Features
 
-- Tiny (669B)!
+- Tiny (686B)!
 - No dependencies
-- [Toggle color support](#color-support) on/off as needed.
+- [Toggle color support](#color-support) on/off as needed
 - Use it as a drop-in replacement for [chalk](https://github.com/chalk/chalk), [ansi-colors](https://github.com/doowb/ansi-colors), [kleur](https://github.com/lukeed/kleur), etc.
-- Need for speed? Turbocolor is the [_fastest_](#benchmarks) terminal colorizer for Node.js.
+- Need for speed? Turbocolor is the [_fastest_](#benchmarks) terminal colorizer for Node.js
 
 ## Installation
 
