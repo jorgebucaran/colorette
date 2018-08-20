@@ -54,7 +54,7 @@ Nesting styles.
 console.log(`Normal ${tc.bold(`Bold ${tc.red("Bold/Red")} Bold`)} Normal`)
 ```
 
-Using [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args).
+Using console.log [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args).
 
 ```jsx
 console.log(tc.green("Total: $%f"), 1.99)
