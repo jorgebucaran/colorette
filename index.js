@@ -14,6 +14,22 @@ const init = (style, open, close, re) => {
     len = 1,
     seq = [(Styles[style] = { open, close, re })]
 
+  const fn = s => {
+    if (tc.enabled) {
+      for (i = 0, s += ""; i < len; i++) {
+        style = seq[i]
+        s =
+          (open = style.open) +
+          (~s.indexOf((close = style.close), 4) // skip first \x1b[
+            ? s.replace(style.re, open)
+            : s) +
+          close
+      }
+      len = 1
+    }
+    return s
+  }
+
   defineProp(tc, style, {
     get: () => {
       for (let k in Styles)
@@ -25,22 +41,6 @@ const init = (style, open, close, re) => {
     },
     configurable: true
   })
-
-  const fn = out => {
-    if (tc.enabled) {
-      for (i = 0, out += ""; i < len; i++) {
-        style = seq[i]
-        out =
-          (open = style.open) +
-          (~out.indexOf((close = style.close), 4) // skip first \x1b[
-            ? out.replace(style.re, open)
-            : out) +
-          close
-      }
-      len = 1
-    }
-    return out
-  }
 }
 
 init("reset", "\x1b[0m", "\x1b[0m", /\x1b\[0m/g)
