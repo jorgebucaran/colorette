@@ -42,15 +42,14 @@ runBenchmark(
       blue,
       cyan,
       white,
-      green,
       yellow,
       magenta,
       bold,
       italic,
       underline
     }) =>
-      green(
-        `GREEN, ${blue(
+      red(
+        `RED, ${blue(
           `BLUE, ${bold(
             `BOLD AND ${yellow("YELLOW")}. BACK TO BLUE, ${underline(
               `UNDERLINE,`
@@ -60,7 +59,7 @@ runBenchmark(
               ` CYAN, ${italic(`ITALIC ${bold("BOLD")} ITALIC`)}, CYAN,`
             )} MAGENTA,`
           )} BLUE`
-        )} AND BACK TO GREEN.`
+        )} AND BACK TO RED.`
       )
   },
   {

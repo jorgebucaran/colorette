@@ -99,23 +99,19 @@ Colorette supports the normal and bright color variations.
 
 ## To chalk or not to chalk?
 
-Chalk is the go-to terminal colorizer for Node.js. It's robust and actively maintained. So, why not chalk? Size, performance and complexity. Chalk is [several orders larger](https://packagephobia.now.sh/result?p=chalk) than [colorette](https://packagephobia.now.sh/result?p=colorette) and [20x~100x slower](#benchmark-results) depending on what you're doing. Every time you add it as a dependency you make your modules heavier and slower to install.
+Chalk is the go-to terminal colorizer for Node.js. It's robust and actively maintained. So, why not chalk? Chalk is [larger](https://packagephobia.now.sh/result?p=chalk) than [colorette](https://packagephobia.now.sh/result?p=colorette) and 20x~100x [slower](#benchmark-results) depending on what you're doing. Every time you add it as a dependency you make your modules heavier and slower for no reason.
 
-What about complexity? Chalk has an API that allows you to chain style methods with each other using [property accesors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors). Every style is both a property and a function sharing the same [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype). No doubt it is clever, but to describe this API as expressive would be an overstatement. Here is a typical case of [Easy vs Simple](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/SimpleMadeEasy.md).
-
-Chalk's API hides real complexity. It's not evident how it works until you've delved deeply into its implementation, none of which is essential to accomplish the task at hand.
+Part of the complexity stems from its chainable API where every style is both a property and a method sharing the same [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype). A clever approach it is, but to describe it as expressive would be an overstatement. It's not evident how it works until you've delved deeply into its implementation, none of which is essential to accomplish the task at hand.
 
 ```js
-red.bold.underline("Red, bold and underline.")
+red.bold.underline("Do you believe in magic?")
 ```
 
-Colorette's approach has a few sticking parenthesis, but it has been carved away of all the surprises.
+Colorette has more sticking parentheses, but it has been carved away of all the surprises.
 
 ```js
-red(bold(underline("Red, bold and underline.")))
+red(bold(underline("Do you believe in magic?")))
 ```
-
-Minimalism reminds us of what is really important. I don't use chalk because I can't agree with its underlying complexity.
 
 ## Benchmark Results
 
