@@ -8,9 +8,9 @@ Colorette is a Node.js library for colorizing text using [ANSI escape sequences]
 
 ## Features
 
-- No dependencies
-- Includes normal and bright colors
-- [Toggle color support](#options-enabled) on/off as needed
+- Zero dependency
+- [Toggle color](#options-enabled) on/off as needed
+- Automatic color support detection
 - Need for speed? Colorette is the [_fastest_](#benchmarks) terminal colorizer for Node.js
 
 ## Installation
@@ -52,13 +52,13 @@ console.log(bold("Total: $%f"), 1.99)
 Nest styles without breaking an existing open sequence.
 
 ```js
-console.log(red(`Red ${blue("Blue")} Red`))
+console.log(red(`Red ${green("Green")} Red`))
 ```
 
 Feeling adventurous? Try the [pipeline operator](https://github.com/tc39/proposal-pipeline-operator).
 
 ```js
-console.log("Make it so!" |> bold |> red)
+console.log("Make it so!" |> bold |> green)
 ```
 
 ## API
@@ -99,15 +99,15 @@ Colorette supports the normal and bright color variations.
 
 ## To chalk or not to chalk?
 
-Chalk is the go-to terminal colorizer for Node.js. It's robust and actively maintained. So, why not chalk? Chalk is [larger](https://packagephobia.now.sh/result?p=chalk) than [colorette](https://packagephobia.now.sh/result?p=colorette) and 20x~100x [slower](#benchmark-results) depending on what you're doing. Every time you add it as a dependency you make your modules heavier and slower for no reason.
+Chalk is the go-to terminal colorizer for Node.js. It's robust and actively maintained. So, why not chalk? Because we can do just as well with less. Chalk is [larger](https://packagephobia.now.sh/result?p=chalk) than [colorette](https://packagephobia.now.sh/result?p=colorette) and 20x~100x [slower](#benchmark-results) depending on what you're doing.
 
-Part of the complexity stems from its chainable API where every style is both a property and a method sharing the same [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype). A clever approach it is, but to describe it as expressive would be an overstatement. It's not evident how it works until you've delved deeply into its implementation, none of which is essential to accomplish the task at hand.
+Part of the complexity stems from a chainable API where styles are used both as properties or methods by sharing the same [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype). The trick is not evident unless you look at the implementation. You are just told it works, but none of it is essential to accomplish our goals.
 
 ```js
 red.bold.underline("Do you believe in magic?")
 ```
 
-Colorette has more sticking parentheses, but it has been carved away of all the surprises.
+Colorette's approach has more sticking parentheses, but it has been carved away of all the surprises.
 
 ```js
 red(bold(underline("Do you believe in magic?")))
