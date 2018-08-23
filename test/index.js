@@ -67,11 +67,11 @@ exports.default = {
   "disable color support": [
     {
       assert: equal,
-      actual: done => [
-        (c.options.enabled = false),
-        done(c.red(c.options.enabled)),
-        (c.options.enabled = true)
-      ],
+      actual: done => {
+        c.options.enabled = false
+        done(c.bold(c.options.enabled))
+        c.options.enabled = true
+      },
       expected: false
     }
   ]
