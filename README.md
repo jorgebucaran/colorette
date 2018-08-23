@@ -1,105 +1,121 @@
-# Turbocolor
+# Colorette
 
-[![CI](http://img.shields.io/travis/jorgebucaran/turbocolor.svg)](https://travis-ci.org/jorgebucaran/turbocolor)
-[![Coverage](https://img.shields.io/codecov/c/github/jorgebucaran/turbocolor/master.svg)](https://codecov.io/gh/jorgebucaran/turbocolor)
-[![](https://img.shields.io/npm/v/turbocolor.svg)](https://www.npmjs.org/package/turbocolor)
+[![CI](http://img.shields.io/travis/jorgebucaran/colorette.svg)](https://travis-ci.org/jorgebucaran/colorette)
+[![Coverage](https://img.shields.io/codecov/c/github/jorgebucaran/colorette/master.svg)](https://codecov.io/gh/jorgebucaran/colorette)
+[![](https://img.shields.io/npm/v/colorette.svg)](https://www.npmjs.org/package/colorette)
 
-Turbocolor is a Node.js library for colorizing text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
+Colorette is a Node.js library for colorizing text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
 ## Features
 
 - No dependencies
-- [Toggle color support](#color-support) on/off as needed
-- Use it as a drop-in replacement for [chalk](https://github.com/chalk/chalk), [ansi-colors](https://github.com/doowb/ansi-colors), [kleur](https://github.com/lukeed/kleur)
-- Need for speed? Turbocolor is the [_fastest_](#benchmarks) terminal colorizer for Node.js
+- Includes normal and bright colors
+- [Toggle color support](#options-enabled) on/off as needed
+- Need for speed? Colorette is the [_fastest_](#benchmarks) terminal colorizer for Node.js
 
 ## Installation
 
 <pre>
-npm i <a href="https://www.npmjs.com/package/turbocolor">turbocolor</a>
+npm i <a href="https://www.npmjs.com/package/colorette">colorette</a>
 </pre>
 
 ## Usage
 
-```jsx
-const tc = require("turbocolor")
+Import the [style functions](#styles) you need.
+
+```js
+const { red, green, bold } = require("colorette")
 ```
 
-Using styles.
+Then use them to colorize your output.
 
-```jsx
-console.log(tc.red("Hello!"))
+```js
+console.log(bold(green("Engage!")))
 ```
 
-Chaining styles.
+[Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) are a good choice too.
 
-```jsx
-console.log(tc.red.bold("Turbo") + tc.bgRed.white("Color"))
-```
-
-Using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
-
-```jsx
+```js
 console.log(`
-  ${tc.bold("Score")}: ${100}
-  Lives: ${tc.red.inverse(1)}
-  Level: ${tc.bgCyan.black.inverse(2)}
+  Beets are ${red("red")},
+  Cucumbers are ${green("green")},
+  ${bold("Colorette!")}.
 `)
 ```
 
-Nesting styles.
+Use console.log's [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args).
 
-```jsx
-console.log(`Normal ${tc.bold(`Bold ${tc.red("Bold/Red")} Bold`)} Normal`)
+```js
+console.log(bold("Total: $%f"), 1.99)
 ```
 
-Using console.log [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args).
+Nest styles without breaking an existing open sequence.
 
-```jsx
-console.log(tc.green("Total: $%f"), 1.99)
+```js
+console.log(red(`Red ${blue("Blue")} Red`))
+```
+
+Feeling adventurous? Try the [pipeline operator](https://github.com/tc39/proposal-pipeline-operator).
+
+```js
+console.log("Make it so!" |> bold |> red)
 ```
 
 ## API
 
-### tc.<samp>style[.style...]</samp>(string)
+### _style_(string)
 
-Every [style](#tc-styles) function can be chained or nested with one another and when invoked, will return the given string argument wrapped in the corresponding ANSI escape codes. Style precedence is determined by chaining order in a first-come, first-served basis. This means that `tc.red.green.blue` is reduced to `tc.red`.
+Every style function returns its string argument wrapped in the corresponding ANSI escape sequence.
 
-### tc.Styles
-
-Turbocolor exports ANSI escape codes for each available style. Use them if you want to stylize console output manually.
-
-```jsx
-const { Styles } = require("turbocolor")
-
-console.log(`${Styles.red.open}Red${Styles.red.close}`)
+```js
+red("Red") //=> \u001b[31mRed\u001b[39m
 ```
 
-### tc.enabled
+### options.enabled
 
 Color support is automatically enabled if your terminal supports it, but you can toggle it on/off as needed.
 
 ```js
-const tc = require("turbocolor")
+const { options } = require("colorette")
 
-tc.enabled = false
+options.enabled = false
 ```
 
 ## Styles
 
-Turbocolor only supports the regular color set at the moment. If you want to use the high intensity variations or need 256 color/Truecolor support, please use [chalk](https://github.com/chalk/chalk) instead.
+Colorette supports the normal and bright color variations.
 
-| Colors  | Background Colors | Modifiers         |
-| ------- | ----------------- | ----------------- |
-| black   | bgBlack           | dim               |
-| red     | bgRed             | **bold**          |
-| green   | bgGreen           | hidden            |
-| yellow  | bgYellow          | _italic_          |
-| blue    | bgBlue            | underline         |
-| magenta | bgMagenta         | inverse           |
-| cyan    | bgCyan            | ~~strikethrough~~ |
-| white   | bgWhite           | reset             |
-| gray    |                   |                   |
+| Colors  | Background Colors | Bright Colors | Bright Background Colors | Modifiers         |
+| ------- | ----------------- | ------------- | ------------------------ | ----------------- |
+| black   | bgBlack           | blackBright   | bgBlackBright            | dim               |
+| red     | bgRed             | redBright     | bgRedBright              | **bold**          |
+| green   | bgGreen           | greenBright   | bgGreenBright            | hidden            |
+| yellow  | bgYellow          | yellowBright  | bgYellowBright           | _italic_          |
+| blue    | bgBlue            | blueBright    | bgBlueBright             | underline         |
+| magenta | bgMagenta         | magentaBright | bgMagentaBright          | ~~strikethrough~~ |
+| cyan    | bgCyan            | cyanBright    | bgCyanBright             | reset             |
+| white   | bgWhite           | whiteBright   | bgWhiteBright            |                   |
+| gray    |                   |               |                          |                   |
+
+## To chalk or not to chalk?
+
+Chalk is the go-to terminal colorizer for Node.js. It's robust and actively maintained. So, why not chalk? Size, performance and complexity. Chalk is [several orders larger](https://packagephobia.now.sh/result?p=chalk) than [colorette](https://packagephobia.now.sh/result?p=colorette) and [20x~100x slower](#benchmark-results) depending on what you're doing. Every time you add it as a dependency you make your modules heavier and slower to install.
+
+What about complexity? Chalk has an API that allows you to chain style methods with each other using [property accesors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors). Every style is both a property and a function sharing the same [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype). No doubt it is clever, but to describe this API as expressive would be an overstatement. Here is a typical case of [Easy vs Simple](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/SimpleMadeEasy.md).
+
+Chalk's API hides real complexity. It's not evident how it works until you've delved deeply into its implementation, none of which is essential to accomplish the task at hand.
+
+```js
+red.bold.underline("Red, bold and underline.")
+```
+
+Colorette's approach has a few sticking parenthesis, but it has been carved away of all the surprises.
+
+```js
+red(bold(underline("Red, bold and underline.")))
+```
+
+Minimalism reminds us of what is really important. I don't use chalk because I can't agree with its underlying complexity.
 
 ## Benchmark Results
 
@@ -111,24 +127,21 @@ npm i -C bench && node bench
 
 <pre>
 # Using Styles
-chalk × 8,510 ops/sec
-kleur × 298,812 ops/sec
-ansi-colors × 299,145 ops/sec
-<em>turbocolor × 606,180 ops/sec</em>
+chalk × 8,627 ops/sec
+ansi-colors × 289,823 ops/sec
+<em>colorette × 724,394 ops/sec</em>
 
-# Chaining Styles
-chalk × 1,881 ops/sec
-kleur × 43,187 ops/sec
-ansi-colors × 22,549 ops/sec
-<em>turbocolor × 58,745 ops/sec</em>
+# Combining Styles
+chalk × 1,906 ops/sec
+ansi-colors × 21,747 ops/sec
+<em>colorette × 76,419 ops/sec</em>
 
 # Nesting Styles
-chalk × 12,449 ops/sec
-kleur × 183,384 ops/sec
-ansi-colors × 123,488 ops/sec
-<em>turbocolor × 197,616 ops/sec</em>
+chalk × 22,422 ops/sec
+ansi-colors × 289,973 ops/sec
+<em>colorette × 393,130 ops/sec</em>
 </pre>
 
 ## License
 
-Turbocolor is MIT licensed. See [LICENSE](LICENSE.md).
+Colorette is MIT licensed. See [LICENSE](LICENSE.md).

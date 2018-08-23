@@ -1,49 +1,71 @@
+const styles = [
+  "reset",
+  "bold",
+  "dim",
+  "italic",
+  "underline",
+  "inverse",
+  "hidden",
+  "strikethrough",
+  "black",
+  "red",
+  "green",
+  "yellow",
+  "blue",
+  "magenta",
+  "cyan",
+  "white",
+  "gray",
+  "bgBlack",
+  "bgRed",
+  "bgGreen",
+  "bgYellow",
+  "bgBlue",
+  "bgMagenta",
+  "bgCyan",
+  "bgWhite"
+]
 const { runBenchmark } = require("./runBenchmark")
-
-const chalk = require("chalk")
-const kleur = require("kleur")
-const color = require("ansi-colors")
-const tc = require("..")
-
-const styleKeys = Object.keys(tc.Styles)
 
 runBenchmark(
   {
-    "# Using Styles": c => styleKeys.map(k => c[k](k)),
-    "# Chaining Styles": c => styleKeys.map(k => c[k].italic.underline.bold(k)),
+    "# Using Styles": c => styles.map(k => c[k](k)),
+    "# Combining Styles": (c, id) =>
+      styles.map(
+        k =>
+          id === "colorette"
+            ? c.bold(c.underline(c.italic(c[k](k))))
+            : c.bold.underline.italic[k](k)
+      ),
     "# Nesting Styles": ({
       red,
-      cyan,
-      green,
       blue,
-      bold,
-      magenta,
+      cyan,
       white,
-      bgBlue,
-      yellow
+      green,
+      yellow,
+      magenta,
+      bold,
+      italic,
+      underline
     }) =>
       green(
         `GREEN, ${blue(
           `BLUE, ${bold(
-            `BOLD AND ${green("GREEN")}. BACK TO BLUE, ${red.italic.underline(
-              `RED ITALIC UNDERLINE,`
+            `BOLD AND ${yellow("YELLOW")}. BACK TO BLUE, ${underline(
+              `UNDERLINE,`
             )}`
           )} MORE BLUE, ${magenta(
-            `MAGENTA, ${white.inverse("INVERSE WHITE,")}${cyan(
-              ` CYAN, ${bgBlue.black(
-                `BLACK ON BLUE, ${yellow.bold.inverse(
-                  "BLUE ON BOLD YELLOW"
-                )}, BLACK ON BLUE`
-              )}, CYAN,`
+            `MAGENTA, ${white("WHITE,")}${cyan(
+              ` CYAN, ${italic(`ITALIC ${bold("BOLD")} ITALIC`)}, CYAN,`
             )} MAGENTA,`
           )} BLUE`
         )} AND BACK TO GREEN.`
       )
   },
   {
-    chalk,
-    kleur,
-    "ansi-colors": color,
-    turbocolor: tc
+    chalk: require("chalk"),
+    "ansi-colors": require("ansi-colors"),
+    colorette: require("..")
   }
 )

@@ -1,7 +1,9 @@
-import tc, { red, Styles } from "turbocolor"
+import { red, green, bold, options, Style } from "colorette"
 
-console.log(
-  tc.red.inverse.underline.bold("Hey!"),
-  red.bgWhite.italic("Ho!"),
-  `${Styles.red.open}Let's go!${Styles.red.close}`
-)
+options.enabled = true
+
+console.log(`
+  Beets are ${red("red")},
+  Cucumbers are ${green("green")},
+  ${bold("Colorette!")}.
+`)
