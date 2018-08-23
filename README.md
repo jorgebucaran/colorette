@@ -9,7 +9,7 @@ Colorette is a Node.js library for colorizing text using [ANSI escape sequences]
 ## Features
 
 - Zero dependency
-- [Toggle on/off](#options-enabled) as needed
+- [Toggle on/off](#optionsenabled) as needed
 - Automatic color support detection
 - Need for speed? Colorette is the [_fastest_](#benchmarks) terminal colorizer for Node.js
 
@@ -24,13 +24,13 @@ npm i <a href="https://www.npmjs.com/package/colorette">colorette</a>
 Import the [style functions](#styles) you need.
 
 ```js
-const { red, green, bold } = require("colorette")
+const { red, blue, bold } = require("colorette")
 ```
 
 Then use them to colorize your output.
 
 ```js
-console.log(bold(green("Engage!")))
+console.log(bold(blue("Engage!")))
 ```
 
 [Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) are a good choice too.
@@ -38,7 +38,7 @@ console.log(bold(green("Engage!")))
 ```js
 console.log(`
   Beets are ${red("red")},
-  Cucumbers are ${green("green")},
+  Plums are ${blue("blue")},
   ${bold("Colorette!")}.
 `)
 ```
@@ -52,13 +52,13 @@ console.log(bold("Total: $%f"), 1.99)
 Nest styles without breaking an existing open sequence.
 
 ```js
-console.log(red(`Red ${green("Green")} Red`))
+console.log(red(`Red Shirt ${blue("Blue Shirt")} Red Shirt`))
 ```
 
 Feeling adventurous? Try the [pipeline operator](https://github.com/tc39/proposal-pipeline-operator).
 
 ```js
-console.log("Make it so!" |> bold |> green)
+console.log("Make it so!" |> bold |> blue)
 ```
 
 ## API
@@ -68,7 +68,7 @@ console.log("Make it so!" |> bold |> green)
 Every style function returns its string argument wrapped in the corresponding ANSI escape sequence.
 
 ```js
-red("Red") //=> \u001b[31mRed\u001b[39m
+red("Shields Up!") //=> \u001b[31mShields Up!\u001b[39m
 ```
 
 ### options.enabled
