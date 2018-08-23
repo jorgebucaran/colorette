@@ -69,10 +69,10 @@ exports.default = {
       assert: equal,
       actual: done => [
         (c.options.enabled = false),
-        done(c.red(null)),
+        done(c.red(c.options.enabled)),
         (c.options.enabled = true)
       ],
-      expected: null
+      expected: false
     }
   ]
 }
