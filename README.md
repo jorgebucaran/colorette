@@ -123,19 +123,19 @@ npm i -C bench && node bench
 
 <pre>
 # Using Styles
-chalk × 8,627 ops/sec
-ansi-colors × 289,823 ops/sec
-<em>colorette × 724,394 ops/sec</em>
+chalk × 8,537 ops/sec
+ansi-colors × 163,167 ops/sec
+<em>colorette × 721,085 ops/sec</em>
 
 # Combining Styles
-chalk × 1,906 ops/sec
-ansi-colors × 21,747 ops/sec
-<em>colorette × 76,419 ops/sec</em>
+chalk × 27,268 ops/sec
+ansi-colors × 310,516 ops/sec
+<em>colorette × 2,043,137 ops/sec</em> 
 
 # Nesting Styles
-chalk × 22,422 ops/sec
-ansi-colors × 289,973 ops/sec
-<em>colorette × 393,130 ops/sec</em>
+chalk × 22,897 ops/sec
+ansi-colors × 239,785 ops/sec
+<em>colorette × 391,617 ops/sec</em>
 </pre>
 
 ## License
