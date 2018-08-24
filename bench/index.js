@@ -30,13 +30,10 @@ const { runBenchmark } = require("./runBenchmark")
 runBenchmark(
   {
     "# Using Styles": c => styles.map(k => c[k](k)),
-    "# Combining Styles": (c, id) =>
-      styles.map(
-        k =>
-          id === "colorette"
-            ? c.bold(c.underline(c.italic(c[k](k))))
-            : c.bold.underline.italic[k](k)
-      ),
+    "# Combining Styles": ({ red, bgWhite, bold, underline, italic }, id) =>
+      id === "colorette"
+        ? red(bgWhite(bold(underline(italic("Engage!")))))
+        : red.bgWhite.bold.underline.italic("Engage!"),
     "# Nesting Styles": ({
       red,
       blue,
