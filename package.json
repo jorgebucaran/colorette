@@ -1,6 +1,6 @@
 {
   "name": "colorette",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node.js library for colorizing text using ANSI escape sequences.",
   "main": "index.js",
   "types": "colorette.d.ts",
