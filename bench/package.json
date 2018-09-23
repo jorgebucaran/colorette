@@ -3,6 +3,7 @@
   "dependencies": {
     "benchmark": "^2.1.4",
     "chalk": "^2.4.1",
+    "kleur": "2.0.2",
     "ansi-colors": "^3.0.4"
   }
 }

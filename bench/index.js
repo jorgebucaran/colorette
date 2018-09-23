@@ -61,6 +61,7 @@ runBenchmark(
   },
   {
     chalk: require("chalk"),
+    kleur: require("kleur"),
     "ansi-colors": require("ansi-colors"),
     colorette: require("..")
   }

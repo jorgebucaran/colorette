@@ -121,19 +121,23 @@ All tests run on a 2.4GHz Intel Core i7 CPU with 16 GB memory.
 npm i -C bench && node bench
 ```
 
+
 <pre>
 # Using Styles
 chalk × 8,537 ops/sec
+kleur × 258,385 ops/sec
 ansi-colors × 163,167 ops/sec
 <em>colorette × 721,085 ops/sec</em>
 
 # Combining Styles
 chalk × 27,268 ops/sec
+kleur × 726,598 ops/sec
 ansi-colors × 310,516 ops/sec
-<em>colorette × 2,043,137 ops/sec</em> 
+<em>colorette × 2,043,137 ops/sec</em>
 
 # Nesting Styles
 chalk × 22,897 ops/sec
+kleur × 287,399 ops/sec
 ansi-colors × 239,785 ops/sec
 <em>colorette × 391,617 ops/sec</em>
 </pre>
