@@ -121,7 +121,6 @@ All tests run on a 2.4GHz Intel Core i7 CPU with 16 GB memory.
 npm i -C bench && node bench
 ```
 
-
 <pre>
 # Using Styles
 chalk × 8,537 ops/sec
