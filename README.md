@@ -1,6 +1,6 @@
 # Colorette
 
-[![CI](http://img.shields.io/travis/jorgebucaran/colorette.svg)](https://travis-ci.org/jorgebucaran/colorette)
+[![CI](https://img.shields.io/travis/jorgebucaran/colorette.svg)](https://travis-ci.org/jorgebucaran/colorette)
 [![Coverage](https://img.shields.io/codecov/c/github/jorgebucaran/colorette/master.svg)](https://codecov.io/gh/jorgebucaran/colorette)
 [![](https://img.shields.io/npm/v/colorette.svg)](https://www.npmjs.org/package/colorette)
 
