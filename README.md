@@ -99,19 +99,7 @@ Colorette supports the normal and bright color variations.
 
 ## To chalk or not to chalk?
 
-Chalk is the go-to terminal colorizer for Node.js. It's robust and actively maintained. So, why not chalk? Because we can do just as well with less. Chalk is [larger](https://packagephobia.now.sh/result?p=chalk) than [colorette](https://packagephobia.now.sh/result?p=colorette) and 20 to 100 times [slower](#benchmark-results) depending on what you're doing.
-
-Part of the complexity comes from a chainable API where styles are used both as properties and methods by sharing the same [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype). It isn't evident how this could work unless you look at the implementation. You are just told it does, but none of it is essential to solve the problem at thand.
-
-```js
-red.bold.underline("Do you believe in magic?")
-```
-
-Colorette's approach has more sticking parentheses, but it has been carved away of all the surprises.
-
-```js
-red(bold(underline("Do you believe in magic?")))
-```
+Chalk is another Node.js terminal colorizer. Its core feature is a [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)-based chainable API where ANSI styles can be used both as properties or methods. Colorette's approach has more sticking parentheses, but the result is more idiomatic without [magical](<https://en.wikipedia.org/wiki/Magic_(programming)>) abstractions.
 
 ## Benchmark Results
 
