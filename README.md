@@ -97,10 +97,6 @@ Colorette supports the normal and bright color variations.
 | white   | bgWhite           | whiteBright   | bgWhiteBright            |                   |
 | gray    |                   |               |                          |                   |
 
-## To chalk or not to chalk?
-
-Chalk is another Node.js terminal colorizer. Its core feature is a [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)-based chainable API where ANSI styles can be used both as properties or methods. Colorette's approach has more sticking parentheses, but the result is more idiomatic without [magical](<https://en.wikipedia.org/wiki/Magic_(programming)>) abstractions.
-
 ## Benchmark Results
 
 All tests run on a 2.4GHz Intel Core i7 CPU with 16 GB memory.
@@ -131,6 +127,10 @@ colors × 144,403 ops/sec
 ansi-colors × 234,658 ops/sec
 colorette × 389,825 ops/sec
 </pre>
+
+## To chalk or not to chalk?
+
+Chalk is another Node.js terminal colorizer. Its core feature is a [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)-based chainable API where ANSI styles can be used both as properties or methods. Colorette doesn't rely on a domain-specific abstraction, allowing you to write purely functional, idiomatic JavaScript if you don't mind more sticking parentheses.
 
 ## License
 
