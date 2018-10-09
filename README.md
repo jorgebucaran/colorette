@@ -134,4 +134,4 @@ Chalk is another Node.js terminal colorizer. Its core feature is a [prototype](h
 
 ## License
 
-Colorette is MIT licensed. See [LICENSE](LICENSE.md).
+Colorette is MIT licensed. See the [LICENSE](LICENSE.md) for details.
