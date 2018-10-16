@@ -5,7 +5,7 @@
   "main": "index.js",
   "types": "colorette.d.ts",
   "scripts": {
-    "test": "nyc -r lcov testmatrix test/*.js",
+    "test": "nyc -r lcov testmatrix test/index.js",
     "release": "npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push origin master && git push --tags && npm publish"
   },
   "repository": {

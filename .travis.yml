@@ -3,6 +3,10 @@ node_js:
   - 6
   - 8
   - 10
+os:
+  - windows
+  - linux
+  - osx
 
 env:
   - NODE_ENV=development
