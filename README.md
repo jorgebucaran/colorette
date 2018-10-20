@@ -4,12 +4,13 @@
 [![Coverage](https://img.shields.io/codecov/c/github/jorgebucaran/colorette/master.svg)](https://codecov.io/gh/jorgebucaran/colorette)
 [![](https://img.shields.io/npm/v/colorette.svg)](https://www.npmjs.org/package/colorette)
 
-Colorette is a Node.js library for colorizing text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
+Colorette is a Node.js [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) terminal colorizer.
 
 ## Features
 
 - Zero dependency
 - Automatic color support detection
+- [24-bit/Truecolor](https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit) support
 - [Toggle color output on/off](#optionsenabled) as needed
 - Need for speed? Colorette is the [fastest](#benchmark-results) terminal colorizer for Node.js
 
@@ -85,7 +86,7 @@ options.enabled = false
 
 Colorette supports the normal and bright color variations.
 
-| Colors  | Background Colors | Bright Colors | Bright Background Colors | Modifiers         |
+| Colors  | Background Colors | Bright Colors | Bright Background Colors | Effects           |
 | ------- | ----------------- | ------------- | ------------------------ | ----------------- |
 | black   | bgBlack           | blackBright   | bgBlackBright            | dim               |
 | red     | bgRed             | redBright     | bgRedBright              | **bold**          |
