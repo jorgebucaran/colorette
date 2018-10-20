@@ -15,6 +15,7 @@ coverage
 node_modules
 *.xml
 .DS_Store
+example
 
 # Dist
 *.gz

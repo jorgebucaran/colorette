@@ -14,6 +14,13 @@ const init = (open, close, re) => s =>
       close
     : s
 
+const color = (code, offset, seq) =>
+  init(
+    `\x1b[${code + offset}${seq || ""}m`,
+    `\x1b[${39 + offset}m`,
+    new RegExp(`\\x1b\\[${39 + offset}m`, "g")
+  )
+
 module.exports = {
   options: Object.defineProperty({}, "enabled", {
     get: () => enabled,
@@ -31,43 +38,49 @@ module.exports = {
   strikethrough: init("\x1b[9m", "\x1b[29m", /\x1b\[29m/g),
 
   // Foreground Colors
-  black: init("\x1b[30m", "\x1b[39m", /\x1b\[39m/g),
-  red: init("\x1b[31m", "\x1b[39m", /\x1b\[39m/g),
-  green: init("\x1b[32m", "\x1b[39m", /\x1b\[39m/g),
-  yellow: init("\x1b[33m", "\x1b[39m", /\x1b\[39m/g),
-  blue: init("\x1b[34m", "\x1b[39m", /\x1b\[39m/g),
-  magenta: init("\x1b[35m", "\x1b[39m", /\x1b\[39m/g),
-  cyan: init("\x1b[36m", "\x1b[39m", /\x1b\[39m/g),
-  white: init("\x1b[37m", "\x1b[39m", /\x1b\[39m/g),
-  gray: init("\x1b[90m", "\x1b[39m", /\x1b\[39m/g),
-
-  // Bright Foreground Colors
-  blackBright: init("\x1b[90m", "\x1b[39m", /\x1b\[39/g),
-  redBright: init("\x1b[91m", "\x1b[39m", /\x1b\[39/g),
-  greenBright: init("\x1b[92m", "\x1b[39m", /\x1b\[39/g),
-  yellowBright: init("\x1b[93m", "\x1b[39m", /\x1b\[39/g),
-  blueBright: init("\x1b[94m", "\x1b[39m", /\x1b\[39/g),
-  magentaBright: init("\x1b[95m", "\x1b[39m", /\x1b\[39/g),
-  cyanBright: init("\x1b[96m", "\x1b[39m", /\x1b\[39/g),
-  whiteBright: init("\x1b[97m", "\x1b[39m", /\x1b\[39/g),
+  black: color(30, 0),
+  red: color(31, 0),
+  green: color(32, 0),
+  yellow: color(33, 0),
+  blue: color(34, 0),
+  magenta: color(35, 0),
+  cyan: color(36, 0),
+  white: color(37, 0),
+  gray: color(90, 0),
 
   // Background Colors
-  bgBlack: init("\x1b[40m", "\x1b[49m", /\x1b\[49m/g),
-  bgRed: init("\x1b[41m", "\x1b[49m", /\x1b\[49m/g),
-  bgGreen: init("\x1b[42m", "\x1b[49m", /\x1b\[49m/g),
-  bgYellow: init("\x1b[43m", "\x1b[49m", /\x1b\[49m/g),
-  bgBlue: init("\x1b[44m", "\x1b[49m", /\x1b\[49m/g),
-  bgMagenta: init("\x1b[45m", "\x1b[49m", /\x1b\[49m/g),
-  bgCyan: init("\x1b[46m", "\x1b[49m", /\x1b\[49m/g),
-  bgWhite: init("\x1b[47m", "\x1b[49m", /\x1b\[49m/g),
+  bgBlack: color(30, 10),
+  bgRed: color(31, 10),
+  bgGreen: color(32, 10),
+  bgYellow: color(33, 10),
+  bgBlue: color(34, 10),
+  bgMagenta: color(35, 10),
+  bgCyan: color(36, 10),
+  bgWhite: color(37, 10),
+  bgGray: color(90, 10),
+
+  // Bright Foreground Colors
+  blackBright: color(90, 0),
+  redBright: color(91, 0),
+  greenBright: color(92, 0),
+  yellowBright: color(93, 0),
+  blueBright: color(94, 0),
+  magentaBright: color(95, 0),
+  cyanBright: color(96, 0),
+  whiteBright: color(97, 0),
 
   // Bright Background Colors
-  bgBlackBright: init("\x1b[100m", "\x1b[49m", /\x1b\[49/g),
-  bgRedBright: init("\x1b[101m", "\x1b[49m", /\x1b\[49/g),
-  bgGreenBright: init("\x1b[102m", "\x1b[49m", /\x1b\[49/g),
-  bgYellowBright: init("\x1b[103m", "\x1b[49m", /\x1b\[49/g),
-  bgBlueBright: init("\x1b[104m", "\x1b[49m", /\x1b\[49/g),
-  bgMagentaBright: init("\x1b[105m", "\x1b[49m", /\x1b\[49/g),
-  bgCyanBright: init("\x1b[106m", "\x1b[49m", /\x1b\[49/g),
-  bgWhiteBright: init("\x1b[107m", "\x1b[49m", /\x1b\[49/g)
+  bgBlackBright: color(90, 10),
+  bgRedBright: color(91, 10),
+  bgGreenBright: color(92, 10),
+  bgYellowBright: color(93, 10),
+  bgBlueBright: color(94, 10),
+  bgMagentaBright: color(95, 10),
+  bgCyanBright: color(96, 10),
+  bgWhiteBright: color(97, 10),
+
+  // Color Generators
+  rgb: (r, g, b, isBg) => color(38, isBg ? 10 : 0, `;2;${r};${g};${b}`),
+  ansi256: (code, isBg) => color(38, isBg ? 10 : 0, `;5;${code}`),
+  ansi16: (code, isBg) => color(code, isBg ? 10 : 0)
 }
