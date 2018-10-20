@@ -130,7 +130,7 @@ colorette × 389,825 ops/sec
 
 ## To chalk or not to chalk?
 
-Chalk is another Node.js terminal colorizer. Its core feature is a [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)-based chainable API where ANSI styles can be used both as properties or methods. Colorette doesn't rely on a domain-specific abstraction, allowing you to write purely functional, idiomatic JavaScript if you don't mind more sticking parentheses.
+Chalk is another Node.js terminal colorizer. Its core feature is a [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)-based chainable API where ANSI styles can be used both as properties or methods. Colorette doesn't rely on a domain-specific abstraction, allowing you to write purely functional, idiomatic JavaScript if you don't mind a few more sticking parentheses.
 
 ## License
 
