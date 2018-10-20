@@ -61,6 +61,32 @@ exports.default = {
       `\x1b[31mRED \x1b[34mBLUE \x1b[1mBOLD\x1b[22m BLUE\x1b[31m RED\x1b[39m`
     )
   ],
+  "ansi functions": [
+    EqualTest(
+      c.rgb(255, 0, 0)("TRUE RED"),
+      `\x1b[38;2;255;0;0mTRUE RED\x1b[39m`
+    ),
+    EqualTest(
+      c.ansi256(220)("GOLD"),
+      `\x1b[38;5;220mGOLD\x1b[39m`
+    ),
+    EqualTest(
+      c.ansi16(31)("RED"),
+      `\x1b[31mRED\x1b[39m`
+    ),
+    EqualTest(
+      c.rgb(255, 0, 0, true)("TRUE RED"),
+      `\x1b[48;2;255;0;0mTRUE RED\x1b[49m`
+    ),
+    EqualTest(
+      c.ansi256(220, true)("GOLD"),
+      `\x1b[48;5;220mGOLD\x1b[49m`
+    ),
+    EqualTest(
+      c.ansi16(31, true)("RED"),
+      `\x1b[41mRED\x1b[49m`
+    ),
+  ],
   "numbers & others": [new Date(), -1e10, -1, -0.1, 0, 0.1, 1, 1e10].map(n =>
     EqualTest(c.red(n), `\x1b[31m${n}\x1b[39m`)
   ),

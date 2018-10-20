@@ -46,3 +46,12 @@ export const bgBlueBright: Style
 export const bgMagentaBright: Style
 export const bgCyanBright: Style
 export const bgWhiteBright: Style
+
+export function ansi16(code: number, isBgColor: boolean): Style
+export function ansi256(code: number, isBgColor: boolean): Style
+export function rgb(
+  red: number,
+  green: number,
+  blue: number,
+  isBgColor: boolean
+): Style

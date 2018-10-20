@@ -14,6 +14,13 @@ const init = (open, close, re) => s =>
       close
     : s
 
+const ansi = (open, close, offset, seq) =>
+  init(
+    `\x1b[${open + (offset = offset == null ? 0 : offset)}${seq || ""}m`,
+    `\x1b[${close + offset}m`,
+    new RegExp(`\\x1b\\[${close + offset}m`, "g")
+  )
+
 module.exports = {
   options: Object.defineProperty({}, "enabled", {
     get: () => enabled,
@@ -21,53 +28,58 @@ module.exports = {
   }),
 
   // Effects
-  reset: init("\x1b[0m", "\x1b[0m", /\x1b\[0m/g),
-  bold: init("\x1b[1m", "\x1b[22m", /\x1b\[22m/g),
-  dim: init("\x1b[2m", "\x1b[22m", /\x1b\[22m/g),
-  italic: init("\x1b[3m", "\x1b[23m", /\x1b\[23m/g),
-  underline: init("\x1b[4m", "\x1b[24m", /\x1b\[24m/g),
-  inverse: init("\x1b[7m", "\x1b[27m", /\x1b\[27m/g),
-  hidden: init("\x1b[8m", "\x1b[28m", /\x1b\[28m/g),
-  strikethrough: init("\x1b[9m", "\x1b[29m", /\x1b\[29m/g),
+  reset: ansi(0, 0),
+  bold: ansi(1, 22),
+  dim: ansi(2, 22),
+  italic: ansi(3, 23),
+  underline: ansi(4, 24),
+  inverse: ansi(7, 27),
+  hidden: ansi(8, 28),
+  strikethrough: ansi(9, 29),
 
   // Foreground Colors
-  black: init("\x1b[30m", "\x1b[39m", /\x1b\[39m/g),
-  red: init("\x1b[31m", "\x1b[39m", /\x1b\[39m/g),
-  green: init("\x1b[32m", "\x1b[39m", /\x1b\[39m/g),
-  yellow: init("\x1b[33m", "\x1b[39m", /\x1b\[39m/g),
-  blue: init("\x1b[34m", "\x1b[39m", /\x1b\[39m/g),
-  magenta: init("\x1b[35m", "\x1b[39m", /\x1b\[39m/g),
-  cyan: init("\x1b[36m", "\x1b[39m", /\x1b\[39m/g),
-  white: init("\x1b[37m", "\x1b[39m", /\x1b\[39m/g),
-  gray: init("\x1b[90m", "\x1b[39m", /\x1b\[39m/g),
-
-  // Bright Foreground Colors
-  blackBright: init("\x1b[90m", "\x1b[39m", /\x1b\[39/g),
-  redBright: init("\x1b[91m", "\x1b[39m", /\x1b\[39/g),
-  greenBright: init("\x1b[92m", "\x1b[39m", /\x1b\[39/g),
-  yellowBright: init("\x1b[93m", "\x1b[39m", /\x1b\[39/g),
-  blueBright: init("\x1b[94m", "\x1b[39m", /\x1b\[39/g),
-  magentaBright: init("\x1b[95m", "\x1b[39m", /\x1b\[39/g),
-  cyanBright: init("\x1b[96m", "\x1b[39m", /\x1b\[39/g),
-  whiteBright: init("\x1b[97m", "\x1b[39m", /\x1b\[39/g),
+  black: ansi(30, 39),
+  red: ansi(31, 39),
+  green: ansi(32, 39),
+  yellow: ansi(33, 39),
+  blue: ansi(34, 39),
+  magenta: ansi(35, 39),
+  cyan: ansi(36, 39),
+  white: ansi(37, 39),
+  gray: ansi(90, 39),
 
   // Background Colors
-  bgBlack: init("\x1b[40m", "\x1b[49m", /\x1b\[49m/g),
-  bgRed: init("\x1b[41m", "\x1b[49m", /\x1b\[49m/g),
-  bgGreen: init("\x1b[42m", "\x1b[49m", /\x1b\[49m/g),
-  bgYellow: init("\x1b[43m", "\x1b[49m", /\x1b\[49m/g),
-  bgBlue: init("\x1b[44m", "\x1b[49m", /\x1b\[49m/g),
-  bgMagenta: init("\x1b[45m", "\x1b[49m", /\x1b\[49m/g),
-  bgCyan: init("\x1b[46m", "\x1b[49m", /\x1b\[49m/g),
-  bgWhite: init("\x1b[47m", "\x1b[49m", /\x1b\[49m/g),
+  bgBlack: ansi(40, 49),
+  bgRed: ansi(41, 49),
+  bgGreen: ansi(42, 49),
+  bgYellow: ansi(43, 49),
+  bgBlue: ansi(44, 49),
+  bgMagenta: ansi(45, 49),
+  bgCyan: ansi(46, 49),
+  bgWhite: ansi(47, 49),
+
+  // Bright Foreground Colors
+  blackBright: ansi(90, 39),
+  redBright: ansi(91, 39),
+  greenBright: ansi(92, 39),
+  yellowBright: ansi(93, 39),
+  blueBright: ansi(94, 39),
+  magentaBright: ansi(95, 39),
+  cyanBright: ansi(96, 39),
+  whiteBright: ansi(97, 39),
 
   // Bright Background Colors
-  bgBlackBright: init("\x1b[100m", "\x1b[49m", /\x1b\[49/g),
-  bgRedBright: init("\x1b[101m", "\x1b[49m", /\x1b\[49/g),
-  bgGreenBright: init("\x1b[102m", "\x1b[49m", /\x1b\[49/g),
-  bgYellowBright: init("\x1b[103m", "\x1b[49m", /\x1b\[49/g),
-  bgBlueBright: init("\x1b[104m", "\x1b[49m", /\x1b\[49/g),
-  bgMagentaBright: init("\x1b[105m", "\x1b[49m", /\x1b\[49/g),
-  bgCyanBright: init("\x1b[106m", "\x1b[49m", /\x1b\[49/g),
-  bgWhiteBright: init("\x1b[107m", "\x1b[49m", /\x1b\[49/g)
+  bgBlackBright: ansi(100, 49),
+  bgRedBright: ansi(101, 49),
+  bgGreenBright: ansi(102, 49),
+  bgYellowBright: ansi(103, 49),
+  bgBlueBright: ansi(104, 49),
+  bgMagentaBright: ansi(105, 49),
+  bgCyanBright: ansi(106, 49),
+  bgWhiteBright: ansi(107, 49),
+
+  // Color Generators
+  rgb: (r, g, b, isBg) => ansi(38, 39, isBg ? 10 : 0, `;2;${r};${g};${b}`),
+  ansi256: (code, isBg) => ansi(38, 39, isBg ? 10 : 0, `;5;${code}`),
+  ansi16: (code, isBg) => ansi(code, 39, isBg ? 10 : 0)
 }

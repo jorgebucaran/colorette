@@ -10,7 +10,7 @@ Colorette is a Node.js [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) te
 
 - Zero dependency
 - Automatic color support detection
-- [24-bit/Truecolor](https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit) support
+- [24-bit color](https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit) support
 - [Toggle color output on/off](#optionsenabled) as needed
 - Need for speed? Colorette is the [fastest](#benchmark-results) terminal colorizer for Node.js
 
@@ -56,6 +56,16 @@ Nest styles without breaking an existing open sequence.
 console.log(red(`Red Shirt ${blue("Blue Shirt")} Red Shirt`))
 ```
 
+Create your own [24-bit color](https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit) function.
+
+```js
+const { rgb } = require("colorette")
+const { hex } = require("color-convert")
+
+const mauve = rgb(...hex.rgb("#b784a7"))
+console.log(mauve("TrueColor -- the final frontier..."))
+```
+
 Feeling adventurous? Try the [pipeline operator](https://github.com/tc39/proposal-pipeline-operator).
 
 ```js
@@ -71,6 +81,12 @@ Every style function returns its string argument wrapped in the corresponding AN
 ```js
 red("Red Alert") //=> \u001b[31mRed Alert\u001b[39m
 ```
+
+### ansi16(code, isBgColor)
+
+### ansi256(code, isBgColor)
+
+### ansi16(reg, green, blue, isBgColor)
 
 ### options.enabled
 

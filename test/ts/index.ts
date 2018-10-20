@@ -1,4 +1,13 @@
-import { red, green, bold, options, Style } from "colorette"
+import {
+  red,
+  green,
+  bold,
+  ansi16,
+  ansi256,
+  rgb,
+  options,
+  Style
+} from "colorette"
 
 options.enabled = true
 
@@ -7,3 +16,4 @@ console.log(`
   Cucumbers are ${green("green")},
   ${bold("Colorette!")}.
 `)
+
