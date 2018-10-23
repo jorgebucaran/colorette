@@ -29,8 +29,6 @@ module.exports = {
     set: value => (enabled = value)
   }),
   reset: init(0, 0),
-  bold: init(1, 22),
-  dim: init(2, 22),
   bold: rawInit("\x1b[1m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[1m"),
   dim: rawInit("\x1b[2m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[2m"),
   italic: init(3, 23),
