@@ -65,7 +65,7 @@ console.log("Make it so!" |> bold |> blue)
 
 ### _style_(string)
 
-Every style function returns its string argument wrapped in the corresponding ANSI escape sequence.
+A style function returns its string argument wrapped in the corresponding ANSI escape sequence.
 
 ```js
 red("Red Alert") //=> \u001b[31mRed Alert\u001b[39m
@@ -107,25 +107,25 @@ npm i -C bench && node bench
 
 <pre>
 # Using Styles
-chalk × 8,510 ops/sec
-kleur × 265,858 ops/sec
-colors × 64,999 ops/sec
-ansi-colors × 159,135 ops/sec
-colorette × 709,733 ops/sec
+chalk × 8,935 ops/sec
+kleur × 297,289 ops/sec
+colors × 75,594 ops/sec
+ansi-colors × 166,105 ops/sec
+colorette × 725,926 ops/sec
 
 # Combining Styles
-chalk × 24,714 ops/sec
-kleur × 780,688 ops/sec
-colors × 246,004 ops/sec
-ansi-colors × 300,876 ops/sec
-colorette × 2,049,555 ops/sec
+chalk × 28,834 ops/sec
+kleur × 764,202 ops/sec
+colors × 263,517 ops/sec
+ansi-colors × 304,108 ops/sec
+colorette × 2,047,564 ops/sec
 
 # Nesting Styles
-chalk × 24,253 ops/sec
-kleur × 292,607 ops/sec
-colors × 144,403 ops/sec
-ansi-colors × 234,658 ops/sec
-colorette × 389,825 ops/sec
+chalk × 24,584 ops/sec
+kleur × 294,766 ops/sec
+colors × 143,747 ops/sec
+ansi-colors × 208,175 ops/sec
+colorette × 388,440 ops/sec
 </pre>
 
 ## To chalk or not to chalk?

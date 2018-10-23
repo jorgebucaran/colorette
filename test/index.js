@@ -57,8 +57,8 @@ exports.default = {
   ].map(args => StyleTest.apply({}, args)),
   "nesting styles": [
     EqualTest(
-      c.red(`RED ${c.blue(`BLUE ${c.bold("BOLD")} BLUE`)} RED`),
-      `\x1b[31mRED \x1b[34mBLUE \x1b[1mBOLD\x1b[22m BLUE\x1b[31m RED\x1b[39m`
+      c.bold(`BOLD ${c.red(`RED ${c.dim("DIM")} RED`)} BOLD`),
+      `\x1b[1mBOLD \x1b[31mRED \x1b[2mDIM\x1b[22m\x1b[1m RED\x1b[39m BOLD\x1b[22m`
     )
   ],
   "numbers & others": [new Date(), -1e10, -1, -0.1, 0, 0.1, 1, 1e10].map(n =>

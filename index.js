@@ -5,59 +5,70 @@ let enabled =
   process.platform === "win32" ||
   (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
 
-const init = (open, close, re) => s =>
+const rawInit = (open, close, searchRegex, replaceValue) => s =>
   enabled
     ? open +
       (~(s += "").indexOf(close, 4) // skip opening \x1b[
-        ? s.replace(re, open)
+        ? s.replace(searchRegex, replaceValue)
         : s) +
       close
     : s
+
+const init = (open, close) => {
+  return rawInit(
+    `\x1b[${open}m`,
+    `\x1b[${close}m`,
+    new RegExp(`\\x1b\\[${close}m`, "g"),
+    `\x1b[${open}m`
+  )
+}
 
 module.exports = {
   options: Object.defineProperty({}, "enabled", {
     get: () => enabled,
     set: value => (enabled = value)
   }),
-  reset: init("\x1b[0m", "\x1b[0m", /\x1b\[0m/g),
-  bold: init("\x1b[1m", "\x1b[22m", /\x1b\[22m/g),
-  dim: init("\x1b[2m", "\x1b[22m", /\x1b\[22m/g),
-  italic: init("\x1b[3m", "\x1b[23m", /\x1b\[23m/g),
-  underline: init("\x1b[4m", "\x1b[24m", /\x1b\[24m/g),
-  inverse: init("\x1b[7m", "\x1b[27m", /\x1b\[27m/g),
-  hidden: init("\x1b[8m", "\x1b[28m", /\x1b\[28m/g),
-  strikethrough: init("\x1b[9m", "\x1b[29m", /\x1b\[29m/g),
-  black: init("\x1b[30m", "\x1b[39m", /\x1b\[39m/g),
-  red: init("\x1b[31m", "\x1b[39m", /\x1b\[39m/g),
-  green: init("\x1b[32m", "\x1b[39m", /\x1b\[39m/g),
-  yellow: init("\x1b[33m", "\x1b[39m", /\x1b\[39m/g),
-  blue: init("\x1b[34m", "\x1b[39m", /\x1b\[39m/g),
-  magenta: init("\x1b[35m", "\x1b[39m", /\x1b\[39m/g),
-  cyan: init("\x1b[36m", "\x1b[39m", /\x1b\[39m/g),
-  white: init("\x1b[37m", "\x1b[39m", /\x1b\[39m/g),
-  gray: init("\x1b[90m", "\x1b[39m", /\x1b\[39m/g),
-  bgBlack: init("\x1b[40m", "\x1b[49m", /\x1b\[49m/g),
-  bgRed: init("\x1b[41m", "\x1b[49m", /\x1b\[49m/g),
-  bgGreen: init("\x1b[42m", "\x1b[49m", /\x1b\[49m/g),
-  bgYellow: init("\x1b[43m", "\x1b[49m", /\x1b\[49m/g),
-  bgBlue: init("\x1b[44m", "\x1b[49m", /\x1b\[49m/g),
-  bgMagenta: init("\x1b[45m", "\x1b[49m", /\x1b\[49m/g),
-  bgCyan: init("\x1b[46m", "\x1b[49m", /\x1b\[49m/g),
-  bgWhite: init("\x1b[47m", "\x1b[49m", /\x1b\[49m/g),
-  blackBright: init("\x1b[90m", "\x1b[39m", /\x1b\[39/g),
-  redBright: init("\x1b[91m", "\x1b[39m", /\x1b\[39/g),
-  greenBright: init("\x1b[92m", "\x1b[39m", /\x1b\[39/g),
-  yellowBright: init("\x1b[93m", "\x1b[39m", /\x1b\[39/g),
-  blueBright: init("\x1b[94m", "\x1b[39m", /\x1b\[39/g),
-  magentaBright: init("\x1b[95m", "\x1b[39m", /\x1b\[39/g),
-  cyanBright: init("\x1b[96m", "\x1b[39m", /\x1b\[39/g),
-  whiteBright: init("\x1b[97m", "\x1b[39m", /\x1b\[39/g),
-  bgBlackBright: init("\x1b[100m", "\x1b[49m", /\x1b\[49/g),
-  bgRedBright: init("\x1b[101m", "\x1b[49m", /\x1b\[49/g),
-  bgGreenBright: init("\x1b[102m", "\x1b[49m", /\x1b\[49/g),
-  bgYellowBright: init("\x1b[103m", "\x1b[49m", /\x1b\[49/g),
-  bgBlueBright: init("\x1b[104m", "\x1b[49m", /\x1b\[49/g),
-  bgMagentaBright: init("\x1b[105m", "\x1b[49m", /\x1b\[49/g),
-  bgCyanBright: init("\x1b[106m", "\x1b[49m", /\x1b\[49/g),
-  bgWhiteBright: init("\x1b[107m", "\x1b[49m", /\x1b\[49/g)
+  reset: init(0, 0),
+  bold: init(1, 22),
+  dim: init(2, 22),
+  bold: rawInit("\x1b[1m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[1m"),
+  dim: rawInit("\x1b[2m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[2m"),
+  italic: init(3, 23),
+  underline: init(4, 24),
+  inverse: init(7, 27),
+  hidden: init(8, 28),
+  strikethrough: init(9, 29),
+  black: init(30, 39),
+  red: init(31, 39),
+  green: init(32, 39),
+  yellow: init(33, 39),
+  blue: init(34, 39),
+  magenta: init(35, 39),
+  cyan: init(36, 39),
+  white: init(37, 39),
+  gray: init(90, 39),
+  bgBlack: init(40, 49),
+  bgRed: init(41, 49),
+  bgGreen: init(42, 49),
+  bgYellow: init(43, 49),
+  bgBlue: init(44, 49),
+  bgMagenta: init(45, 49),
+  bgCyan: init(46, 49),
+  bgWhite: init(47, 49),
+  blackBright: init(90, 39),
+  redBright: init(91, 39),
+  greenBright: init(92, 39),
+  yellowBright: init(93, 39),
+  blueBright: init(94, 39),
+  magentaBright: init(95, 39),
+  cyanBright: init(96, 39),
+  whiteBright: init(97, 39),
+  bgBlackBright: init(100, 49),
+  bgRedBright: init(101, 49),
+  bgGreenBright: init(102, 49),
+  bgYellowBright: init(103, 49),
+  bgBlueBright: init(104, 49),
+  bgMagentaBright: init(105, 49),
+  bgCyanBright: init(106, 49),
+  bgWhiteBright: init(107, 49)
 }
