@@ -1,36 +1,76 @@
 "use strict"
 
-let enabled =
-  process.env.FORCE_COLOR ||
-  process.platform === "win32" ||
-  (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
+const env = process.env
+const has256 =
+  env.TERM_PROGRAM === "Apple_Terminal" || /-256(color)?$/i.test(env.TERM)
+const has16m =
+  env.COLORTERM === "truecolor" ||
+  (env.TERM_PROGRAM === "iTerm.app" && /^3/.test(env.TERM_PROGRAM_VERSION))
 
-const rawInit = (open, close, searchRegex, replaceValue) => s =>
+let enabled = env.FORCE_COLOR || process.stdout.isTTY
+
+const sgrToWrapFn = (open, close, searchRegex, replaceValue) => s =>
   enabled
     ? open +
       (~(s += "").indexOf(close, 4) // skip opening \x1b[
-        ? s.replace(searchRegex, replaceValue)
+        ? s.replace(searchRegex, replaceValue + open)
         : s) +
       close
     : s
 
-const init = (open, close) => {
-  return rawInit(
-    `\x1b[${open}m`,
-    `\x1b[${close}m`,
-    new RegExp(`\\x1b\\[${close}m`, "g"),
-    `\x1b[${open}m`
+const init = (open, close, offset, appendix, replaceValue) =>
+  sgrToWrapFn(
+    `\x1b[${open + ~~offset + (appendix || "")}m`,
+    `\x1b[${close + ~~offset}m`,
+    new RegExp(`\\x1b\\[${close + ~~offset}m`, "g"),
+    replaceValue || ""
   )
-}
+
+const hexToRgb = code =>
+  (i => [(i >> 16) & 255, (i >> 8) & 255, i & 255])(
+    parseInt(code[0] === "#" ? code.slice(1) : code, 16)
+  )
+
+const rgbToAnsi16 = (r, g, b) =>
+  (r > 128 || g > 128 || b > 128 ? 90 : 30) +
+  (r === g && r === b && r > 128 && r < 192
+    ? 0
+    : ~~(r / 255 + 0.5) | (~~(g / 255 + 0.5) << 1) | (~~(b / 255 + 0.5) << 2))
+
+const rgbToAnsi256 = (r, g, b) =>
+  r === g && r === b
+    ? r < 8
+      ? 16 // Black
+      : r > 248
+        ? 231 // White
+        : 232 + ~~(((r - 8) / 247) * 25 + 0.5) // Grays
+    : 16 +
+      ~~((r / 255) * 5 + 0.5) * 36 +
+      ~~((g / 255) * 5 + 0.5) * 6 +
+      ~~((b / 255) * 5 + 0.5)
+
+const rgb = offset => (r, g, b) =>
+  has16m
+    ? init(38, 39, offset, `;2;${r};${g};${b}`)
+    : has256
+      ? init(38, 39, offset, `;5;${rgbToAnsi256(r, g, b)}`)
+      : init(rgbToAnsi16(r, g, b), 39, offset)
+
+const hex = offset => code =>
+  rgb(offset)((code = hexToRgb(code))[0], code[1], code[2])
 
 module.exports = {
   options: Object.defineProperty({}, "enabled", {
     get: () => enabled,
     set: value => (enabled = value)
   }),
+  rgb: rgb(0),
+  bgRgb: rgb(10),
+  hex: hex(0),
+  bgHex: hex(10),
   reset: init(0, 0),
-  bold: rawInit("\x1b[1m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[1m"),
-  dim: rawInit("\x1b[2m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[2m"),
+  bold: init(1, 22, 0, "", "\x1b[22m"),
+  dim: init(2, 22, 0, "", "\x1b[22m"),
   italic: init(3, 23),
   underline: init(4, 24),
   inverse: init(7, 27),

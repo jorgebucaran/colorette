@@ -9,7 +9,8 @@ Colorette is a Node.js library for colorizing text using [ANSI escape sequences]
 ## Features
 
 - Zero dependency
-- Automatic color support detection
+- [24 bit/Truecolor](https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit) support
+- Color support auto-detection
 - [Toggle color output on/off](#optionsenabled) as needed
 - Need for speed? Colorette is the [fastest](#benchmark-results) terminal colorizer for Node.js
 
@@ -21,7 +22,7 @@ npm i <a href="https://www.npmjs.com/package/colorette">colorette</a>
 
 ## Usage
 
-Import the [style functions](#styles) you want to use.
+Import the [style functions](#stylestring) you want to use.
 
 ```js
 const { red, blue, bold } = require("colorette")
@@ -65,26 +66,6 @@ console.log("Make it so!" |> bold |> blue)
 
 ### _style_(string)
 
-A style function returns its string argument wrapped in the corresponding ANSI escape sequence.
-
-```js
-red("Red Alert") //=> \u001b[31mRed Alert\u001b[39m
-```
-
-### options.enabled
-
-Color support is automatically enabled if your terminal supports it, but you can toggle it on/off as needed.
-
-```js
-const { options } = require("colorette")
-
-options.enabled = false
-```
-
-## Styles
-
-Colorette supports the normal and bright color variations.
-
 | Colors  | Background Colors | Bright Colors | Bright Background Colors | Modifiers         |
 | ------- | ----------------- | ------------- | ------------------------ | ----------------- |
 | black   | bgBlack           | blackBright   | bgBlackBright            | dim               |
@@ -97,6 +78,37 @@ Colorette supports the normal and bright color variations.
 | white   | bgWhite           | whiteBright   | bgWhiteBright            |                   |
 | gray    |                   |               |                          |                   |
 
+Any of the style functions listed above. It returns the string argument wrapped in the corresponding ANSI control sequence.
+
+```js
+red("Red Alert") //=> \u001b[31mRed Alert\u001b[39m
+```
+
+### hex(color): _style_
+
+```js
+const { hex } = require("colorette")
+const gold = hex("#d7af00")
+
+gold("Yes, sir!") // => \u001b[38;2;255;215;0mYes, sir!\u001b[39m
+```
+
+### bgHex(color): _style_
+
+### rgb(color): _style_
+
+### bgRgb(color): _style_
+
+### options.enabled
+
+Color support is automatically enabled if your terminal supports it, but you can toggle it on/off as needed.
+
+```js
+const { options } = require("colorette")
+
+options.enabled = false
+```
+
 ## Benchmark Results
 
 All tests run on a 2.4GHz Intel Core i7 CPU with 16 GB memory.
@@ -107,25 +119,25 @@ npm i -C bench && node bench
 
 <pre>
 # Using Styles
-chalk × 8,935 ops/sec
-kleur × 297,289 ops/sec
-colors × 75,594 ops/sec
-ansi-colors × 166,105 ops/sec
-colorette × 725,926 ops/sec
+chalk × 8,749 ops/sec
+kleur × 291,375 ops/sec
+colors × 73,812 ops/sec
+ansi-colors × 166,635 ops/sec
+colorette × 764,258 ops/sec
 
 # Combining Styles
-chalk × 28,834 ops/sec
-kleur × 764,202 ops/sec
-colors × 263,517 ops/sec
-ansi-colors × 304,108 ops/sec
-colorette × 2,047,564 ops/sec
+chalk × 28,049 ops/sec
+kleur × 856,977 ops/sec
+colors × 268,524 ops/sec
+ansi-colors × 307,712 ops/sec
+colorette × 2,092,063 ops/sec
 
 # Nesting Styles
-chalk × 24,584 ops/sec
-kleur × 294,766 ops/sec
-colors × 143,747 ops/sec
-ansi-colors × 208,175 ops/sec
-colorette × 388,440 ops/sec
+chalk × 23,823 ops/sec
+kleur × 323,155 ops/sec
+colors × 143,092 ops/sec
+ansi-colors × 211,075 ops/sec
+colorette × 386,658 ops/sec
 </pre>
 
 ## To chalk or not to chalk?

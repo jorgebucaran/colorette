@@ -31,7 +31,7 @@ runBenchmark(
   {
     "# Using Styles": c => styles.map(k => c[k](k)),
     "# Combining Styles": ({ red, bgWhite, bold, underline, italic }, id) =>
-      id === "colorette"
+      /^colorette/.test(id)
         ? red(bgWhite(bold(underline(italic("Engage!")))))
         : red.bgWhite.bold.underline.italic("Engage!"),
     "# Nesting Styles": ({
