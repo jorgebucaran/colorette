@@ -4,15 +4,7 @@
 [![Coverage](https://img.shields.io/codecov/c/github/jorgebucaran/colorette/master.svg)](https://codecov.io/gh/jorgebucaran/colorette)
 [![](https://img.shields.io/npm/v/colorette.svg)](https://www.npmjs.org/package/colorette)
 
-Colorette is a Node.js library for colorizing text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
-
-## Features
-
-- [Fast](https://github.com/jorgebucaran/colorette#benchmark-results)
-- [Small](https://bundlephobia.com/result?p=colorette)
-- Automatic color detection
-- [Not a drop-in replacement for chalk](https://github.com/jorgebucaran/colorette#to-chalk-or-not-to-chalk)
-- A function for each [available ANSI style](https://github.com/jorgebucaran/colorette#styles)
+Colorette is a Node.js library for colorizing text using ANSI [escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). It's [small](https://bundlephobia.com/result?p=colorette) and [faster](https://github.com/jorgebucaran/colorette#benchmark-results) than alternatives. Each [available style](https://github.com/jorgebucaran/colorette#styles) is a function you can use to wrap your strings in a escape sequence without prototype-chains or learning a domain specific language. Color your terminal using purely functional, idiomatic JavaScript.
 
 ## Installation
 
@@ -128,10 +120,6 @@ colors × 143,747 ops/sec
 ansi-colors × 208,175 ops/sec
 colorette × 388,440 ops/sec
 </pre>
-
-## To chalk or not to chalk?
-
-Chalk is another Node.js terminal colorizer. Its core feature is a [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)-based chainable API where ANSI styles can be used both as properties or methods. Colorette doesn't rely on a domain-specific abstraction, allowing you to write purely functional, idiomatic JavaScript if you don't mind a few more sticking parentheses.
 
 ## License
 
