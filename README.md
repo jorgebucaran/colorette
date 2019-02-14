@@ -10,9 +10,7 @@ Colorette is a Node.js library for colorizing text using [ANSI escape sequences]
 
 - [Fast](https://github.com/jorgebucaran/colorette#benchmark-results)
 - [Small](https://bundlephobia.com/result?p=colorette)
-- No dependencies
-- On/off color toggle
-- Automatic color support detection
+- Automatic color detection
 - [Not a drop-in replacement for chalk](https://github.com/jorgebucaran/colorette#to-chalk-or-not-to-chalk)
 - A function for each [available ANSI style](https://github.com/jorgebucaran/colorette#styles)
 
