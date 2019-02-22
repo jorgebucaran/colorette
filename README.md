@@ -4,7 +4,7 @@
 [![Coverage](https://img.shields.io/codecov/c/github/jorgebucaran/colorette/master.svg)](https://codecov.io/gh/jorgebucaran/colorette)
 [![](https://img.shields.io/npm/v/colorette.svg)](https://www.npmjs.org/package/colorette)
 
-Colorette is a Node.js library for colorizing text using ANSI [escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). It's [small](https://bundlephobia.com/result?p=colorette) and [faster](https://github.com/jorgebucaran/colorette#benchmark-results) than alternatives. Each [available style](https://github.com/jorgebucaran/colorette#styles) is a function you can use to wrap your strings in a escape sequence without prototype-chains or learning a domain specific language. Color your terminal using purely functional, idiomatic JavaScript.
+Colorette is a Node.js library for colorizing text using ANSI [escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). It's [small](https://bundlephobia.com/result?p=colorette) and [faster](https://github.com/jorgebucaran/colorette#benchmark-results) than alternatives. Each [available style](https://github.com/jorgebucaran/colorette#styles) is a function you can use to wrap your strings in an escape sequence without prototype-chains or learning a domain specific language. Color your terminal using purely functional, idiomatic JavaScript.
 
 ## Installation
 
@@ -42,7 +42,7 @@ Use console.log's [string substitution](https://nodejs.org/api/console.html#cons
 console.log(bold("Total: $%f"), 1.99)
 ```
 
-Nest styles without breaking an existing open sequence.
+You can also nest styles without breaking existing escape sequences.
 
 ```js
 console.log(red(`Red Shirt ${blue("Blue Shirt")} Red Shirt`))
@@ -76,7 +76,7 @@ options.enabled = false
 
 ## Styles
 
-Colorette supports the normal and bright color variations.
+Colorette supports the standard bright color variations.
 
 | Colors  | Background Colors | Bright Colors | Bright Background Colors | Modifiers         |
 | ------- | ----------------- | ------------- | ------------------------ | ----------------- |
