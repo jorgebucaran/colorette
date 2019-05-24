@@ -3,7 +3,7 @@
 let enabled =
   process.env.FORCE_COLOR ||
   process.platform === "win32" ||
-  (process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
+  (process.stdout != null && process.stdout.isTTY && process.env.TERM && process.env.TERM !== "dumb")
 
 const rawInit = (open, close, searchRegex, replaceValue) => s =>
   enabled
