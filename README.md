@@ -7,7 +7,7 @@ Colorette is a Node.js library for embellishing your CLI tools with colors and s
 - Up to ~10x faster than the alternatives ([run the benchmarks](#run-the-benchmarks)).
 - No wonky prototype-based method chains.
 - Automatic color support detection.
-- 80-ish LOC and no dependencies.
+- 80-ishg LOC and no dependencies.
 - [`NO_COLOR`](https://no-color.org) friendly.
 
 ## Quickstart
@@ -86,7 +86,7 @@ red("Red Alert") //=> \u001b[31mRed Alert\u001b[39m
 
 ### `options.enabled`
 
-Color support is automatically enabled if your terminal supports it, but you can toggle it on/off as needed.
+Colorette is enabled if your terminal supports color, `FORCE_COLOR=1` or if `NO_COLOR` isn't in the environment, but you can always override it when you need to.
 
 ```js
 const { options } = require("colorette")
