@@ -33,6 +33,12 @@ runBenchmark(
     "# Combining Styles": ({ red, bgWhite, bold, underline, italic }, id) =>
       id === "colorette"
         ? red(bgWhite(bold(underline(italic("Engage!")))))
+        : id === "kleur"
+        ? red()
+            .bgWhite()
+            .bold()
+            .underline()
+            .italic("Engage!")
         : red.bgWhite.bold.underline.italic("Engage!"),
     "# Nesting Styles": ({
       red,
