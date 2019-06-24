@@ -1,32 +1,36 @@
-# Colorette
+# Colorette [![](https://img.shields.io/npm/v/colorette.svg?label=&color=0080ff)](https://www.npmjs.org/package/colorette) [![CI](https://img.shields.io/travis/jorgebucaran/colorette.svg?label=)](https://travis-ci.org/jorgebucaran/colorette)
 
-[![CI](https://img.shields.io/travis/jorgebucaran/colorette.svg)](https://travis-ci.org/jorgebucaran/colorette)
-[![Coverage](https://img.shields.io/codecov/c/github/jorgebucaran/colorette/master.svg)](https://codecov.io/gh/jorgebucaran/colorette)
-[![](https://img.shields.io/npm/v/colorette.svg)](https://www.npmjs.org/package/colorette)
+> Color your terminal using pure idiomatic JavaScript.
 
-Colorette is a Node.js library for colorizing text using ANSI [escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). It's [small](https://bundlephobia.com/result?p=colorette) and [faster](https://github.com/jorgebucaran/colorette#benchmark-results) than alternatives. Each [available style](https://github.com/jorgebucaran/colorette#styles) is a function you can use to wrap your strings in an escape sequence without prototype-chains or learning a domain specific language. Color your terminal using purely functional, idiomatic JavaScript.
+Colorette is a Node.js library for embellishing your CLI tools with colors and styles using [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
-## Installation
+- Up to ~10x faster than the alternatives ([run the benchmarks](#run-the-benchmarks)).
+- No wonky prototype-based method chains.
+- Automatic color support detection.
+- 80-ish LOC and no dependencies.
+- [`NO_COLOR`](https://no-color.org) friendly.
 
-<pre>
-npm i <a href="https://www.npmjs.com/package/colorette">colorette</a>
-</pre>
+## Quickstart
 
-## Usage
+Install Colorette with npm or Yarn:
 
-Import the [style functions](#styles) you want to use.
+```console
+npm i colorette
+```
+
+Bring in the [styles](#styles) you need. [Here](#supported-styles)'s the list of the styles you can use.
 
 ```js
 const { red, blue, bold } = require("colorette")
 ```
 
-Then use them to colorize your output.
+Wrap your strings in one or more styles to produce the finish you're looking for.
 
 ```js
 console.log(bold(blue("Engage!")))
 ```
 
-Mix it with [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+Or mix it with [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) to interpolate variables, expressions and create multi-line strings easily.
 
 ```js
 console.log(`
@@ -36,13 +40,13 @@ console.log(`
 `)
 ```
 
-Use console.log's [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args).
+Using `console.log`'s [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args) can be useful too!
 
 ```js
 console.log(bold("Total: $%f"), 1.99)
 ```
 
-You can also nest styles without breaking existing escape sequences.
+You can even nest styles without breaking existing escape codes.
 
 ```js
 console.log(red(`Red Shirt ${blue("Blue Shirt")} Red Shirt`))
@@ -54,29 +58,9 @@ Feeling adventurous? Try the [pipeline operator](https://github.com/tc39/proposa
 console.log("Make it so!" |> bold |> blue)
 ```
 
-## API
+## Supported styles
 
-### _style_(string)
-
-A style function returns its string argument wrapped in the corresponding ANSI escape sequence.
-
-```js
-red("Red Alert") //=> \u001b[31mRed Alert\u001b[39m
-```
-
-### options.enabled
-
-Color support is automatically enabled if your terminal supports it, but you can toggle it on/off as needed.
-
-```js
-const { options } = require("colorette")
-
-options.enabled = false
-```
-
-## Styles
-
-Colorette supports the standard bright color variations.
+Colorette supports the standard and bright color variations out-of-the-box. For true color support see [this issue](https://github.com/jorgebucaran/colorette/issues/27).
 
 | Colors  | Background Colors | Bright Colors | Bright Background Colors | Modifiers         |
 | ------- | ----------------- | ------------- | ------------------------ | ----------------- |
@@ -90,9 +74,29 @@ Colorette supports the standard bright color variations.
 | white   | bgWhite           | whiteBright   | bgWhiteBright            |                   |
 | gray    |                   |               |                          |                   |
 
-## Benchmark Results
+## API
 
-All tests run on a 2.4GHz Intel Core i7 CPU with 16 GB memory.
+### <code><i>style</i>(string)</code>
+
+Returns a string wrapped in the corresponding ANSI escape code.
+
+```js
+red("Red Alert") //=> \u001b[31mRed Alert\u001b[39m
+```
+
+### `options.enabled`
+
+Color support is automatically enabled if your terminal supports it, but you can toggle it on/off as needed.
+
+```js
+const { options } = require("colorette")
+
+options.enabled = false
+```
+
+## Run the benchmarks
+
+All tests run on a 2.4 GHz Intel Core i9 CPU with 32 GB memory.
 
 ```
 npm i -C bench && node bench
@@ -100,25 +104,16 @@ npm i -C bench && node bench
 
 <pre>
 # Using Styles
-chalk × 8,935 ops/sec
-kleur × 297,289 ops/sec
-colors × 75,594 ops/sec
-ansi-colors × 166,105 ops/sec
-colorette × 725,926 ops/sec
+chalk × 14,468 ops/sec
+colorette × 901,148 ops/sec
 
 # Combining Styles
-chalk × 28,834 ops/sec
-kleur × 764,202 ops/sec
-colors × 263,517 ops/sec
-ansi-colors × 304,108 ops/sec
-colorette × 2,047,564 ops/sec
+chalk × 44,067 ops/sec
+colorette × 2,566,778 ops/sec
 
 # Nesting Styles
-chalk × 24,584 ops/sec
-kleur × 294,766 ops/sec
-colors × 143,747 ops/sec
-ansi-colors × 208,175 ops/sec
-colorette × 388,440 ops/sec
+chalk × 40,165 ops/sec
+colorette × 506,494 ops/sec
 </pre>
 
 ## License
