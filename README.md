@@ -7,7 +7,7 @@ Colorette is a Node.js library for embellishing your CLI tools with colors and s
 - Up to ~10x faster than the alternatives ([run the benchmarks](#run-the-benchmarks)).
 - No wonky prototype-based method chains.
 - Automatic color support detection.
-- 80-ishg LOC and no dependencies.
+- ~80 LOC and no dependencies.
 - [`NO_COLOR`](https://no-color.org) friendly.
 
 ## Quickstart
