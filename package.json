@@ -1,7 +1,7 @@
 {
   "name": "colorette",
   "version": "1.0.8",
-  "description": "Node.js library for colorizing text using ANSI escape sequences.",
+  "description": "Color your terminal using pure idiomatic JavaScript.",
   "main": "index.js",
   "types": "colorette.d.ts",
   "scripts": {
