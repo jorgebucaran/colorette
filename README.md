@@ -96,8 +96,6 @@ options.enabled = false
 
 ## Run the benchmarks
 
-All tests run on a 2.4 GHz Intel Core i9 CPU with 32 GB memory.
-
 ```
 npm i -C bench && node bench
 ```
