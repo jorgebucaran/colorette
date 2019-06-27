@@ -12,13 +12,11 @@ Colorette is a Node.js library for embellishing your CLI tools with colors and s
 
 ## Quickstart
 
-Install Colorette with npm or Yarn:
-
 ```console
 npm i colorette
 ```
 
-Bring in the [styles](#styles) you need. [Here](#supported-styles)'s the list of the styles you can use.
+Load the [styles](#styles) you need. [Here](#supported-styles)'s the list of the styles you can use.
 
 ```js
 const { red, blue, bold } = require("colorette")
