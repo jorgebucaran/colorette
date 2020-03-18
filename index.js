@@ -1,13 +1,19 @@
 "use strict"
 
-let enabled =
-  !("NO_COLOR" in process.env) &&
-  process.env.FORCE_COLOR !== "0" &&
-  (process.platform === "win32" ||
-    (process.stdout != null &&
-      process.stdout.isTTY &&
-      process.env.TERM &&
-      process.env.TERM !== "dumb"))
+let enabled
+
+if ("NO_COLOR" in process.env) {
+  enabled = false
+} else if ((process.env.FORCE_COLOR || "0") !== "0") {
+  enabled = true
+} else if (process.platform === "win32") {
+  enabled = true
+} else {
+  enabled = process.stdout != null
+    && process.stdout.isTTY
+    && process.env.TERM
+    && process.env.TERM !== "dumb"
+}
 
 const rawInit = (open, close, searchRegex, replaceValue) => s =>
   enabled
