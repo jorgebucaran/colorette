@@ -1,4 +1,4 @@
-# Colorette [![](https://img.shields.io/npm/v/colorette.svg?label=&color=0080ff)](https://www.npmjs.org/package/colorette)
+# Colorette [![](https://img.shields.io/npm/v/colorette.svg?label=&color=2a64e6)](https://www.npmjs.org/package/colorette)
 
 > Color your terminal using pure idiomatic JavaScript.
 
