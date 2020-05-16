@@ -5,6 +5,7 @@ interface Style {
 export const options: {
   enabled: boolean
 }
+
 export const reset: Style
 export const bold: Style
 export const dim: Style
