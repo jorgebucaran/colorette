@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/jorgebucaran/colorette",
   "devDependencies": {
-    "nyc": "14.1.1",
+    "nyc": "15.0.1",
     "testmatrix": "0.1.2"
   }
 }
