@@ -2,14 +2,14 @@
 
 let enabled =
   !("NO_COLOR" in process.env) &&
-  process.env.FORCE_COLOR !== "0" &&
-  (process.platform === "win32" ||
+  ("FORCE_COLOR" in process.env ||
+    process.platform === "win32" ||
     (process.stdout != null &&
       process.stdout.isTTY &&
       process.env.TERM &&
       process.env.TERM !== "dumb"))
 
-const rawInit = (open, close, searchRegex, replaceValue) => s =>
+const raw = (open, close, searchRegex, replaceValue) => (s) =>
   enabled
     ? open +
       (~(s += "").indexOf(close, 4) // skip opening \x1b[
@@ -19,7 +19,7 @@ const rawInit = (open, close, searchRegex, replaceValue) => s =>
     : s
 
 const init = (open, close) => {
-  return rawInit(
+  return raw(
     `\x1b[${open}m`,
     `\x1b[${close}m`,
     new RegExp(`\\x1b\\[${close}m`, "g"),
@@ -30,11 +30,11 @@ const init = (open, close) => {
 module.exports = {
   options: Object.defineProperty({}, "enabled", {
     get: () => enabled,
-    set: value => (enabled = value)
+    set: (value) => (enabled = value),
   }),
   reset: init(0, 0),
-  bold: rawInit("\x1b[1m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[1m"),
-  dim: rawInit("\x1b[2m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[2m"),
+  bold: raw("\x1b[1m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[1m"),
+  dim: raw("\x1b[2m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[2m"),
   italic: init(3, 23),
   underline: init(4, 24),
   inverse: init(7, 27),
@@ -72,5 +72,5 @@ module.exports = {
   bgBlueBright: init(104, 49),
   bgMagentaBright: init(105, 49),
   bgCyanBright: init(106, 49),
-  bgWhiteBright: init(107, 49)
+  bgWhiteBright: init(107, 49),
 }

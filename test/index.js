@@ -5,7 +5,17 @@ const EqualTest = (actual, expected) => ({
   name: actual,
   assert: equal,
   actual,
-  expected
+  expected,
+})
+
+const ScriptTest = (name, cmd, script) => ({
+  name,
+  assert: equal,
+  actual: (done) => {
+    const exec = require("child_process").exec
+    exec(`${cmd} ${__dirname}/${script}`, done)
+  },
+  expected: null,
 })
 
 const StyleTest = (name, open, close) =>
@@ -53,26 +63,34 @@ exports.default = {
     ["bgBlueBright", "\x1b[104m", "\x1b[49m"],
     ["bgMagentaBright", "\x1b[105m", "\x1b[49m"],
     ["bgCyanBright", "\x1b[106m", "\x1b[49m"],
-    ["bgWhiteBright", "\x1b[107m", "\x1b[49m"]
-  ].map(args => StyleTest.apply({}, args)),
+    ["bgWhiteBright", "\x1b[107m", "\x1b[49m"],
+  ].map((args) => StyleTest.apply({}, args)),
   "nesting styles": [
     EqualTest(
       c.bold(`BOLD ${c.red(`RED ${c.dim("DIM")} RED`)} BOLD`),
       `\x1b[1mBOLD \x1b[31mRED \x1b[2mDIM\x1b[22m\x1b[1m RED\x1b[39m BOLD\x1b[22m`
-    )
+    ),
   ],
-  "numbers & others": [new Date(), -1e10, -1, -0.1, 0, 0.1, 1, 1e10].map(n =>
+  "numbers & others": [new Date(), -1e10, -1, -0.1, 0, 0.1, 1, 1e10].map((n) =>
     EqualTest(c.red(n), `\x1b[31m${n}\x1b[39m`)
   ),
-  "disable color support": [
+  "options.enabled can toggle color on/off": [
     {
       assert: equal,
-      actual: done => {
+      actual: (done) => {
         c.options.enabled = false
         done(c.bold(c.options.enabled))
         c.options.enabled = true
       },
-      expected: false
-    }
-  ]
+      expected: false,
+    },
+  ],
+  "env variables": [
+    ScriptTest(
+      "`FORCE_COLOR=` forces color even through a shell pipeline in a TTY",
+      "sh",
+      "FORCE_COLOR.sh"
+    ),
+    ScriptTest("`NO_COLOR=` disables color", "sh", "NO_COLOR.sh"),
+  ],
 }
