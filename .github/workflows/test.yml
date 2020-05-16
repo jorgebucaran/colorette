@@ -19,5 +19,5 @@ jobs:
         run: |
           npm i -g codecov
           npm i
-          npm test
+          FORCE_COLOR= npm test
           codecov
