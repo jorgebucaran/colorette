@@ -1,75 +1,29 @@
-const styles = [
-  "reset",
-  "bold",
-  "dim",
-  "italic",
-  "underline",
-  "inverse",
-  "hidden",
-  "strikethrough",
-  "black",
-  "red",
-  "green",
-  "yellow",
-  "blue",
-  "magenta",
-  "cyan",
-  "white",
-  "gray",
-  "bgBlack",
-  "bgRed",
-  "bgGreen",
-  "bgYellow",
-  "bgBlue",
-  "bgMagenta",
-  "bgCyan",
-  "bgWhite"
-]
-const { runBenchmark } = require("./runBenchmark")
+const Suite = require("benchmark").Suite
+
+const runBenchmark = (test, modules) =>
+  Object.keys(modules)
+    .reduce(
+      (bench, id) => bench.add(id, test.bind({}, modules[id])),
+      new Suite().on("cycle", ({ target: { name, hz } }) =>
+        console.log(`${name} × ${Math.floor(hz).toLocaleString()} ops/sec`)
+      )
+    )
+    .run()
 
 runBenchmark(
+  (c) =>
+    c.red(
+      `${"X"}${c.blue(
+        `${"X"}${c.bold(
+          `${"X"}${c.yellow("X")}${"X"}${c.underline("X")}`
+        )}${"X"}${c.magenta(`${"X"}${c.white("X")}${c.cyan("X")}${"X"}`)}${"X"}`
+      )}${"X"}`
+    ),
   {
-    "# Using Styles": c => styles.map(k => c[k](k)),
-    "# Combining Styles": ({ red, bgWhite, bold, underline, italic }, id) =>
-      id === "colorette"
-        ? red(bgWhite(bold(underline(italic("Engage!")))))
-        : id === "kleur"
-        ? red()
-            .bgWhite()
-            .bold()
-            .underline()
-            .italic("Engage!")
-        : red.bgWhite.bold.underline.italic("Engage!"),
-    "# Nesting Styles": ({
-      red,
-      blue,
-      cyan,
-      white,
-      yellow,
-      magenta,
-      bold,
-      italic,
-      underline
-    }) =>
-      red(
-        `RED, ${blue(
-          `BLUE, ${bold(
-            `BOLD AND ${yellow("YELLOW")}. BACK TO BLUE, ${underline(
-              `UNDERLINE,`
-            )}`
-          )} MORE BLUE, ${magenta(
-            `MAGENTA, ${white("WHITE,")}${cyan(
-              ` CYAN, ${italic(`ITALIC ${bold("BOLD")} ITALIC`)}, CYAN,`
-            )} MAGENTA,`
-          )} BLUE`
-        )} AND BACK TO RED.`
-      )
-  },
-  {
+    colorette: require(".."),
     chalk: require("chalk"),
     kleur: require("kleur"),
-    colors: require("colors/safe"),
+    colors: require("colors"),
     "ansi-colors": require("ansi-colors"),
-    colorette: require("..")
   }
 )

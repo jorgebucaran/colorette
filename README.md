@@ -4,7 +4,7 @@
 
 Colorette is a Node.js library for embellishing your CLI tools with colors and styles using [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
-- Up to ~10x faster than the alternatives ([run the benchmarks](#run-the-benchmarks)).
+- ~1.5x faster than alternatives ([run the benchmarks](#run-the-benchmarks)).
 - No wonky prototype-based method chains.
 - Automatic color support detection.
 - ~80 LOC and no dependencies.
@@ -16,7 +16,7 @@ Colorette is a Node.js library for embellishing your CLI tools with colors and s
 npm i colorette
 ```
 
-Load the [styles](#styles) you need. [Here](#supported-styles)'s the list of the styles you can use.
+Import the [styles](#styles) you need. [Here](#supported-styles)'s the list of styles you can use.
 
 ```js
 const { red, blue, bold } = require("colorette")
@@ -28,7 +28,7 @@ Wrap your strings in one or more styles to produce the finish you're looking for
 console.log(bold(blue("Engage!")))
 ```
 
-Or mix it with [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) to interpolate variables, expressions and create multi-line strings easily.
+Mix it with [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) to interpolate variables, expressions and create multi-line strings easily.
 
 ```js
 console.log(`
@@ -38,13 +38,13 @@ console.log(`
 `)
 ```
 
-Using `console.log`'s [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args) can be useful too!
+Using `console.log`'s [string substitution](https://nodejs.org/api/console.html#console_console_log_data_args) can be useful too.
 
 ```js
 console.log(bold("Total: $%f"), 1.99)
 ```
 
-You can even nest styles without breaking existing escape codes.
+You can also nest styles without breaking existing escape codes.
 
 ```js
 console.log(red(`Red Shirt ${blue("Blue Shirt")} Red Shirt`))
@@ -58,7 +58,7 @@ console.log("Make it so!" |> bold |> blue)
 
 ## Supported styles
 
-Colorette supports the standard and bright color variations out-of-the-box. For true color support see [this issue](https://github.com/jorgebucaran/colorette/issues/27).
+Colorette supports the standard and bright color variations out-of-the-box. See [this issue](https://github.com/jorgebucaran/colorette/issues/27) if you were looking for TrueColor support.
 
 | Colors  | Background Colors | Bright Colors | Bright Background Colors | Modifiers         |
 | ------- | ----------------- | ------------- | ------------------------ | ----------------- |
@@ -76,7 +76,7 @@ Colorette supports the standard and bright color variations out-of-the-box. For 
 
 ### <code><i>style</i>(string)</code>
 
-Returns a string wrapped in the corresponding ANSI escape code.
+Returns a string wrapped in the corresponding ANSI escape codes.
 
 ```js
 red("Red Alert") //=> \u001b[31mRed Alert\u001b[39m
@@ -84,7 +84,7 @@ red("Red Alert") //=> \u001b[31mRed Alert\u001b[39m
 
 ### `options.enabled`
 
-Colorette is enabled if your terminal supports color, `FORCE_COLOR=1` or if `NO_COLOR` isn't in the environment, but you can always override it when you need to.
+Color will be enabled if your terminal supports it, `FORCE_COLOR` is defined in [`process.env`](https://nodejs.org/dist/latest-v8.x/docs/api/process.html#process_process_env) and if `NO_COLOR` isn't, but you can always override it if you want.
 
 ```js
 const { options } = require("colorette")
@@ -99,17 +99,11 @@ npm i -C bench && node bench
 ```
 
 <pre>
-# Using Styles
-chalk × 14,468 ops/sec
-colorette × 901,148 ops/sec
-
-# Combining Styles
-chalk × 44,067 ops/sec
-colorette × 2,566,778 ops/sec
-
-# Nesting Styles
-chalk × 40,165 ops/sec
-colorette × 506,494 ops/sec
+colorette × 759,429 ops/sec
+chalk × 524,034 ops/sec
+kleur × 490,347 ops/sec
+colors × 255,661 ops/sec
+ansi-colors × 317,605 ops/sec
 </pre>
 
 ## License
