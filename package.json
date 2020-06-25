@@ -6,7 +6,7 @@
   "types": "colorette.d.ts",
   "scripts": {
     "test": "nyc -r lcov testmatrix test/index.js",
-    "release": "v=$npm_package_version; git commit -am $v && git tag -s $v -m $v && git push && git push --tags && npm publish"
+    "release": "v=$npm_package_version; git commit -am $v && git tag -s $v -m $v && git push && git push --tags && npx dual-publish"
   },
   "repository": {
     "type": "git",
