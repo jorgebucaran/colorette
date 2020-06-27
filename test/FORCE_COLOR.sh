@@ -1,3 +1,3 @@
 #!/bin/sh
 
-[ "$(echo `FORCE_COLOR= node -e 'console.log(require(".").blue("ok"))' | strings`)" = "[34mok [39m" ] || exit 1
+[ "$(echo `FORCE_COLOR= node -e 'console.log(require(".").blue("hello"))' | strings`)" = "[34mhello [39m" ] || exit 1
