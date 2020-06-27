@@ -15,7 +15,7 @@
   "types": "colorette.d.ts",
   "scripts": {
     "test": "nyc -r lcov testmatrix test/*.cjs",
-    "build": "node -e 'fs.writeFileSync(\"index.cjs\",fs.readFileSync(\"index.js\", \"utf8\").replace(/export const /g, \"exports.\"),\"utf8\")'",
+    "build": "node -e \"fs.writeFileSync('index.cjs',fs.readFileSync('index.js','utf8').replace(/export const /g,'exports.'),'utf8')\"",
     "release": "v=$npm_package_version; git commit -am $v && git tag -s $v -m $v && git push && git push --tags && npx dual-publish"
   },
   "repository": {
