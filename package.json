@@ -1,6 +1,6 @@
 {
   "name": "colorette",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Color your terminal using pure idiomatic JavaScript.",
   "main": "index.cjs",
   "type": "module",
