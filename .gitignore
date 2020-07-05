@@ -13,7 +13,7 @@ coverage
 
 # Misc
 node_modules
-*.cjs
+/*.cjs
 *.xml
 .DS_Store
 example
