@@ -1,5 +1,5 @@
 const c = require("..")
-const equal = require("testmatrix").equal
+const { equal } = require("testmatrix")
 
 const EqualTest = (actual, expected) => ({
   name: actual,
@@ -86,11 +86,7 @@ exports.default = {
     },
   ],
   "env variables": [
-    ScriptTest(
-      "`FORCE_COLOR=` forces color even through a shell pipeline in a TTY",
-      "sh",
-      "FORCE_COLOR.sh"
-    ),
-    ScriptTest("`NO_COLOR=` disables color", "sh", "NO_COLOR.sh"),
+    ScriptTest("`FORCE_COLOR` in the env forces color", "sh", "FORCE_COLOR.sh"),
+    ScriptTest("`NO_COLOR` in the env disables color", "sh", "NO_COLOR.sh"),
   ],
 }

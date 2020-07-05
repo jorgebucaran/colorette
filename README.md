@@ -19,7 +19,7 @@ npm i colorette
 Import the [styles](#styles) you need. [Here](#supported-styles)'s the list of styles you can use.
 
 ```js
-const { red, blue, bold } = require("colorette")
+import { red, blue, bold } from "colorette"
 ```
 
 Wrap your strings in one or more styles to produce the finish you're looking for.
@@ -87,7 +87,7 @@ red("Red Alert") //=> \u001b[31mRed Alert\u001b[39m
 Color will be enabled if your terminal supports it, `FORCE_COLOR` is defined in [`process.env`](https://nodejs.org/dist/latest-v8.x/docs/api/process.html#process_process_env) and if `NO_COLOR` isn't, but you can always override it if you want.
 
 ```js
-const { options } = require("colorette")
+import { options } from "colorette"
 
 options.enabled = false
 ```
