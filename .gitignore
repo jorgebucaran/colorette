@@ -1,23 +1,8 @@
-# IDE
-.idea
-.vscode
-
-# Logs
-*.log*
-yarn.lock
-package-lock.json
-
-# Coverage
-coverage
-.nyc_output
-
-# Misc
-node_modules
-/*.cjs
-*.xml
-.DS_Store
-example
-
-# Dist
+*.br
 *.gz
-dist
+
+*.cjs
+
+package-lock.json
+node_modules
+coverage
