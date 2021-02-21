@@ -1,10 +1,15 @@
-const Suite = require("benchmark").Suite
+import bench from "benchmark"
+import * as colorette from "../index.js"
+import ansiColors from "ansi-colors"
+import colors from "colors"
+import chalk from "chalk"
+import kleur from "kleur"
 
 const runBenchmark = (test, modules) =>
   Object.keys(modules)
     .reduce(
       (bench, id) => bench.add(id, test.bind({}, modules[id])),
-      new Suite().on("cycle", ({ target: { name, hz } }) =>
+      new bench.Suite().on("cycle", ({ target: { name, hz } }) =>
         console.log(`${name} × ${Math.floor(hz).toLocaleString()} ops/sec`)
       )
     )
@@ -20,10 +25,10 @@ runBenchmark(
       )}${"X"}`
     ),
   {
-    colorette: require(".."),
-    chalk: require("chalk"),
-    kleur: require("kleur"),
-    colors: require("colors"),
-    "ansi-colors": require("ansi-colors"),
+    colorette,
+    chalk,
+    kleur,
+    colors,
+    "ansi-colors": ansiColors,
   }
 )
