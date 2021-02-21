@@ -1,10 +1,13 @@
 {
   "name": "colorette",
   "version": "1.2.1",
-  "description": "Color your terminal using pure idiomatic JavaScript.",
-  "main": "index.cjs",
   "type": "module",
+  "main": "index.cjs",
   "module": "index.js",
+  "types": "index.d.ts",
+  "description": "Terminal colors and styles for Node.js.",
+  "repository": "jorgebucaran/colorette",
+  "license": "MIT",
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -12,33 +15,21 @@
       "import": "./index.js"
     }
   },
-  "types": "colorette.d.ts",
-  "scripts": {
-    "test": "c8 testmatrix test/*.cjs",
-    "build": "node -e \"fs.writeFileSync('index.cjs',fs.readFileSync('index.js','utf8').replace(/export const /g,'exports.'),'utf8')\"",
-    "release": "v=$npm_package_version; git commit -am $v && git tag -s $v -m $v && git push && git push --tags && npm publish"
-  },
-  "repository": {
-    "type": "git",
-    "url": "jorgebucaran/colorette"
-  },
   "files": [
-    "index.*",
-    "colorette.d.ts"
+    "*.*(c)[tj]s*"
   ],
+  "author": "Jorge Bucaran",
   "keywords": [
-    "colorette",
     "terminal",
     "styles",
     "color",
     "ansi"
   ],
-  "author": "Jorge Bucaran",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jorgebucaran/colorette/issues"
+  "scripts": {
+    "test": "c8 testmatrix test/*.cjs",
+    "build": "node -e \"fs.writeFileSync('index.cjs',fs.readFileSync('index.js','utf8').replace(/export const /g,'exports.'),'utf8')\"",
+    "release": "v=$npm_package_version; git commit -am $v && git tag -s $v -m $v && git push && git push --tags && npm publish"
   },
-  "homepage": "https://github.com/jorgebucaran/colorette",
   "devDependencies": {
     "c8": "7.3.5",
     "testmatrix": "0.1.2"
