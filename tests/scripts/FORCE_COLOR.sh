@@ -2,5 +2,5 @@
 
 [ `FORCE_COLOR= node -e '
     import("colorette").then(({ blue }) =>
-      console.log(blue("hello")))
-  '` = "$(echo '\x1b[34mhello\x1b[39m')" ]
+      console.log(blue("window")))
+  '` = `printf '\e[34mwindow\e[39m'` ]

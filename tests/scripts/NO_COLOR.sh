@@ -2,5 +2,5 @@
 
 [ `NO_COLOR= node -e '
     import("colorette").then(({ blue }) =>
-      console.log(blue("hello")))
-  '` = "hello" ]
+      console.log(blue("window")))
+  '` = "window" ]
