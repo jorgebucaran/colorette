@@ -5,7 +5,7 @@
   "main": "index.cjs",
   "module": "index.js",
   "types": "index.d.ts",
-  "description": "Terminal colors and styles for Node.js.",
+  "description": "Easily set the color and style of text in the terminal.",
   "repository": "jorgebucaran/colorette",
   "license": "MIT",
   "exports": {

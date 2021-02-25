@@ -1,13 +1,13 @@
 # Colorette
 
-> Terminal colors and styles for Node.js.
+> Easily set the color and style of text in the terminal.
 
-- No wonky prototype chain API or monkey-patching.
+- No wonky prototype method-chain API.
 - Automatic color support detection.
 - Up to [2x faster](#benchmarks) than alternatives.
 - [`NO_COLOR`](https://no-color.org) friendly. 👌
 
-Just import the colors and styles you want, and get down to business.
+Here's the first example to get you started.
 
 ```js
 import { blue, bold, underline } from "colorette"
@@ -19,7 +19,7 @@ console.log(
 )
 ```
 
-Use with [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) to interpolate variables, expressions, and create multi-line strings easily.
+Here's an example using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
 ```js
 console.log(`
@@ -30,7 +30,7 @@ console.log(`
 `)
 ```
 
-Nest styles without breaking existing color sequences.
+Of course, you can nest styles without breaking existing color sequences.
 
 ```js
 console.log(bold(`I'm ${blue(`da ba ${underline("dee")} da ba`)} daa`))
@@ -48,6 +48,35 @@ console.log("Da ba dee da ba daa" |> blue |> bold)
 npm install colorette
 ```
 
+## API
+
+### `<style>(string)`
+
+```js
+import { blue } from "colorette"
+
+blue("I'm blue") //=> \x1b[34mI'm blue\x1b[39m
+```
+
+See [supported styles]().
+
+### `options.enabled`
+
+Colorette automatically detects if your terminal can display color, but you can toggle color as needed.
+
+```js
+import { options } from "colorette"
+
+options.enabled = false
+```
+
+You can also force the use of color globally by setting `FORCE_COLOR=` or `NO_COLOR=` from the CLI.
+
+```console
+$ FORCE_COLOR= node example.js >log
+$ NO_COLOR= node example.js
+```
+
 ## Supported styles
 
 | Colors  | Background Colors | Bright Colors | Bright Background Colors | Modifiers         |
@@ -61,28 +90,6 @@ npm install colorette
 | cyan    | bgCyan            | cyanBright    | bgCyanBright             | reset             |
 | white   | bgWhite           | whiteBright   | bgWhiteBright            |                   |
 | gray    |                   |               |                          |                   |
-
-## API
-
-### <code><i>style</i>(s)</code>
-
-```js
-import { blue } from "colorette"
-
-blue("I'm blue") //=> \u001b[34mI'm blue\u001b[39m
-```
-
-### `options.enabled`
-
-Toggle color support as needed.
-
-```js
-import { options } from "colorette"
-
-options.enabled = false
-```
-
-> You can also [set](https://nodejs.org/dist/latest-v8.x/docs/api/process.html#process_process_env) `FORCE_COLOR` or `NO_COLOR` from the CLI to forcibly enable or disable color output.
 
 ## Benchmarks
 
