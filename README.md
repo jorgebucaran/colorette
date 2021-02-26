@@ -52,13 +52,13 @@ npm install colorette
 
 ### `<style>(string)`
 
+See [supported styles](#supported-styles).
+
 ```js
 import { blue } from "colorette"
 
 blue("I'm blue") //=> \x1b[34mI'm blue\x1b[39m
 ```
-
-See [supported styles]().
 
 ### `options.enabled`
 
