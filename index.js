@@ -1,15 +1,18 @@
-let enabled =
-  (typeof process !== "undefined" && // Node.js
-  !("NO_COLOR" in process.env) &&
+let enabled
+
+if (typeof process !== "undefined") {
+  enabled = !("NO_COLOR" in process.env) &&
   ("FORCE_COLOR" in process.env ||
     process.platform === "win32" ||
     (process.stdout != null &&
       process.stdout.isTTY &&
       process.env.TERM &&
-      process.env.TERM !== "dumb"))) ||
-  (typeof Deno !== "undefined" && // Deno
-  !Deno.noColor) &&
-  true // Browser
+      process.env.TERM !== "dumb"))
+} else if (typeof Deno !== "undefined") {
+  enabled = !Deno.noColor
+} else {
+  enabled = true
+}
 
 const raw = (open, close, searchRegex, replaceValue) => (s) =>
   enabled
