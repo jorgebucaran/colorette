@@ -1,4 +1,5 @@
 let enabled =
+  typeof process !== 'undefined' &&
   !("NO_COLOR" in process.env) &&
   ("FORCE_COLOR" in process.env ||
     process.platform === "win32" ||
