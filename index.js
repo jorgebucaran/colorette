@@ -1,18 +1,21 @@
-const {env} = process;
+const env = process.env;
 
 const isDisabled = "NO_COLOR" in env
 const isForced = "FORCE_COLOR" in env
 const isWindows = process.platform === "win32"
 
-const isCompatibleTerminal = (process.stdout != null &&
+const isCompatibleTerminal =
+    process.stdout != null &&
     process.stdout.isTTY &&
     env.TERM &&
-    env.TERM !== "dumb")
+    env.TERM !== "dumb"
 
-const isCI = ('CI' in env && ['CIRCLECI', 'GITLAB_CI', 'GITHUB_ACTIONS'].some(sign => sign in env))
+const isCI =
+    "CI" in env &&
+    ("GITHUB_ACTIONS" in env || "GITLAB_CI" in env || "CIRCLECI" in env)
 
-let enabled = (!isDisabled) &&
-  (isForced || isWindows || isCompatibleTerminal || isCI)
+let enabled =
+    !isDisabled && (isForced || isWindows || isCompatibleTerminal || isCI)
 
 const raw = (open, close, searchRegex, replaceValue) => (s) =>
   enabled
