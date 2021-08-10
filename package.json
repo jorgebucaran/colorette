@@ -5,7 +5,7 @@
   "main": "index.cjs",
   "module": "index.js",
   "types": "index.d.ts",
-  "description": "Easily set the color and style of text in the terminal.",
+  "description": "Easily set the text color and style in the terminal.",
   "repository": "jorgebucaran/colorette",
   "license": "MIT",
   "exports": {

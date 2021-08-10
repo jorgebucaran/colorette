@@ -1,6 +1,6 @@
 # Colorette
 
-> Easily set the color and style of text in the terminal.
+> Easily set the text color and style in the terminal.
 
 - No wonky prototype method-chain API.
 - Automatic color support detection.
