@@ -1,4 +1,4 @@
-const tty = require('tty');
+import * as tty from 'tty';
 const env = process.env;
 
 const isDisabled = "NO_COLOR" in env
