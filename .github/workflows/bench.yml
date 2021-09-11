@@ -9,4 +9,4 @@ jobs:
         with:
           node-version: 16
       - name: Benchmarks
-        run: npm --prefix bench start
+        run: FORCE_COLOR= npm --prefix bench start
