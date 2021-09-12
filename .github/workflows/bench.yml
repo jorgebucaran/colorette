@@ -1,0 +1,12 @@
+name: Benchmarks
+on: [push, pull_request]
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Benchmarks
+        run: FORCE_COLOR= npm --prefix bench start
