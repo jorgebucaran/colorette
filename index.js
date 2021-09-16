@@ -1,20 +1,20 @@
 import * as tty from "tty"
 
-const env = process.env
+const env = process?.env || {}
 
-const isDisabled = "NO_COLOR" in env
-const isForced = "FORCE_COLOR" in env
-const isWindows = process.platform === "win32"
+const isDisabled = () => "NO_COLOR" in env
+const isForced = () => "FORCE_COLOR" in env
+const isWindows = () => process.platform === "win32"
 
 const isCompatibleTerminal =
-  tty && tty.isatty(1) && env.TERM && env.TERM !== "dumb"
+  () => tty?.isatty?.(1) && env.TERM && env.TERM !== "dumb"
 
 const isCI =
-  "CI" in env &&
-  ("GITHUB_ACTIONS" in env || "GITLAB_CI" in env || "CIRCLECI" in env)
+  () => "CI" in env &&
+        ("GITHUB_ACTIONS" in env || "GITLAB_CI" in env || "CIRCLECI" in env)
 
 let enabled =
-  !isDisabled && (isForced || isWindows || isCompatibleTerminal || isCI)
+  !isDisabled() && (isForced() || isWindows() || isCompatibleTerminal() || isCI())
 
 const raw = (open, close, searchRegex, replaceValue) => (s) =>
   enabled
