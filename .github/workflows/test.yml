@@ -17,7 +17,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Test
         run: |
-          npm install -g codecov
           npm install
-          FORCE_COLOR= npm test
-          codecov
+          FORCE_COLOR= npx c8 --reporter=lcov npm test && npx codecov
+
