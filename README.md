@@ -1,11 +1,11 @@
 # Colorette
 
-> Easily set the text color and style in the terminal.
+> Easily set your terminal text color & styles.
 
 - No wonky prototype method-chain API.
 - Automatic color support detection.
 - Up to [2x faster](#benchmarks) than alternatives.
-- [`NO_COLOR`](https://no-color.org) friendly. 👌
+- [`NO_COLOR`](https://no-color.org) friendly. ✅
 
 Here's the first example to get you started.
 
@@ -36,10 +36,14 @@ Of course, you can nest styles without breaking existing color sequences.
 console.log(bold(`I'm ${blue(`da ba ${underline("dee")} da ba`)} daa`))
 ```
 
-Feeling adventurous? Try the [pipeline operator](https://github.com/tc39/proposal-pipeline-operator).
+Need to dynamically enable or disable color? You can do that too.
 
 ```js
-console.log("Da ba dee da ba daa" |> blue |> bold)
+import { createColors } from "colorette"
+
+const { blue } = createColors({ useColor: false })
+
+console.log(blue("Blue, not, nope, nah"))
 ```
 
 ## Installation
@@ -50,34 +54,37 @@ npm install colorette
 
 ## API
 
-### `<style>(string)`
+### `blue(text)`
 
-See [supported styles](#supported-styles).
+> See all [supported colors](#supported-colors).
 
 ```js
-import { blue } from "colorette"
-
 blue("I'm blue") //=> \x1b[34mI'm blue\x1b[39m
 ```
 
-### `options.enabled`
+### `isColorSupported`
 
-Colorette automatically detects if your terminal can display color, but you can toggle color as needed.
+`true` if your terminal supports color or `false` otherwise. Used internally and handled for you, but exposed for convenience.
+
+### `createColors({ useColor })`
+
+Create a reusable instance of Colorette. Color support is automatically detected, but you can override it by setting the `useColor` boolean property.
 
 ```js
-import { options } from "colorette"
+import { createColors } from "colorette"
 
-options.enabled = false
+const { blue } = createColors({ useColor: false })
 ```
 
-You can also force the use of color globally by setting `FORCE_COLOR=` or `NO_COLOR=` from the CLI.
+## Environment
+
+You can override automatic color detection from the CLI via `NO_COLOR=` or `FORCE_COLOR=`.
 
 ```console
-$ FORCE_COLOR= node example.js >log
-$ NO_COLOR= node example.js
+$ FORCE_COLOR= node example.js | ./consumer.js
 ```
 
-## Supported styles
+## Supported colors
 
 | Colors  | Background Colors | Bright Colors | Bright Background Colors | Modifiers         |
 | ------- | ----------------- | ------------- | ------------------------ | ----------------- |
@@ -91,7 +98,7 @@ $ NO_COLOR= node example.js
 | white   | bgWhite           | whiteBright   | bgWhiteBright            |                   |
 | gray    |                   |               |                          |                   |
 
-## Benchmarks
+## [Benchmarks](https://github.com/jorgebucaran/colorette/actions/workflows/bench.yml)
 
 ```console
 npm --prefix bench start

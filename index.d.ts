@@ -1,49 +1,93 @@
-interface Style {
-  (string: string): string
-}
+declare module "colorette" {
+  type Color = (text: string | number) => string
 
-export const options: {
-  enabled: boolean
-}
+  interface Colorette {
+    reset: Color
+    bold: Color
+    dim: Color
+    italic: Color
+    underline: Color
+    inverse: Color
+    hidden: Color
+    strikethrough: Color
+    black: Color
+    red: Color
+    green: Color
+    yellow: Color
+    blue: Color
+    magenta: Color
+    cyan: Color
+    white: Color
+    gray: Color
+    bgBlack: Color
+    bgRed: Color
+    bgGreen: Color
+    bgYellow: Color
+    bgBlue: Color
+    bgMagenta: Color
+    bgCyan: Color
+    bgWhite: Color
+    blackBright: Color
+    redBright: Color
+    greenBright: Color
+    yellowBright: Color
+    blueBright: Color
+    magentaBright: Color
+    cyanBright: Color
+    whiteBright: Color
+    bgBlackBright: Color
+    bgRedBright: Color
+    bgGreenBright: Color
+    bgYellowBright: Color
+    bgBlueBright: Color
+    bgMagentaBright: Color
+    bgCyanBright: Color
+    bgWhiteBright: Color
+  }
 
-export const reset: Style
-export const bold: Style
-export const dim: Style
-export const italic: Style
-export const underline: Style
-export const inverse: Style
-export const hidden: Style
-export const strikethrough: Style
-export const black: Style
-export const red: Style
-export const green: Style
-export const yellow: Style
-export const blue: Style
-export const magenta: Style
-export const cyan: Style
-export const white: Style
-export const gray: Style
-export const bgBlack: Style
-export const bgRed: Style
-export const bgGreen: Style
-export const bgYellow: Style
-export const bgBlue: Style
-export const bgMagenta: Style
-export const bgCyan: Style
-export const bgWhite: Style
-export const blackBright: Style
-export const redBright: Style
-export const greenBright: Style
-export const yellowBright: Style
-export const blueBright: Style
-export const magentaBright: Style
-export const cyanBright: Style
-export const whiteBright: Style
-export const bgBlackBright: Style
-export const bgRedBright: Style
-export const bgGreenBright: Style
-export const bgYellowBright: Style
-export const bgBlueBright: Style
-export const bgMagentaBright: Style
-export const bgCyanBright: Style
-export const bgWhiteBright: Style
+  const reset: Color
+  const bold: Color
+  const dim: Color
+  const italic: Color
+  const underline: Color
+  const inverse: Color
+  const hidden: Color
+  const strikethrough: Color
+  const black: Color
+  const red: Color
+  const green: Color
+  const yellow: Color
+  const blue: Color
+  const magenta: Color
+  const cyan: Color
+  const white: Color
+  const gray: Color
+  const bgBlack: Color
+  const bgRed: Color
+  const bgGreen: Color
+  const bgYellow: Color
+  const bgBlue: Color
+  const bgMagenta: Color
+  const bgCyan: Color
+  const bgWhite: Color
+  const blackBright: Color
+  const redBright: Color
+  const greenBright: Color
+  const yellowBright: Color
+  const blueBright: Color
+  const magentaBright: Color
+  const cyanBright: Color
+  const whiteBright: Color
+  const bgBlackBright: Color
+  const bgRedBright: Color
+  const bgGreenBright: Color
+  const bgYellowBright: Color
+  const bgBlueBright: Color
+  const bgMagentaBright: Color
+  const bgCyanBright: Color
+  const bgWhiteBright: Color
+
+  const isColorSupported: boolean
+
+  function createColors(options: { useColor: boolean }): Colorette
+}

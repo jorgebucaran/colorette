@@ -13,31 +13,23 @@ const isCI =
   "CI" in env &&
   ("GITHUB_ACTIONS" in env || "GITLAB_CI" in env || "CIRCLECI" in env)
 
-let enabled =
+export const isColorSupported =
   !isDisabled && (isForced || isWindows || isCompatibleTerminal || isCI)
 
 const raw = (open, close, searchRegex, replaceValue) => (s) =>
-  enabled
-    ? open +
-      (~(s += "").indexOf(close, 4) // skip opening \x1b[
-        ? s.replace(searchRegex, replaceValue)
-        : s) +
-      close
-    : s
+  open +
+  (~(s += "").indexOf(close, 4) // skip opening \x1b[
+    ? s.replace(searchRegex, replaceValue)
+    : s) +
+  close
 
-const init = (open, close) => {
-  return raw(
+const init = (open, close) =>
+  raw(
     `\x1b[${open}m`,
     `\x1b[${close}m`,
     new RegExp(`\\x1b\\[${close}m`, "g"),
     `\x1b[${open}m`
   )
-}
-
-export const options = Object.defineProperty({}, "enabled", {
-  get: () => enabled,
-  set: (value) => (enabled = value),
-})
 
 export const reset = init(0, 0)
 export const bold = raw("\x1b[1m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[1m")
@@ -80,3 +72,54 @@ export const bgBlueBright = init(104, 49)
 export const bgMagentaBright = init(105, 49)
 export const bgCyanBright = init(106, 49)
 export const bgWhiteBright = init(107, 49)
+
+const none = (any) => any
+
+export const createColors = ({ useColor = isColorSupported } = {}) => ({
+  ...Object.entries({
+    reset,
+    bold,
+    dim,
+    italic,
+    underline,
+    inverse,
+    hidden,
+    strikethrough,
+    black,
+    red,
+    green,
+    yellow,
+    blue,
+    magenta,
+    cyan,
+    white,
+    gray,
+    bgBlack,
+    bgRed,
+    bgGreen,
+    bgYellow,
+    bgBlue,
+    bgMagenta,
+    bgCyan,
+    bgWhite,
+    blackBright,
+    redBright,
+    greenBright,
+    yellowBright,
+    blueBright,
+    magentaBright,
+    cyanBright,
+    whiteBright,
+    bgBlackBright,
+    bgRedBright,
+    bgGreenBright,
+    bgYellowBright,
+    bgBlueBright,
+    bgMagentaBright,
+    bgCyanBright,
+    bgWhiteBright,
+  }).reduce((colorMap, [key, color]) => ({
+    ...colorMap,
+    [key]: useColor ? color : none,
+  })),
+})
