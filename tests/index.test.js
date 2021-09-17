@@ -1,7 +1,7 @@
 import * as c from "../index.js"
 import { t, equal } from "twist"
 
-const styles = [
+const colors = [
   ["reset", "\x1b[0m", "\x1b[0m"],
   ["bold", "\x1b[1m", "\x1b[22m"],
   ["dim", "\x1b[2m", "\x1b[22m"],
@@ -48,7 +48,7 @@ const styles = [
 export default [
   t("colorette", [
     t("simple", [
-      ...styles.map(([name, open, close]) =>
+      ...colors.map(([name, open, close]) =>
         equal(c[name](name), open + name + close)
       ),
     ]),
