@@ -4,7 +4,7 @@
   "scripts": {
     "start": "npm install && node index.js"
   },
-  "dependencies": {
+  "devDependencies": {
     "ansi-colors": "*",
     "benchmark": "*",
     "chalk": "*",
