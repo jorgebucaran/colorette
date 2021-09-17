@@ -18,11 +18,11 @@ const runBenchmark = (test, modules) =>
 runBenchmark(
   (c) =>
     c.red(
-      `${"X"}${c.blue(
-        `${"X"}${c.bold(
-          `${"X"}${c.yellow("X")}${"X"}${c.underline("X")}`
-        )}${"X"}${c.magenta(`${"X"}${c.white("X")}${c.cyan("X")}${"X"}`)}${"X"}`
-      )}${"X"}`
+      `${c.blue(
+        `${c.bold(`${c.yellow("foo")}${c.underline("foo")}`)}${c.magenta(
+          `${c.white("foo")}${c.cyan("foo")}`
+        )}`
+      )}`
     ),
   {
     colorette,
