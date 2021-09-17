@@ -36,14 +36,14 @@ Of course, you can nest styles without breaking existing color sequences.
 console.log(bold(`I'm ${blue(`da ba ${underline("dee")} da ba`)} daa`))
 ```
 
-Need to dynamically enable or disable color? You can do that too.
+Need to dynamically override color detection? You can do that too.
 
 ```js
 import { createColors } from "colorette"
 
 const { blue } = createColors({ useColor: false })
 
-console.log(blue("Blue, not, nope, nah"))
+console.log(blue("Blue? Nope, nah"))
 ```
 
 ## Installation
@@ -78,7 +78,7 @@ const { blue } = createColors({ useColor: false })
 
 ## Environment
 
-You can override automatic color detection from the CLI via `NO_COLOR=` or `FORCE_COLOR=`.
+You can override automatic color detection from the CLI too via `NO_COLOR=` or `FORCE_COLOR=`.
 
 ```console
 $ FORCE_COLOR= node example.js | ./consumer.js
