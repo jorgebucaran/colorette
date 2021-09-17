@@ -1,5 +1,8 @@
 #!/bin/sh
 
-[ `FORCE_COLOR= node -e '
-    import("colorette").then(({ blue }) => console.log(blue("window")))
-  '` = `printf '\e[34mwindow\e[39m'` ]
+[ `FORCE_COLOR= node --eval '
+
+    import("./index.js").then(({ createColors }) =>
+      console.log(createColors().blue("foobar")))
+
+  '` = `printf '\e[34mfoobar\e[39m'` ]
