@@ -89,5 +89,5 @@ declare module "colorette" {
 
   const isColorSupported: boolean
 
-  function createColors(options: { useColor: boolean }): Colorette
+  function createColors(options?: { useColor: boolean }): Colorette
 }
