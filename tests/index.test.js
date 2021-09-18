@@ -66,7 +66,6 @@ export default [
     t("empty & falsy values", [
       equal(c.blue(), ""),
       equal(c.blue(""), ""),
-      equal(c.blue([]), ""),
       equal(c.blue(undefined), ""),
       equal(c.blue(0), "\x1b[34m0\x1b[39m"),
       equal(c.blue(null), "\x1b[34mnull\x1b[39m"),
