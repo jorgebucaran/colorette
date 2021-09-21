@@ -6,7 +6,7 @@ const isForced = "FORCE_COLOR" in env
 const isWindows = platform === "win32"
 
 const isCompatibleTerminal =
-  tty && tty.isatty(1) && env.TERM && env.TERM !== "dumb"
+  tty.isatty && tty.isatty(1) && env.TERM && env.TERM !== "dumb"
 
 const isCI =
   "CI" in env &&
