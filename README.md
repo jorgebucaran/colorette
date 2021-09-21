@@ -40,7 +40,7 @@ Of course, you can nest styles without breaking existing color sequences.
 console.log(bold(`I'm ${blue(`da ba ${underline("dee")} da ba`)} daa`))
 ```
 
-Need to dynamically override color detection? You can do that too.
+Need to override automatic color detection? You can do that too.
 
 ```js
 import { createColors } from "colorette"
@@ -68,7 +68,7 @@ blue("I'm blue") //=> \x1b[34mI'm blue\x1b[39m
 
 ### `isColorSupported`
 
-`true` if your terminal supports color or `false` otherwise. Used internally and handled for you, but exposed for convenience.
+`true` if your terminal supports color, `false` otherwise. Used internally and handled for you, but exposed for convenience.
 
 ### `createColors({ useColor })`
 
