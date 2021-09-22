@@ -1,11 +1,10 @@
 import * as tty from "tty"
-import process from "process"
 
-const env = process.env || {}
+const env = (process && process.env) || {}
 
 const isDisabled = "NO_COLOR" in env
 const isForced = "FORCE_COLOR" in env
-const isWindows = process.platform === "win32"
+const isWindows = process && process.platform === "win32"
 
 const isCompatibleTerminal =
   tty && tty.isatty && tty.isatty(1) && env.TERM && env.TERM !== "dumb"
