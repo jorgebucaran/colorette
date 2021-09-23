@@ -23,7 +23,7 @@ const raw =
     s === ""
       ? s
       : open +
-        (~(s += "").indexOf(close, 4) // skip opening \x1b[
+        (~(s + "").indexOf(close, 4) // skip opening \x1b[
           ? s.replace(searchRegex, replaceValue)
           : s) +
         close
