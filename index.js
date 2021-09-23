@@ -83,13 +83,12 @@ const colors = {
 const none = (any) => any
 
 export const createColors = ({ useColor = isColorSupported } = {}) =>
-  Object.entries(colors).reduce(
-    (colorMap, [key, color]) => ({
-      ...colorMap,
-      [key]: useColor ? color : none,
-    }),
-    {}
-  )
+  useColor
+    ? colors
+    : Object.keys(colors).reduce(
+        (colorMap, key) => ({ ...colorMap, [key]: none }),
+        {}
+      )
 
 export const {
   reset,
