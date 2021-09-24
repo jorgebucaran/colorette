@@ -16,16 +16,14 @@ const isCI =
 export const isColorSupported =
   !isDisabled && (isForced || isWindows || isCompatibleTerminal || isCI)
 
-const raw =
-  (open, close, searchRegex, replaceValue) =>
-  (s = "") =>
-    s === ""
-      ? s
-      : open +
-        (~(s + "").indexOf(close, 4) // skip opening \x1b[
-          ? s.replace(searchRegex, replaceValue)
-          : s) +
-        close
+const raw = (open, close, searchRegex, replaceValue) => (s) =>
+  s === undefined || s === ""
+    ? ""
+    : open +
+      (~(s + "").indexOf(close, 4) // skip opening \x1b[
+        ? s.replace(searchRegex, replaceValue)
+        : s) +
+      close
 
 const init = (open, close) =>
   raw(
