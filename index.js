@@ -1,5 +1,4 @@
 import * as tty from "tty"
-import process from "process"
 
 const env = process.env || {}
 
