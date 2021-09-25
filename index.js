@@ -17,7 +17,7 @@ export const isColorSupported =
   !isDisabled && (isForced || isWindows || isCompatibleTerminal || isCI)
 
 const raw = (open, close, searchRegex, replaceValue) => (s) =>
-  s === undefined || s === ""
+  !s && (s === "" || s === undefined)
     ? ""
     : open +
       (~(s + "").indexOf(close, 4) // skip opening \x1b[
