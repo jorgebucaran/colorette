@@ -68,9 +68,11 @@ export default [
       equal(c.blue(""), ""),
       equal(c.blue(undefined), ""),
       equal(c.blue(0), "\x1b[34m0\x1b[39m"),
-      equal(c.blue(null), "\x1b[34mnull\x1b[39m"),
-      equal(c.blue(false), "\x1b[34mfalse\x1b[39m"),
       equal(c.blue(NaN), "\x1b[34mNaN\x1b[39m"),
+      equal(c.blue(null), "\x1b[34mnull\x1b[39m"),
+      equal(c.blue(true), "\x1b[34mtrue\x1b[39m"),
+      equal(c.blue(false), "\x1b[34mfalse\x1b[39m"),
+      equal(c.blue(Infinity), "\x1b[34mInfinity\x1b[39m"),
     ]),
   ]),
 ]
