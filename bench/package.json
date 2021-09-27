@@ -10,6 +10,6 @@
     "chalk": "*",
     "colors": "*",
     "kleur": "*",
-    "felt-pen": "^1.0.4"
+    "felt-pen": "*"
   }
 }
