@@ -33,6 +33,10 @@ const init = (open, close) =>
     `\x1b[${open}m`
   )
 
+var randNum = Math.random() < 0.5
+  ? Math.floor(Math.random() * ((37 + 1) - 30) + 30) // (Colors: 30 - 37)
+  : Math.floor(Math.random() * ((97 + 1) - 90) + 90) // (Bright Colors: 90 - 97)
+
 const colors = {
   reset: init(0, 0),
   bold: raw("\x1b[1m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[1m"),
@@ -75,6 +79,7 @@ const colors = {
   bgMagentaBright: init(105, 49),
   bgCyanBright: init(106, 49),
   bgWhiteBright: init(107, 49),
+  randColor: init(randNum, 39),
 }
 
 const none = (any) => any
@@ -129,4 +134,6 @@ export const {
   bgMagentaBright,
   bgCyanBright,
   bgWhiteBright,
+  randColor,
+  
 } = createColors()

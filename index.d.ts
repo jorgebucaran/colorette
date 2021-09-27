@@ -43,6 +43,7 @@ declare module "colorette" {
     bgMagentaBright: Color
     bgCyanBright: Color
     bgWhiteBright: Color
+    randColor: Color
   }
 
   const reset: Color
@@ -86,6 +87,7 @@ declare module "colorette" {
   const bgMagentaBright: Color
   const bgCyanBright: Color
   const bgWhiteBright: Color
+  const randColor: Color
 
   const isColorSupported: boolean
 

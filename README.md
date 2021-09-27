@@ -66,6 +66,14 @@ npm install colorette
 blue("I'm blue") //=> \x1b[34mI'm blue\x1b[39m
 ```
 
+### `randColor(text)`
+
+It will generate random colors and always change every run.
+
+```js
+randColor("I'm random color")
+```
+
 ### `isColorSupported`
 
 `true` if your terminal supports color, `false` otherwise. Used internally and handled for you, but exposed for convenience.
