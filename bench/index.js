@@ -4,6 +4,9 @@ import ansiColors from "ansi-colors"
 import colors from "colors"
 import chalk from "chalk"
 import kleur from "kleur"
+import * as pen from "felt-pen"
+
+let nonce = 1e9
 
 const runBenchmark = (test, modules) =>
   Object.keys(modules)
@@ -20,7 +23,7 @@ runBenchmark(
     c.red(
       `${c.blue(
         `${c.bold(`${c.yellow("foo")}${c.underline("foo")}`)}${c.magenta(
-          `${c.white("foo")}${c.cyan("foo")}`
+          `${++nonce}${c.white("foo")}${c.cyan("foo")}`
         )}`
       )}`
     ),
@@ -30,5 +33,6 @@ runBenchmark(
     kleur,
     colors,
     "ansi-colors": ansiColors,
+    "felt-pen": pen,
   }
 )

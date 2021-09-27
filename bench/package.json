@@ -9,6 +9,7 @@
     "benchmark": "*",
     "chalk": "*",
     "colors": "*",
-    "kleur": "*"
+    "kleur": "*",
+    "felt-pen": "^1.0.4"
   }
 }
