@@ -6,3 +6,4 @@
       console.log(createColors().blue("foobar")))
 
   '` = "foobar" ]
+
