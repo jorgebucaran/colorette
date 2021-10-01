@@ -82,10 +82,16 @@ const { blue } = createColors({ useColor: false })
 
 ## Environment
 
-You can override automatic color detection from the CLI too via `NO_COLOR=` or `FORCE_COLOR=`.
+You can override color detection from the CLI by setting the `--no-color` or `--color` flags.
 
 ```console
-$ FORCE_COLOR= node example.js | ./consumer.js
+$ ./example.js --no-color | ./consumer.js
+```
+
+Or if you can't use CLI flags, by setting the `NO_COLOR=` or `FORCE_COLOR=` environment variables.
+
+```console
+$ NO_COLOR= node example.js | ./consumer.js
 ```
 
 ## Supported colors
