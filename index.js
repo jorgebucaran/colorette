@@ -20,7 +20,7 @@ export const isColorSupported =
 const raw = (open, close, replace, search) => (s) =>
   s || !(s === "" || s === undefined)
     ? open +
-      (~(s + "").indexOf(close, 4) // skip opening \x1b[
+      (~(s + "").indexOf(close, open.length)
         ? s.replace(search, replace)
         : s) +
       close
