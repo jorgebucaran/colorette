@@ -91,7 +91,7 @@ $ ./example.js --no-color | ./consumer.js
 Or if you can't use CLI flags, by setting the `NO_COLOR=` or `FORCE_COLOR=` environment variables.
 
 ```console
-$ NO_COLOR= node example.js | ./consumer.js
+$ NO_COLOR= ./example.js | ./consumer.js
 ```
 
 ## Supported colors
