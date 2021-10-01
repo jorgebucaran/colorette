@@ -54,10 +54,21 @@ export default [
     ]),
     t("nesting", [
       equal(
-        c.bold(`BOLD ${c.red(`RED ${c.dim("DIM")} RED`)} BOLD`),
-        `\x1b[1mBOLD \x1b[31mRED \x1b[2mDIM\x1b[22m\x1b[1m RED\x1b[39m BOLD\x1b[22m`
+        c.bold(`bold ${c.red(`red ${c.dim("dim")} red`)} bold`),
+        "\x1B[1mbold \x1B[31mred \x1B[2mdim\x1B[22m\x1B[1m red\x1B[39m bold\x1B[22m"
+      ),
+      equal(
+        c.magenta(
+          `magenta ${c.yellow(
+            `yellow ${c.cyan("cyan")} ${c.red("red")} ${c.green(
+              "green"
+            )} yellow`
+          )} magenta`
+        ),
+        "\x1B[35mmagenta \x1B[33myellow \x1B[36mcyan\x1B[33m \x1B[31mred\x1B[33m \x1B[32mgreen\x1B[33m yellow\x1B[35m magenta\x1B[39m"
       ),
     ]),
+
     t("numbers & others", [
       ...[new Date(), -1e10, -1, -0.1, 0, 0.1, 1, 1e10].map((n) =>
         equal(c.red(n), `\x1b[31m${n}\x1b[39m`)
