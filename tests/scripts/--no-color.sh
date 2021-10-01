@@ -1,4 +1,3 @@
 #!/bin/sh
 
-[ `node --eval 'import("./index.js").then(({ blue }) => console.log(blue("foobar")))' -- --no-color` = 'foobar' ]
-
+[ `FORCE_COLOR= ./tests/scripts/bin.js --no-color` = foo ]

@@ -23,8 +23,5 @@ export default [
     t("`--color` enables color", [
       sh(`${SCRIPTS_PATH}/--color.sh`, exitStatusSuccess),
     ]),
-    t("`NO_COLOR beats --color` enables color", [
-      sh(`${SCRIPTS_PATH}/--color.NO_COLOR.sh`, exitStatusSuccess),
-    ]),
   ]),
 ]
