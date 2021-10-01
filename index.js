@@ -16,27 +16,27 @@ const isCI =
 export const isColorSupported =
   !isDisabled && (isForced || isWindows || isCompatibleTerminal || isCI)
 
-const raw = (open, close, searchRegex, replaceValue) => (s) =>
+const raw = (open, close, replace, search) => (s) =>
   s || !(s === "" || s === undefined)
     ? open +
       (~(s + "").indexOf(close, 4) // skip opening \x1b[
-        ? s.replace(searchRegex, replaceValue)
+        ? s.replace(search, replace)
         : s) +
       close
     : ""
 
-const init = (open, close) =>
+const init = (open, close, replace = `\x1b[${open}m`) =>
   raw(
     `\x1b[${open}m`,
     `\x1b[${close}m`,
-    new RegExp(`\\x1b\\[${close}m`, "g"),
-    `\x1b[${open}m`
+    replace,
+    new RegExp(`\\x1b\\[${close}m`, "g")
   )
 
 const colors = {
   reset: init(0, 0),
-  bold: raw("\x1b[1m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[1m"),
-  dim: raw("\x1b[2m", "\x1b[22m", /\x1b\[22m/g, "\x1b[22m\x1b[2m"),
+  bold: init(1, 22, "\x1b[22m\x1b[1m"),
+  dim: init(2, 22, "\x1b[22m\x1b[2m"),
   italic: init(3, 23),
   underline: init(4, 24),
   inverse: init(7, 27),
