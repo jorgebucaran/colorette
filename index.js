@@ -17,22 +17,36 @@ const isCI =
 export const isColorSupported =
   !isDisabled && (isForced || isWindows || isCompatibleTerminal || isCI)
 
-const raw = (open, close, replace, search) => (s) =>
-  s || !(s === "" || s === undefined)
-    ? open +
-      (~(s + "").indexOf(close, open.length)
-        ? s.replace(search, replace)
-        : s) +
-      close
-    : ""
+const replaceClose = (
+  s,
+  close,
+  replace,
+  index,
+  head = s.substring(0, index) + replace,
+  tail = s.substring(index + close.length),
+  next = tail.indexOf(close)
+) => head + (next >= 0 ? replaceClose(tail, close, replace, next) : tail)
 
-const init = (open, close, replace = `\x1b[${open}m`) =>
-  raw(
-    `\x1b[${open}m`,
-    `\x1b[${close}m`,
-    replace,
-    new RegExp(`\\x1b\\[${close}m`, "g")
-  )
+const clearNested = (s, open, close, replace, index) =>
+  index >= 0
+    ? open + replaceClose(s, close, replace, index) + close
+    : open + s + close
+
+const filterEmpty =
+  (open, close, replace = open) =>
+  (s) =>
+    s || !(s === "" || s === undefined)
+      ? clearNested(
+          s,
+          open,
+          close,
+          replace,
+          ("" + s).indexOf(close, open.length + 1)
+        )
+      : ""
+
+const init = (open, close, replace) =>
+  filterEmpty(`\x1b[${open}m`, `\x1b[${close}m`, replace)
 
 const colors = {
   reset: init(0, 0),
