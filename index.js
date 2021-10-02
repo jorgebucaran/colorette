@@ -27,7 +27,7 @@ const replaceClose = (
   next = tail.indexOf(close)
 ) => head + (next >= 0 ? replaceClose(tail, close, replace, next) : tail)
 
-const clearNested = (s, open, close, replace, index) =>
+const clearBleeding = (s, open, close, replace, index) =>
   index >= 0
     ? open + replaceClose(s, close, replace, index) + close
     : open + s + close
@@ -36,7 +36,7 @@ const filterEmpty =
   (open, close, replace = open) =>
   (s) =>
     s || !(s === "" || s === undefined)
-      ? clearNested(
+      ? clearBleeding(
           s,
           open,
           close,
