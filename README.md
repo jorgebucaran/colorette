@@ -68,7 +68,7 @@ blue("I'm blue") //=> \x1b[34mI'm blue\x1b[39m
 
 ### `createColors()`
 
-You can manually override terminal color detection by using `createColors({ useColor })` to create new color functions.
+Override terminal color detection via `createColors({ useColor })`.
 
 ```js
 import { createColors } from "colorette"
@@ -78,7 +78,7 @@ const { blue } = createColors({ useColor: false })
 
 ### `isColorSupported`
 
-`true` if your terminal supports color, `false` otherwise. Used internally and handled for you, but exposed for convenience.
+`true` if your terminal supports color, `false` otherwise. Used internally, but exposed for convenience.
 
 ## Environment
 
