@@ -27,7 +27,7 @@ const replaceClose = (
   next = tail.indexOf(close)
 ) => head + (next >= 0 ? replaceClose(tail, close, replace, next) : tail)
 
-const clearBleeding = (s, open, close, replace, index) =>
+const clearBleed = (s, open, close, replace, index) =>
   index >= 0
     ? open + replaceClose(s, close, replace, index) + close
     : open + s + close
@@ -36,7 +36,7 @@ const filterEmpty =
   (open, close, replace = open) =>
   (s) =>
     s || !(s === "" || s === undefined)
-      ? clearBleeding(
+      ? clearBleed(
           s,
           open,
           close,
@@ -98,7 +98,7 @@ export const createColors = ({ useColor = isColorSupported } = {}) =>
   useColor
     ? colors
     : Object.keys(colors).reduce(
-        (colorMap, key) => ({ ...colorMap, [key]: none }),
+        (colors, key) => ({ ...colors, [key]: none }),
         {}
       )
 
