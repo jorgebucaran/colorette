@@ -1,4 +1,4 @@
-name: Tests
+name: Legacy Node Tests
 on: [push, pull_request]
 jobs:
   test:
@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Test Legacy Node
+      - name: Test
         run: |
           npm install && npm install tape
           FORCE_COLOR= npx tape tests/index.test.cjs
