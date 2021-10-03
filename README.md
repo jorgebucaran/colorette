@@ -66,19 +66,19 @@ npm install colorette
 blue("I'm blue") //=> \x1b[34mI'm blue\x1b[39m
 ```
 
-### `isColorSupported`
+### `createColors()`
 
-`true` if your terminal supports color, `false` otherwise. Used internally and handled for you, but exposed for convenience.
-
-### `createColors({ useColor })`
-
-Create a reusable instance of Colorette. Color support is automatically detected, but you can override it by setting the `useColor` boolean property.
+You can manually override terminal color detection by using `createColors({ useColor })` to create new color functions.
 
 ```js
 import { createColors } from "colorette"
 
 const { blue } = createColors({ useColor: false })
 ```
+
+### `isColorSupported`
+
+`true` if your terminal supports color, `false` otherwise. Used internally and handled for you, but exposed for convenience.
 
 ## Environment
 
