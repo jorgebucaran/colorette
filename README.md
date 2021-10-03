@@ -5,7 +5,7 @@
 - No wonky prototype method-chain API.
 - Automatic color support detection.
 - Up to [2x faster](#benchmarks) than alternatives.
-- [`NO_COLOR`](https://no-color.org) friendly. ✅
+- [`NO_COLOR`](https://no-color.org) friendly.
 
 > 👋 [**Upgrading from Colorette `1.x`?**](https://github.com/jorgebucaran/colorette/issues/70)
 
