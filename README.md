@@ -2,10 +2,10 @@
 
 > Easily set your terminal text color & styles.
 
-- No wonky prototype method-chain API.
 - Automatic color support detection.
 - Up to [2x faster](#benchmarks) than alternatives.
-- [`NO_COLOR`](https://no-color.org) friendly. ✅
+- [`NO_COLOR`](https://no-color.org) friendly.
+- Node >= `10`
 
 > 👋 [**Upgrading from Colorette `1.x`?**](https://github.com/jorgebucaran/colorette/issues/70)
 
@@ -40,7 +40,7 @@ Of course, you can nest styles without breaking existing color sequences.
 console.log(bold(`I'm ${blue(`da ba ${underline("dee")} da ba`)} daa`))
 ```
 
-Need to override automatic color detection? You can do that too.
+Need to override terminal color detection? You can do that too.
 
 ```js
 import { createColors } from "colorette"
@@ -66,13 +66,9 @@ npm install colorette
 blue("I'm blue") //=> \x1b[34mI'm blue\x1b[39m
 ```
 
-### `isColorSupported`
+### `createColors()`
 
-`true` if your terminal supports color, `false` otherwise. Used internally and handled for you, but exposed for convenience.
-
-### `createColors({ useColor })`
-
-Create a reusable instance of Colorette. Color support is automatically detected, but you can override it by setting the `useColor` boolean property.
+Override terminal color detection via `createColors({ useColor })`.
 
 ```js
 import { createColors } from "colorette"
@@ -80,12 +76,22 @@ import { createColors } from "colorette"
 const { blue } = createColors({ useColor: false })
 ```
 
+### `isColorSupported`
+
+`true` if your terminal supports color, `false` otherwise. Used internally, but exposed for convenience.
+
 ## Environment
 
-You can override automatic color detection from the CLI too via `NO_COLOR=` or `FORCE_COLOR=`.
+You can override color detection from the CLI by setting the `--no-color` or `--color` flags.
 
 ```console
-$ FORCE_COLOR= node example.js | ./consumer.js
+$ ./example.js --no-color | ./consumer.js
+```
+
+Or if you can't use CLI flags, by setting the `NO_COLOR=` or `FORCE_COLOR=` environment variables.
+
+```console
+$ NO_COLOR= ./example.js | ./consumer.js
 ```
 
 ## Supported colors
@@ -107,6 +113,10 @@ $ FORCE_COLOR= node example.js | ./consumer.js
 ```console
 npm --prefix bench start
 ```
+
+## Acknowledgements
+
+Colorette started out in 2015 by [@jorgebucaran](https://github.com/jorgebucaran) as a lightweight alternative to [Chalk](https://github.com/chalk/chalk) and was introduced originally as [Clor](https://github.com/jorgebucaran/colorette/commit/b01b5b9961ceb7df878583a3002e836fae9e37ce). Our terminal color detection logic borrows heavily from [@sindresorhus](https://github.com/sindresorhus) and [@Qix-](https://github.com/Qix-) work on Chalk. The idea of slicing strings to clear bleeding sequences was adapted from a similar technique used by [@alexeyraspopov](https://github.com/alexeyraspopov) in [picocolors](https://github.com/alexeyraspopov/picocolors). Thank you to all our contributors! <3
 
 ## License
 

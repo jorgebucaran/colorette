@@ -6,6 +6,7 @@
   },
   "devDependencies": {
     "ansi-colors": "*",
+    "picocolors": "*",
     "benchmark": "*",
     "chalk": "*",
     "colors": "*",

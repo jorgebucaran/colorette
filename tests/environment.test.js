@@ -17,5 +17,11 @@ export default [
     t("`NO_COLOR` disables color", [
       sh(`${SCRIPTS_PATH}/NO_COLOR.sh`, exitStatusSuccess),
     ]),
+    t("`--no-color` disables color", [
+      sh(`${SCRIPTS_PATH}/--no-color.sh`, exitStatusSuccess),
+    ]),
+    t("`--color` enables color", [
+      sh(`${SCRIPTS_PATH}/--color.sh`, exitStatusSuccess),
+    ]),
   ]),
 ]

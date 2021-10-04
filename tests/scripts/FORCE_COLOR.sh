@@ -1,8 +1,3 @@
 #!/bin/sh
 
-[ `FORCE_COLOR= node --eval '
-
-    import("./index.js").then(({ createColors }) =>
-      console.log(createColors().blue("foobar")))
-
-  '` = `printf '\e[34mfoobar\e[39m'` ]
+[ `FORCE_COLOR= ./tests/scripts/bin.js` = `printf '\e[34mfoo\e[39m'` ]

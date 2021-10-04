@@ -1,0 +1,22 @@
+name: Legacy Node Tests
+on: [push, pull_request]
+jobs:
+  test:
+    env:
+      NODE_ENV: development
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Test
+        run: |
+          npm install && npm install tape
+          FORCE_COLOR= npx tape tests/index.test.cjs
+
