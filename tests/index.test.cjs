@@ -55,7 +55,6 @@ test("colors", (t) => {
 
 test("nesting", (t) => {
   t.plan(2)
-
   t.equal(
     c.bold(`bold ${c.red(`red ${c.dim("dim")} red`)} bold`),
     "\x1B[1mbold \x1B[31mred \x1B[2mdim\x1B[22m\x1B[1m red\x1B[39m bold\x1B[22m",
@@ -107,32 +106,31 @@ test("createColors", (t) => {
 
 test("environment", (t) => {
   t.plan(4)
-
   exec(
     `FORCE_COLOR= node --print --eval '
       require("./index.cjs").blue("foo")
     '`,
-    (_, stdout) => t.equal(stdout, "\x1B[34mfoo\x1B[39m\n", "FORCE_COLOR")
+    (_, out) => t.equal(out, "\x1B[34mfoo\x1B[39m\n", "FORCE_COLOR")
   )
   exec(
     `NO_COLOR= node --print --eval '
       process.argv.push("--color")
       require("./index.cjs").blue("foo")
     '`,
-    (_, stdout) => t.equal(stdout, "foo\n", "NO_COLOR")
+    (_, out) => t.equal(out, "foo\n", "NO_COLOR")
   )
   exec(
     `FORCE_COLOR= node --print --eval '
       process.argv.push("--no-color")
       require("./index.cjs").blue("foo")
     '`,
-    (_, stdout) => t.equal(stdout, "foo\n", "--no-color")
+    (_, out) => t.equal(out, "foo\n", "--no-color")
   )
   exec(
     `FORCE_COLOR= node --print --eval '
       process.argv.push("--color")
       require("./index.cjs").blue("foo")
     '`,
-    (_, stdout) => t.equal(stdout, "\x1B[34mfoo\x1B[39m\n", "--color")
+    (_, out) => t.equal(out, "\x1B[34mfoo\x1B[39m\n", "--color")
   )
 })
