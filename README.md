@@ -116,7 +116,7 @@ npm --prefix bench start
 
 ## Acknowledgements
 
-Preliminary work for Colorette started in 2015 by [**@jorgebucaran**](https://github.com/jorgebucaran) as a lightweight alternative to Chalk and was introduced originally as [Clor](https://github.com/jorgebucaran/colorette/commit/b01b5b9961ceb7df878583a3002e836fae9e37ce). Our terminal color detection logic borrows heavily from [**@sindresorhus**](https://github.com/sindresorhus) and [**@Qix-**](https://github.com/Qix-) work on Chalk. A heartfelt thank you to [**@alexeyraspopov**](https://github.com/alexeyraspopov) for the idea of slicing strings rather than using global regexes to clear bleeding sequences. <3
+Colorette started out in 2015 by [@jorgebucaran](https://github.com/jorgebucaran) as a lightweight alternative to [Chalk](https://github.com/chalk/chalk) and was introduced originally as [Clor](https://github.com/jorgebucaran/colorette/commit/b01b5b9961ceb7df878583a3002e836fae9e37ce). Our terminal color detection logic borrows heavily from [@sindresorhus](https://github.com/sindresorhus) and [@Qix-](https://github.com/Qix-) work on Chalk. The idea of slicing strings to clear bleeding sequences was adapted from a similar technique used by [@alexeyraspopov](https://github.com/alexeyraspopov) in [picocolors](https://github.com/alexeyraspopov/picocolors). Thank you to all our contributors! <3
 
 ## License
 
