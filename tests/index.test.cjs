@@ -49,7 +49,7 @@ const colors = [
 test("colors", (t) => {
   t.plan(colors.length)
   colors.map(([name, open, close]) =>
-    t.equal(c[name](name), open + name + close, name)
+    t.equal(c[name](name), open + name + close, open + name + close)
   )
 })
 
