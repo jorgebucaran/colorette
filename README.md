@@ -1,17 +1,17 @@
-# Colorette
+# 🌈Colorette
 
 > Easily set your terminal text color & styles.
 
-- Automatic color support detection.
-- Up to [2x faster](#benchmarks) than alternatives.
-- [`NO_COLOR`](https://no-color.org) friendly.
+- No dependecies
+- Automatic color support detection
+- Up to [2x faster](#benchmarks) than alternatives
+- TypeScript support
+- [`NO_COLOR`](https://no-color.org) friendly
 - Node >= `10`
 
-> 👋 [**Upgrading from Colorette `1.x`?**](https://github.com/jorgebucaran/colorette/issues/70)
+> [**Upgrading from Colorette `1.x`?**](https://github.com/jorgebucaran/colorette/issues/70)
 
 ## Quickstart
-
-Here's the first example to get you started.
 
 ```js
 import { blue, bold, underline } from "colorette"
@@ -34,7 +34,7 @@ console.log(`
 `)
 ```
 
-Of course, you can nest styles without breaking existing color sequences.
+You can also nest styles without breaking existing color sequences.
 
 ```js
 console.log(bold(`I'm ${blue(`da ba ${underline("dee")} da ba`)} daa`))
@@ -58,7 +58,7 @@ npm install colorette
 
 ## API
 
-### `blue()`, ...
+### \<color\>()
 
 > See all [supported colors](#supported-colors).
 
@@ -68,7 +68,7 @@ import { blue } from "colorette"
 blue("I'm blue") //=> \x1b[34mI'm blue\x1b[39m
 ```
 
-### `createColors()`
+### createColors()
 
 Override terminal color detection via `createColors({ useColor })`.
 
@@ -78,7 +78,7 @@ import { createColors } from "colorette"
 const { blue } = createColors({ useColor: false })
 ```
 
-### `isColorSupported`
+### isColorSupported
 
 `true` if your terminal supports color, `false` otherwise. Used internally, but exposed for convenience.
 
@@ -114,6 +114,15 @@ $ NO_COLOR= ./example.js | ./consumer.js
 
 ```console
 npm --prefix bench start
+```
+
+```diff
+  chalk         1,786,703 ops/sec
+  kleur         1,618,960 ops/sec
+  colors          646,823 ops/sec
+  ansi-colors     786,149 ops/sec
+  picocolors    2,871,758 ops/sec
++ colorette     3,002,751 ops/sec
 ```
 
 ## Acknowledgements
