@@ -58,11 +58,13 @@ npm install colorette
 
 ## API
 
-### `blue(text)`
+### `blue()`, ...
 
 > See all [supported colors](#supported-colors).
 
 ```js
+import { blue } from "colorette"
+
 blue("I'm blue") //=> \x1b[34mI'm blue\x1b[39m
 ```
 
