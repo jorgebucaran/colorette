@@ -18,30 +18,28 @@ export const isColorSupported =
   !isDisabled && (isForced || isWindows || isCompatibleTerminal || isCI)
 
 const replaceClose = (
+  i,
   s,
   close,
   replace,
-  index,
-  head = s.substring(0, index) + replace,
-  tail = s.substring(index + close.length),
+  head = s.substring(0, i) + replace,
+  tail = s.substring(i + close.length),
   next = tail.indexOf(close)
-) => head + (next >= 0 ? replaceClose(tail, close, replace, next) : tail)
+) => head + (next >= 0 ? replaceClose(next, tail, close, replace) : tail)
 
-const clearBleed = (s, open, close, replace, index) =>
-  index >= 0
-    ? open + replaceClose(s, close, replace, index) + close
-    : open + s + close
+const clearBleed = (i, s, open, close, replace) =>
+  i >= 0 ? open + replaceClose(i, s, close, replace) + close : open + s + close
 
 const filterEmpty =
   (open, close, replace = open) =>
   (s) =>
     s || !(s === "" || s === undefined)
       ? clearBleed(
+          ("" + s).indexOf(close, open.length),
           s,
           open,
           close,
-          replace,
-          ("" + s).indexOf(close, open.length + 1)
+          replace
         )
       : ""
 
