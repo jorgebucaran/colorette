@@ -31,16 +31,10 @@ const clearBleed = (i, s, open, close, replace) =>
   i >= 0 ? open + replaceClose(i, s, close, replace) + close : open + s + close
 
 const filterEmpty =
-  (open, close, replace = open) =>
+  (open, close, replace = open, at = open.length + 1) =>
   (s) =>
     s || !(s === "" || s === undefined)
-      ? clearBleed(
-          ("" + s).indexOf(close, open.length),
-          s,
-          open,
-          close,
-          replace
-        )
+      ? clearBleed(("" + s).indexOf(close, at), s, open, close, replace)
       : ""
 
 const init = (open, close, replace) =>
