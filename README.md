@@ -50,6 +50,25 @@ const { blue } = createColors({ useColor: false })
 console.log(blue("Blue? Nope, nah"))
 ```
 
+For tagged template literal you can use [`colorize-template`](https://github.com/usmanyunusov/colorize-template)
+
+```js
+import { createColorize } from 'colorize-template'
+import * as colorette from 'colorette'
+
+let colorize = createColorize({
+  ...colorette,
+  success: colorette.green,
+  error: colorette.red
+})
+
+console.log(
+  colorize`Is red {red color} text`,
+  colorize`Run {yellow.bgRed ${'yellow'} test}`,
+  colorize`Is red {error error and success {success green text}}`,
+)
+```
+
 ## Installation
 
 ```console
