@@ -102,6 +102,7 @@ export const createColors = ({ useColor = isColorSupported } = {}) =>
         {}
       )
 
+const colors = createColors()
 export const {
   reset,
   bold,
@@ -144,4 +145,6 @@ export const {
   bgMagentaBright,
   bgCyanBright,
   bgWhiteBright,
-} = createColors()
+} = colors
+
+export default colors
