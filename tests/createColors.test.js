@@ -1,17 +1,16 @@
-import { blue, createColors } from "../index.js"
+import { createColors } from "../index.js"
 import { t, equal } from "twist"
 
 export default [
   t("colorette", [
     t("createColors", [
       t("useColor overrides automatic color detection", [
-        (done) => {
-          done([
-            equal(blue("foo"), createColors({ useColor: true }).blue("foo")),
-            equal("foo", createColors({ useColor: false }).blue("foo")),
-            equal("42", createColors({ useColor: false }).blue(42)),
-          ])
-        },
+        equal(
+          `\x1b[34mblue\x1b[39m`,
+          createColors({ useColor: true }).blue("blue")
+        ),
+        equal("nope", createColors({ useColor: false }).blue("nope")),
+        equal("42", createColors({ useColor: false }).blue(42)),
       ]),
     ]),
   ]),

@@ -68,7 +68,6 @@ export default [
         "\x1B[35mmagenta \x1B[33myellow \x1B[36mcyan\x1B[33m \x1B[31mred\x1B[33m \x1B[32mgreen\x1B[33m yellow\x1B[35m magenta\x1B[39m"
       ),
     ]),
-
     t("numbers & others", [
       ...[new Date(), -1e10, -1, -0.1, 0, 0.1, 1, 1e10].map((n) =>
         equal(c.red(n), `\x1b[31m${n}\x1b[39m`)
