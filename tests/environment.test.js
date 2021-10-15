@@ -3,25 +3,25 @@ import { fileURLToPath } from "url"
 import { dirname } from "path"
 import { t, equal } from "twist"
 
-const SCRIPTS_PATH = `${dirname(fileURLToPath(import.meta.url))}/scripts`
+const BIN = `${dirname(fileURLToPath(import.meta.url))}/scripts/bin.js`
 
-const exitStatusSuccess = (done) => (error) => done(equal(error, null))
-
-const sh = (file, assert) => (done) => exec(`sh ${file}`, assert(done))
+const execThenEqual = (cmd, expected) => (done) =>
+  exec(cmd, (_, actual) => done(equal(actual, expected)))
 
 export default [
-  t("variables", [
+  t("environment", [
+    t("no TTY", execThenEqual(BIN, "foo\n")),
     t("`FORCE_COLOR` forces color", [
-      sh(`${SCRIPTS_PATH}/FORCE_COLOR.sh`, exitStatusSuccess),
+      execThenEqual(`FORCE_COLOR= ${BIN}`, "\x1b[34mfoo\x1b[39m\n"),
     ]),
     t("`NO_COLOR` disables color", [
-      sh(`${SCRIPTS_PATH}/NO_COLOR.sh`, exitStatusSuccess),
+      execThenEqual(`NO_COLOR= ${BIN} --color`, "foo\n"),
     ]),
     t("`--no-color` disables color", [
-      sh(`${SCRIPTS_PATH}/--no-color.sh`, exitStatusSuccess),
+      execThenEqual(`FORCE_COLOR= ${BIN} --no-color`, "foo\n"),
     ]),
     t("`--color` enables color", [
-      sh(`${SCRIPTS_PATH}/--color.sh`, exitStatusSuccess),
+      execThenEqual(`${BIN} --color`, "\x1b[34mfoo\x1b[39m\n"),
     ]),
   ]),
 ]
