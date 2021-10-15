@@ -7,14 +7,9 @@ export default [
       t("useColor overrides automatic color detection", [
         (done) => {
           done([
-            equal(
-              blue("megazord"),
-              createColors({ useColor: true }).blue("megazord")
-            ),
-            equal(
-              "megazord",
-              createColors({ useColor: false }).blue("megazord")
-            ),
+            equal(blue("foo"), createColors({ useColor: true }).blue("foo")),
+            equal("foo", createColors({ useColor: false }).blue("foo")),
+            equal("42", createColors({ useColor: false }).blue(42)),
           ])
         },
       ]),

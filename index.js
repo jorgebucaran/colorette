@@ -92,13 +92,11 @@ const colors = {
   bgWhiteBright: init(107, 49),
 }
 
-const none = (any) => any
-
 export const createColors = ({ useColor = isColorSupported } = {}) =>
   useColor
     ? colors
     : Object.keys(colors).reduce(
-        (colors, key) => ({ ...colors, [key]: none }),
+        (colors, key) => ({ ...colors, [key]: String }),
         {}
       )
 
