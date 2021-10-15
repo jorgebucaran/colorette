@@ -10,7 +10,6 @@ const execThenEqual = (cmd, expected) => (done) =>
 
 export default [
   t("environment", [
-    t("no TTY", execThenEqual(BIN, "foo\n")),
     t("`FORCE_COLOR` forces color", [
       execThenEqual(`FORCE_COLOR= ${BIN}`, "\x1b[34mfoo\x1b[39m\n"),
     ]),
