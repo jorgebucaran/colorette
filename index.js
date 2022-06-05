@@ -1,5 +1,9 @@
 import * as tty from "tty"
 
+if (window && !('process' in window)) {
+  window.process = {}
+}
+
 const env = (process && process.env) || {}
 const argv = (process && process.argv) || []
 
