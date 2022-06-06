@@ -1,15 +1,13 @@
 import * as tty from "tty"
 
-if (window && !('process' in window)) {
-  window.process = {}
-}
+const proc = typeof process === "undefined" ? {} : process
 
-const env = (process && process.env) || {}
-const argv = (process && process.argv) || []
+const env = proc.env || {}
+const argv = proc.argv || []
 
 const isDisabled = "NO_COLOR" in env || argv.includes("--no-color")
 const isForced = "FORCE_COLOR" in env || argv.includes("--color")
-const isWindows = process && process.platform === "win32"
+const isWindows = proc.platform === "win32"
 const isDumbTerminal = env.TERM === "dumb"
 
 const isCompatibleTerminal =
