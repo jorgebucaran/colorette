@@ -1,13 +1,10 @@
 import * as tty from "tty"
 
-const proc = typeof process === "undefined" ? {} : process
-
-const env = proc.env || {}
-const argv = proc.argv || []
+const { env, argv, platform } = typeof process === "undefined" ? {} : process
 
 const isDisabled = "NO_COLOR" in env || argv.includes("--no-color")
 const isForced = "FORCE_COLOR" in env || argv.includes("--color")
-const isWindows = proc.platform === "win32"
+const isWindows = platform === "win32"
 const isDumbTerminal = env.TERM === "dumb"
 
 const isCompatibleTerminal =
@@ -18,7 +15,8 @@ const isCI =
   ("GITHUB_ACTIONS" in env || "GITLAB_CI" in env || "CIRCLECI" in env)
 
 export const isColorSupported =
-  !isDisabled && (isForced || (isWindows && !isDumbTerminal) || isCompatibleTerminal || isCI)
+  !isDisabled &&
+  (isForced || (isWindows && !isDumbTerminal) || isCompatibleTerminal || isCI)
 
 const replaceClose = (
   index,
