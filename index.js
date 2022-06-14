@@ -1,6 +1,10 @@
 import * as tty from "tty"
 
-const { env, argv, platform } = typeof process === "undefined" ? {} : process
+const {
+  env = {},
+  argv = [],
+  platform = "",
+} = typeof process === "undefined" ? {} : process
 
 const isDisabled = "NO_COLOR" in env || argv.includes("--no-color")
 const isForced = "FORCE_COLOR" in env || argv.includes("--color")
