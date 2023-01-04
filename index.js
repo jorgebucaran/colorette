@@ -11,8 +11,10 @@ const isForced = "FORCE_COLOR" in env || argv.includes("--color")
 const isWindows = platform === "win32"
 const isDumbTerminal = env.TERM === "dumb"
 
+const isTty = tty && tty.isatty && tty.isatty(1)
+
 const isCompatibleTerminal =
-  tty && tty.isatty && tty.isatty(1) && env.TERM && !isDumbTerminal
+  isTty && env.TERM && !isDumbTerminal
 
 const isCI =
   "CI" in env &&
@@ -20,7 +22,7 @@ const isCI =
 
 export const isColorSupported =
   !isDisabled &&
-  (isForced || (isWindows && !isDumbTerminal) || isCompatibleTerminal || isCI)
+  (isForced || (isWindows && !isDumbTerminal && isTty) || isCompatibleTerminal || isCI)
 
 const replaceClose = (
   index,
