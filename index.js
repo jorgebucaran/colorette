@@ -27,10 +27,16 @@ const replaceClose = (
   string,
   close,
   replace,
-  head = string.substring(0, index) + replace,
-  tail = string.substring(index + close.length),
-  next = tail.indexOf(close)
-) => head + (next < 0 ? tail : replaceClose(next, tail, close, replace))
+) => {
+  let result = '';
+  do {
+    const head = string.substring(0, index) + replace;
+    string = string.substring(index + close.length);
+    index = string.indexOf(close);
+    result += head;
+  } while (index >= 0);
+  return result + string;
+}
 
 const clearBleed = (index, string, open, close, replace) =>
   index < 0
