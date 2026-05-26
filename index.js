@@ -7,7 +7,10 @@ const {
 } = typeof process === "undefined" ? {} : process
 
 const isDisabled = "NO_COLOR" in env || argv.includes("--no-color")
-const isForced = "FORCE_COLOR" in env || argv.includes("--color")
+const forceColor = env.FORCE_COLOR
+const isForced =
+  (forceColor !== undefined && forceColor !== "" && forceColor !== "0") ||
+  argv.includes("--color")
 const isWindows = platform === "win32"
 const isDumbTerminal = env.TERM === "dumb"
 
@@ -20,6 +23,7 @@ const isCI =
 
 export const isColorSupported =
   !isDisabled &&
+  forceColor !== "0" &&
   (isForced || (isWindows && !isDumbTerminal) || isCompatibleTerminal || isCI)
 
 const replaceClose = (
