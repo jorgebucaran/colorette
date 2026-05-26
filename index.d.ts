@@ -1,5 +1,5 @@
 declare module "colorette" {
-  type Color = (text: string | number) => string
+  type Color = (text: any) => string
 
   interface Colorette {
     reset: Color
