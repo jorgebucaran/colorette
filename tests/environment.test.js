@@ -10,8 +10,14 @@ const execThenEqual = (cmd, expected) => (done) =>
 
 export default [
   t("environment", [
-    t("`FORCE_COLOR` forces color", [
-      execThenEqual(`FORCE_COLOR= ${BIN}`, "\x1b[34mfoo\x1b[39m\n"),
+    t("`FORCE_COLOR=1` forces color", [
+      execThenEqual(`FORCE_COLOR=1 ${BIN}`, "\x1b[34mfoo\x1b[39m\n"),
+    ]),
+    t("`FORCE_COLOR=0` disables color", [
+      execThenEqual(`FORCE_COLOR=0 ${BIN}`, "foo\n"),
+    ]),
+    t("`FORCE_COLOR=` does not force color", [
+      execThenEqual(`FORCE_COLOR= ${BIN}`, "foo\n"),
     ]),
     t("`NO_COLOR` disables color", [
       execThenEqual(`NO_COLOR= ${BIN} --color`, "foo\n"),
