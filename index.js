@@ -22,15 +22,19 @@ export const isColorSupported =
   !isDisabled &&
   (isForced || (isWindows && !isDumbTerminal) || isCompatibleTerminal || isCI)
 
-const replaceClose = (
-  index,
-  string,
-  close,
-  replace,
-  head = string.substring(0, index) + replace,
-  tail = string.substring(index + close.length),
-  next = tail.indexOf(close)
-) => head + (next < 0 ? tail : replaceClose(next, tail, close, replace))
+const replaceClose = (index, string, close, replace) => {
+  let result = string.substring(0, index) + replace
+  let remaining = string.substring(index + close.length)
+  let next = remaining.indexOf(close)
+
+  while (next >= 0) {
+    result += remaining.substring(0, next) + replace
+    remaining = remaining.substring(next + close.length)
+    next = remaining.indexOf(close)
+  }
+
+  return result + remaining
+}
 
 const clearBleed = (index, string, open, close, replace) =>
   index < 0
