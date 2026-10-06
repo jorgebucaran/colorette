@@ -6,8 +6,10 @@ const {
   platform = "",
 } = typeof process === "undefined" ? {} : process
 
-const isDisabled = "NO_COLOR" in env || argv.includes("--no-color")
-const isForced = "FORCE_COLOR" in env || argv.includes("--color")
+const isDisabled =
+  "NO_COLOR" in env || env.FORCE_COLOR === "0" || argv.includes("--no-color")
+const isForced =
+  ("FORCE_COLOR" in env && env.FORCE_COLOR !== "0") || argv.includes("--color")
 const isWindows = platform === "win32"
 const isDumbTerminal = env.TERM === "dumb"
 
